@@ -7,3 +7,5 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
+
+console.log("hej kriller");
