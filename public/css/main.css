@@ -1,3 +1,14 @@
-body {
-    background-color: aqua;
+#main {
+    min-width: 1000px;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 150px;
+    background-color: lightgreen;
+}
+#header {
+    background-color: lightblue;
+}
+
+#footer {
+    background-color: lightsalmon;
 }
