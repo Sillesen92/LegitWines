@@ -1,9 +1,11 @@
 const Booking = require('../model/Booking')
 const Customer = require('../model/Customer')
 const Salesman = require('../model/Salesman')
+const BookingController = require('../controller/bookings')
 const newCustomer = null;
 const newSalesman = null;
 const newBooking = null;
+
 
 describe('Unit test af Booking klasse', () => {
     beforeAll(() => {
@@ -46,5 +48,19 @@ describe('Unit test af Booking klasse', () => {
 
         // assert
         expect(result).toBe(0)
+    })
+
+    test("Hent booking fra repository", async () => {
+        //prepare
+        const bookingId = 20210002
+        const contributionMargin = 10;
+        repository.getBookingByBookingId.mockResolvedValue(new Booking(bookingId, contributionMargin, newCustomer, newSalesman))
+
+        // act
+        const result = await BookingController.getBookingByBookingId(bookingId)
+        // assert
+        expect(result.bookingId).toEqual(bookingId)
+        expect(result.salesman.name).toBe("Jonas")
+        expect(result.customer.email).toEqual('john@gmail.com')
     })
 })
