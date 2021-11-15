@@ -1,7 +1,6 @@
 /*------------------Imports------------------*/
 const express = require('express')
 const path = require('path')
-const baseRoute = require('../routes/baseRoute.js')
 const session = require('express-session')
 const app = express()
 const PORT = process.env.PORT || 3600
@@ -17,8 +16,10 @@ app.use(session({secret: 'ADCC58BA-6703-4795-B94D-6C562784DAEB', saveUninitializ
 
 
 /*------------------Routes------------------*/
+const baseRoute = require('../routes/baseRoute.js')
 app.use(baseRoute)
-
+const editBookingRoute = require('../routes/editBookingRoute.js')
+app.use(editBookingRoute)
 
 
 /*------------------Routes End------------------*/
