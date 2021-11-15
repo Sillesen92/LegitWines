@@ -47,4 +47,22 @@ describe('Unit test af Booking klasse', () => {
         // assert
         expect(result).toBe(0)
     })
+
+    test("Hent booking fra repository", async () => {
+        //prepare
+        const bookingId = 20210002
+        const contributionMargin = 10;
+
+
+        const password = "password"
+        const email = "hans@email.dk"
+        repository.getBookingByBookingId.mockResolvedValue(new Booking(bookingId, contributionMargin, newCustomer, newSalesman))
+        // act
+        const result = await userControl.getUser(credential, password)
+        // assert
+        expect(result.id).toEqual(id)
+        expect(result.credential.userName).toEqual(credential)
+        expect(result.credential.email).toEqual(email)
+        expect(result.credential.password).toEqual(password)
+    })
 })
