@@ -1,3 +1,38 @@
-extends layout
-block content
-    h1 Welcome to Greensoft
+doctype html
+html
+    head
+        meta(charset="UTF-8")
+        title GreenSoft
+        block scripts
+
+        block css
+            link(rel='stylesheet', href='css/main.css', type='text/css' )
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+            <link rel="shortcut icon" type="image/ico" href="images/greensoftlogo.ico"/>
+
+    body
+        div#root
+            div#main
+                div#content
+                    block content
+                        div#bookingpage
+                            h1 Vælg Type:
+                            select(name="booking" id="bookingtype")
+                                option(value="choose") -- Vælg --
+                                option(value="create") Opret
+                                option(value="update") Opdater
+                                //TODO: Find ud af hvordan fanden If statements fungerer
+                            if ()
+                                div#bookingpagelogo
+                                    img(src="images/greensoftlogo.png", alt="Greensoft Logo", id="greensoftlogo")
+                            else if ()
+                                h1 Hej
+                        //-
+                            div#frontpage
+                                img(src="images/greensoftlogo.png", alt="Greensoft Logo", id="greensoftlogo")
+                                div#frontpagebuttons
+                                    button#booking Booking
+                                    button#fakturering Fakturering
+                
