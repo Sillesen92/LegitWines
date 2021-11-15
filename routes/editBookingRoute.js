@@ -2,7 +2,8 @@ const express = require('express');
 const bookingController = require('../controller/bookings.js')
 const router = express.Router();
 router.get('/editBooking', async (req, resp) => {
-        resp.render('editBooking', {booking: await bookingController.getBooking(req.query.bookingId)})
+        //resp.render('editBooking', {booking: undefined})
+        await bookingController.getBooking(req.query.bookingId)
 })
 
 router.post('/editBooking', (req, resp) => {

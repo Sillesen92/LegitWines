@@ -8,13 +8,12 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-console.log("hej kriller");
-
 //Mangler de gyldige parametre
+/*
 async function saveBooking(bookingNr){
   {
     const booking = {
-      bookingNr = bookingNr,
+      bookingNr = bookingNr
   }
 }const doc = await db.collection("Bookings").doc()
 await doc.set(booking)
@@ -47,4 +46,4 @@ async function getBookings(){
   
 }
 
-module.exports = {getBookings, saveBooking}
+module.exports = {getBookings, saveBooking}*/
