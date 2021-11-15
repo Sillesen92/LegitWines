@@ -1,14 +1,152 @@
-#main {
+/* Global Styles */
+h1 {
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    font-weight: regular;
+}
+
+h2 {
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    font-weight: italic;
+}
+
+p {
+    font-family: Montserrat, Roboto, "Helvetica Neue";
+}
+
+/* Simple background setup */
+#main {/*
     min-width: 1000px;
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 150px;
-    background-color: lightgreen;
+    margin-top: 150px;*/
+    margin: 0;
+    padding: 0px;
+    background-color: #FEFFFE;
 }
 #header {
-    background-color: lightblue;
+    background-color: #276954;
+    margin: 0px;
+    padding: 0px;
 }
 
+/* Header CSS */
+
+/* Main CSS */
+
+/* Main CSS - Forside */
+#greensoftlogo {
+    width: 340px;
+    height: 350px;
+    margin-bottom: 50px;
+}
+
+#frontpage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    height: auto;
+    margin: 90px auto;
+    padding: 10px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+#frontpagebuttons button {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 28px;
+    width: 250px;
+    height: 100px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+#frontpagebuttons button:hover {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 28px;
+    width: 250px;
+    height: 100px;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+/* Main CSS - Bookingside */
+
+#bookingpage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#bookingpage h1 {
+    margin: 15px 10px 0px 20px;
+}
+
+#bookingpage select {
+    margin: 15px 5px 0px 10px;
+    font-family: Montserrat, Roboto, "Helvetica Neue";
+    font-size: 20px;
+    text-align-last: center;
+}
+
+#bookingtype {
+    border: 2px solid #276954;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+#bookingtype:hover {
+    border: 2px solid #276954;
+    width: 200px;
+    height: 50px;
+    box-shadow: 3px 4px 5px #cccc;
+    border-radius: 5px;
+}
+
+#bookingpagelogo {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    height: auto;
+    margin: 50px auto;
+    padding: 10px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+/* Footer CSS */
+
 #footer {
-    background-color: lightsalmon;
+    background-color: #FEFFFE;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    position:absolute;
+    bottom:0;
+    height:60px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#footer h1 {
+    font-size: 12px;
+}
+
+#footerlogo {
+    width: 75px;
+    height: 75px;
 }

@@ -20,6 +20,8 @@ const baseRoute = require('../routes/baseRoute.js')
 app.use(baseRoute)
 const editBookingRoute = require('../routes/editBookingRoute.js')
 app.use(editBookingRoute)
+const createPartnerRoute = require('../routes/createPartnerRoute.js')
+app.use(createPartnerRoute)
 
 
 /*------------------Routes End------------------*/
