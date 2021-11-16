@@ -1,8 +1,8 @@
 //Klasse med følgende forbindelser: 
-//Enkeltrettet 0..* Reservation
+//Enkeltrettet 0..* HotelReservation
 //Enkeltrettet 0..* CarRental
 //Enkeltrettet 0..* Transfer
-//Enkeltrettet 0..* Greenfee
+//Dobbeltrettet 0..* Greenfee
 //Enkeltrettet 1..* Passenger
 //Dobbeltrettet 1 Customer
 //Dobbeltrettet 1 Salesman
@@ -10,9 +10,11 @@ class Booking{
     //Bookingnummeret bliver genereret af firebase YYYYXXXX
     #bookingNr
     //Contribution margin er en double imellem 0 og 100 (Procent)
+    //Skal som standard være 18,5%
     #contributionMargin
+    #netPrice
     #grossPrice
-    #reservations
+    #hotelReservations
     #carRentals
     #transfers
     #greenfees
@@ -20,12 +22,13 @@ class Booking{
     #customer
     #salesman
     
-    constructor(bookingNr, contributionMargin, salesman, customer){
+    constructor(bookingNr, salesman, customer){
         this.#bookingNr = bookingNr;
-        this.#contributionMargin = contributionMargin;
+        this.#contributionMargin = 18,5;
         this.#salesman = salesman;
+        this.#netPrice = 0;
         this.#grossPrice = 0;
-        this.#reservations = [];
+        this.#hotelReservations = [];
         this.#carRentals = [];
         this.#transfers = [];
         this.#greenfees = [];
@@ -44,13 +47,17 @@ class Booking{
     get salesman(){
         return this.#salesman;
     }
+
+    get netPrice(){
+        return this.#netPrice;
+    }
     
     get grossPrice(){
         return this.#grossPrice;
     }
     
-    get reservations(){
-        return this.#reservations;
+    get hotelReservations(){
+        return this.#hotelReservations;
     }
     
     get carRentals(){
@@ -73,6 +80,10 @@ class Booking{
         return this.#customer;
     }
 
+    get salesman(){
+        return this.#salesman;
+    }
+
     set bookingNr(bookingNr){
         this.#bookingNr = bookingNr;
     }
@@ -81,23 +92,23 @@ class Booking{
         this.#contributionMargin = contributionMargin;
     }
 
-    //Tilføjer en reservation til arrayet af reservationer,
-    //hvis ikke reservationen allerede findes i arrayet.
-    addReservation(reservation){
-        if(!this.#reservations.includes(reservation)){
-            this.#reservations.push(reservation);
+    //Tilføjer en hotel reservation til arrayet af  hotel reservationer,
+    //hvis ikke hotel reservationen allerede findes i arrayet.
+    addHotelReservation(hotelReservation){
+        if(!this.#hotelReservations.includes(hotelReservation)){
+            this.#hotelReservations.push(hotelReservation);
         }
     }
 
     //Fjerne en reservation i arrayet af reservationer,
     //hvis reservationen er tilføjet til dette.
-    removeReservation(reservation){
-        if(this.#reservations.includes(reservation)){
-            let i = this.#reservations.indexOf(reservation);
-            for(let index = i; index < this.#reservations.length - 1; index++){
-                this.#reservations[index] = this.#reservations[index + 1];
+    removeHotelReservation(hotelReservation){
+        if(this.#hotelReservations.includes(hotelReservation)){
+            let i = this.#hotelReservations.indexOf(hotelReservation);
+            for(let index = i; index < this.#hotelReservations.length - 1; index++){
+                this.#hotelReservations[index] = this.#hotelReservations[index + 1];
             }
-            this.#reservations.length = this.#reservations.length - 1;
+            this.#hotelReservations.length = this.#hotelReservations.length - 1;
         }
     }
 
@@ -206,10 +217,23 @@ class Booking{
         }
     }
 
+    //Udregner den samlede kostpris, ud fra
+    //nettopriserne hos de valgte samarbejdspartnere
+    calcNetPrice(){
+        this.#netPrice = 0;
+        return this.#netPrice;
+    }
+
     //Udregner den samlede salgspris, 
-    //ud fra nettoprisen i de valgte samarbejdspartnere
+    //netto prisen ganget med (dækningsbidrag delt med 100 + 1)
     calcGrossPrice() {
-        grossPrice = 0;
+        this.#grossPrice = this.#netPrice * (this.#contributionMargin/100+1);
+        return this.#grossPrice;
+    }
+
+    //Udregner dækningsbidraget i DKK ud fra den samlede pris
+    calcContributionMarginInDKK(){
+        return this.#grossPrice-this.#netPrice;
     }
 }
 

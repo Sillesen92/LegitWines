@@ -82,3 +82,5 @@ class Salesman{
         }
     }
 }
+
+module.exports = Salesman;
