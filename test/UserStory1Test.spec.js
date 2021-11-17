@@ -4,11 +4,16 @@ const Salesman = require('../model/Salesman')
 const BookingController = require('../controller/bookings')
 const repository = require('../repository/repository')
 const Company = require('../model/Company')
+const Contract = require('../model/Contract')
+const HotelReservation = require('../model/HotelReservation')
 const testCustomer = null;
 const testSalesman = null;
 const testBooking = null;
 const testHotel = null;
 const testAirline = null;
+const testContractRoom = null;
+const testContractDoubleRoom = null;
+const testHotelReservation = null;
 
 describe('Unit test af Booking klasse', () => {
     beforeAll(() => {
@@ -29,27 +34,7 @@ describe('Unit test af Booking klasse', () => {
         const salesId = "FunkMasterJones"
 
         testSalesman = new Salesman(name, salesEmail, salesPhoneNr, salesId)
-    })
-
-    test('create booking', () => {
-        // preparation of booking: 
-        const bookingNr = 20210001;
-        const contributionMargin = 10;
-
-        // act 
-        newBooking = new Booking(bookingNr, contributionMargin, newCustomer, newSalesman)
-
-        // assert
-        expect(newBooking.bookingNr).toBe(20210001)
-        expect(newBooking.customer.firstName).toBe("John")
-        expect(newBooking.salesman.name).toBe("Jonas")
-        expect(newBooking).toBeInstanceOf(Booking)
-    })
-
-    test('Unit test af udregning af bruttoprisen', () => {
-
-
-        //preparation of companies
+        // preparation of companies: 
         //hotel
         const hotName = "hotel"
         const HotAdress = "test 123"
@@ -95,16 +80,36 @@ describe('Unit test af Booking klasse', () => {
         const golfPhone = 55555555
         const golfBusinessType = "golf"
         testGolf = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
+
+        // preparation of booking: 
+        const bookingNr = 20210001;
+        testBooking = new Booking(bookingNr, testSalesman, testCustomer)
+
+        // preparation of contracts
+        //preparation of hotel contracts
+
+        const roomType = "singleRoom";
+        const startDate = new Date(2021, 10, 1);
+        const endDate = new Date(2021, 11, 1);
+        const price = 500;
+
+        testContractRoom = testHotel.createContract(roomType, startDate, endDate, price)
+
+        const roomTypeDouble = "doubleRoom";
+        const startDateDouble = new Date(2021, 10, 1);
+        const endDateDouble = new Date(2021, 11, 1);
+        const priceDouble = 800;
+
+        testContractDoubleRoom = testHotel.createContract(roomTypeDouble, startDateDouble, endDateDouble, priceDouble);
+
+        //preparation af booking med forbindelser til contracts
+        testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotel)
+        testHotelReservation.addContract(testContractRoom);
+        testHotelReservation.addContract(testContractDoubleRoom);
+
     })
 
     test('create booking', () => {
-        // preparation of booking: 
-        const bookingNr = 20210001;
-        const contributionMargin = 10;
-
-        // act 
-        testBooking = new Booking(bookingNr, contributionMargin, testCustomer, testSalesman)
-
         // assert
         expect(testBooking.bookingNr).toBe(20210001)
         expect(testBooking.customer.firstName).toBe("John")
@@ -112,24 +117,36 @@ describe('Unit test af Booking klasse', () => {
         expect(testBooking).toBeInstanceOf(Booking)
     })
 
-    test('Unit test af udregning af netprice', () => {
-
-
-
-        //todo -lav en af hver 
+    test('Unit test af udregning af nettoprisen', () => {
 
         //act
         const result = testBooking.calcNetPrice();
 
-        // assert
-        expect(result).toBe(0)
+        //assert -> forventet nettopris: 1300kr
+        expect(result).toBe(1300)
+
+    })
+
+    test('Unit test af udregning af grossprice', () => {
+        //act
+        const result = testBooking.calcGrossPrice();
+
+        // assert -> forventet bruttopris: 1540,5 
+        expect(result).toBe(1540, 5)
+    })
+
+    test('Unit test af dækningsbidragsberegning', () => {
+        //act
+        const result = testBooking.calcContributionMarginInDKK();
+
+        // assert -> forventet fortjeneste: 240,5
+        expect(result).toBe(240, 5)
     })
 
     test("Hent booking fra repository", async () => {
         //prepare
         const bookingId = 20210002
-        const contributionMargin = 10;
-        repository.getBookingByBookingId.mockResolvedValue(new Booking(bookingId, contributionMargin, testCustomer, testSalesman))
+        repository.getBookingByBookingId.mockResolvedValue(new Booking(bookingId, testSalesman, testCustomer))
 
         // act
         const result = await BookingController.getBookingByBookingId(bookingId)
