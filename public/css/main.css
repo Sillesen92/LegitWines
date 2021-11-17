@@ -126,6 +126,46 @@ p {
     justify-content: space-evenly;
 }
 
+/* Create Booking */
+
+#createbooking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    height: auto;
+    margin: 50px auto;
+    padding: 10px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+#searchcontainer {
+    padding: 20px;
+    background-color: #276954;
+    border-radius: 50px;
+}
+
+.airportSearch {
+    width: 200px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #F1DABF;
+    margin: 5px;
+}
+
+.bookingDatePicker {
+    width: 75px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #F1DABF;
+    margin: 5px;
+}
+
+
+
 /* Footer CSS */
 
 #footer {

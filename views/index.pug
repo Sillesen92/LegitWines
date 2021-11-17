@@ -23,6 +23,12 @@ html
                                 option(value="choose") -- Vælg --
                                 option(value="create") Opret
                                 option(value="update") Opdater
+                            div#createbooking
+                                div#searchcontainer
+                                    input(name="search" type="text" placeholder="Fra:" class="airportSearch")
+                                    input(name="search" type="text" placeholder="Til:" class="airportSearch")
+                                    input(name="search" type="date" class="bookingDatePicker")
+                                    input(name="search" type="date" class="bookingDatePicker")
                         //-
                             div#frontpage
                                 img(src="images/greensoftlogo.png", alt="Greensoft Logo", id="greensoftlogo")
