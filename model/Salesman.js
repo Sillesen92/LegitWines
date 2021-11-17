@@ -1,6 +1,6 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Booking
-class Salesman{
+class Salesman {
     #name
     #email
     #phoneNr
@@ -8,7 +8,7 @@ class Salesman{
     #password
     #bookinger
 
-    constructor(name, email, phoneNr, salesId, password){
+    constructor(name, email, phoneNr, salesId, password) {
         this.#name = name;
         this.#email = email;
         this.#phoneNr = phoneNr;
@@ -17,54 +17,54 @@ class Salesman{
         this.#bookinger = [];
     }
 
-    get name(){
+    get name() {
         return this.#name;
     }
 
-    get email(){
+    get email() {
         return this.#email;
     }
 
-    get phoneNr(){
+    get phoneNr() {
         return this.#phoneNr;
     }
 
-    get salesId(){
+    get salesId() {
         return this.#salesId;
     }
 
-    get password(){
+    get password() {
         return this.#password;
     }
 
-    get bookinger(){
+    get bookinger() {
         return this.#bookinger;
     }
 
-    set name(name){
+    set name(name) {
         this.#name = name;
     }
 
-    set email(email){
+    set email(email) {
         this.#email = email;
     }
 
-    set phoneNr(phoneNr){
+    set phoneNr(phoneNr) {
         this.#phoneNr = phoneNr;
     }
 
-    set salesId(salesId){
+    set salesId(salesId) {
         this.#salesId = salesId;
     }
 
-    set password(password){
+    set password(password) {
         this.#password = password;
     }
 
     //Tilføjer en booking til arrayet af bookinger,
     //hvis ikke denne allerede findes i arrayet.
-    addBooking(booking){
-        if(!this.#bookinger.includes(booking)){
+    addBooking(booking) {
+        if (!this.#bookinger.includes(booking)) {
             this.#bookinger.push(booking);
             booking.setSalesman(this);
         }
@@ -72,13 +72,38 @@ class Salesman{
 
     //Fjerner en booking fra arrayet af bookinger,
     //hvis denne allerede er i arrayet.
-    removeBooking(booking){
-        if(this.#bookinger.includes(booking)){
+    removeBooking(booking) {
+        if (this.#bookinger.includes(booking)) {
             let i = this.#bookinger.indexOf(booking);
-            for(let index = i; index < this.#bookinger.length - 1; index++){
+            for (let index = i; index < this.#bookinger.length - 1; index++) {
                 this.#bookinger[index] = this.#bookinger[index + 1];
             }
             this.#bookinger.length = this.#bookinger.length - 1;
+        }
+    }
+
+    getSalesStatistics() {
+        const salesStats = {
+            netSales: 0,
+            grossSales: 0,
+            contributionMargin: 0
+        }
+        if (this.#bookinger.length > 0) {
+            if (this.#bookinger.length == 1) {
+                salesStats.netSales = this.#bookinger[0].calcNetPrice();
+                salesStats.grossSales = this.#bookinger[0].calcGrossPrice();
+                salesStats.contributionMargin = this.#bookinger[0].calcContributionMarginInDKK();
+                return salesStats;
+            } else {
+                for (let index = i; index < this.#bookinger.length; index++) {
+                    salesStats.netSales += this.#bookinger[i].calcNetPrice();
+                    salesStats.grossSales += this.#bookinger[i].calcGrossPrice();
+                    salesStats.contributionMargin += this.#bookinger[i].calcContributionMarginInDKK();
+                }
+                return salesStats;
+            }
+        } else {
+            throw new Error("Der er ingen bookinger registreret til denne sælger.")
         }
     }
 }
