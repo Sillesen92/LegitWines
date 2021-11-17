@@ -7,8 +7,10 @@ router.get('/editPartner/:id', async (req, resp) => {
     resp.render('editPartner', { companyPartner })
 })
 
-router.put('/editPartner/:id', (req, resp) => {
-    /* TODO: Lav metode der henter params fra document.querySelector og opdaterer objektet med de nye attributter.*/
+router.put('/editPartner/:id', async (req, resp) => {
+    const { companyName, companyAddress, companyEmail, companyPhone, companyType } = req.body;
+    await partnerController.updateCompany(companyName, companyAddress, companyEmail, companyPhone, companyType);
+    resp.sendStatus(200);
 })
 
 module.exports = router

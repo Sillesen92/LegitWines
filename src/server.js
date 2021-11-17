@@ -11,7 +11,7 @@ app.set('views', path.join(__dirname, '../views'))
 app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.json())
-app.use(session({secret: 'ADCC58BA-6703-4795-B94D-6C562784DAEB', saveUninitialized: true, resave: true}))
+app.use(session({ secret: 'ADCC58BA-6703-4795-B94D-6C562784DAEB', saveUninitialized: true, resave: true }))
 /*------------------Middleware End------------------*/
 
 
@@ -22,6 +22,8 @@ const editBookingRoute = require('../routes/editBookingRoute.js')
 app.use(editBookingRoute)
 const createPartnerRoute = require('../routes/createPartnerRoute.js')
 app.use(createPartnerRoute)
+const editPartnerRoute = require('../routes/editPartnerRoute.js')
+app.use(editPartnerRoute)
 
 
 /*------------------Routes End------------------*/
