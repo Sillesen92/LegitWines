@@ -8,16 +8,17 @@ class Passenger{
     #meal
     #golfbag
     #luggage
-    #Flight//Nullable
+    //flight er nullable
+    #flight
 
-    constructor(firstName, lastName, gender, meal, golfbag, luggage, Flight){
+    constructor(firstName, lastName, gender, meal, golfbag, luggage, flight){
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
         this.#meal = meal;
         this.#golfbag = golfbag;
         this.#luggage = luggage;
-        this.#Flight = Flight;
+        this.#flight = flight;
     }
 
     get firstName(){
@@ -45,7 +46,7 @@ class Passenger{
     }
 
     get flight(){
-        return this.#Flight;
+        return this.#flight;
     }
 
     set firstName(firstName){
@@ -72,11 +73,11 @@ class Passenger{
         this.#luggage = luggage;
     }
 
-    set Flight(flight){
+    setFlight(flight){
         if(flight instanceof Flight){
-            this.#Flight = flight;
+            this.#flight = flight;
         } else{
-            throw new Error("flight er ikke en instans af Flight");
+            this.#flight = undefined;
         }
     }
 }

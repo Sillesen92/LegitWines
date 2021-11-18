@@ -5,6 +5,7 @@ class Greenfee {
     #date
     #teetime
     #nrOfGolfers
+    //company er nullable
     #company
 
 
@@ -12,11 +13,7 @@ class Greenfee {
         this.#date = date;
         this.#teetime = teetime;
         this.#nrOfGolfers = nrOfGolfers;
-        if (company instanceof Company) {
-            this.#company = company;
-        } else {
-            throw new Error("Company er ikke en instans af Company");
-        }
+        this.#company = company;
     }
 
     get date() {
@@ -62,7 +59,7 @@ class Greenfee {
                 throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet greenfee'en");
             }
         } else {
-            throw new Error("company er ikke en instans af Company");
+            this.#company = undefined;
         }
     }
 }

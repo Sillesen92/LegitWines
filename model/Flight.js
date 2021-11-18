@@ -10,6 +10,7 @@ class Flight {
     #arrivalAirport
     #flightNr
     #passengers
+    //company er nullable
     #company
 
     constructor(departAirport, date, time, arrivalAirport, flightNr, company) {
@@ -19,11 +20,7 @@ class Flight {
         this.#arrivalAirport = arrivalAirport;
         this.#flightNr = flightNr;
         this.#passengers = [];
-        if (company instanceof Company) {
-            this.#company = company;
-        } else {
-            throw new Error("Company er ikke en instans af Company");
-        }
+        this.#company = company;
     }
 
     get departAirport() {
@@ -80,6 +77,7 @@ class Flight {
         if (passenger instanceof Passenger) {
             if (!this.#passenger.includes(passenger)) {
                 this.#passengers.push(passenger);
+                passenger.setFlight(this);
             }
         } else {
             throw new Error("passenger er ikke en instans af Passenger")
@@ -91,6 +89,7 @@ class Flight {
     removePassenger(passenger) {
         if (passenger instanceof Passenger) {
             if (this.#passengers.includes(passenger)) {
+                passenger.setFlight(undefined);
                 let i = this.#passengers.indexOf(passenger);
                 for (let index = i; index < this.#passengers.length - 1; index++) {
                     this.#passengers[index] = this.#passengers[index + 1];
@@ -114,7 +113,7 @@ class Flight {
                 throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet flyet");
             }
         } else {
-            throw new Error("company er ikke en instans af Company");
+            this.#company = undefined;
         }
     }
 }
