@@ -3,11 +3,11 @@ block append scripts
     script(src="script/editPartner.js" defer)
 block content 
     h1 Edit Partner
-    div.Partner
-        input(id="companyName", type="text",placeholder="firma navn")
-        input(id="companyAddress", type="text",placeholder="adresse")
-        input(id="companyEmail", type="text", placeholder="email")
-        input(id="companyPhone", type="text", placeholder="tlf")
+    div.Partner(id=${companyPartner.id})
+        input(id="companyName", type="text",placeholder="firma navn", value=${companyPartner.data().companyName})
+        input(id="companyAddress", type="text",placeholder="adresse", value=${companyPartner.data().companyAddress})
+        input(id="companyEmail", type="text", placeholder="email", value=${companyPartner.data().companyEmail})
+        input(id="companyPhone", type="text", placeholder="tlf", value=${companyPartner.data().companyPhone})
         select(id="companyType")
             option(value="") --Vælg partnertype--
             option(value="Hotel") Hotel

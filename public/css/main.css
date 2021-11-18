@@ -164,6 +164,138 @@ p {
     margin: 5px;
 }
 
+#personCounter {
+    width: 50px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #F1DABF;
+    margin: 5px;
+    text-align: center;
+}
+
+#minusPersonCounter {
+    width: 30px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #F1DABF;
+    margin: 5px; 
+}
+
+#plusPersonCounter {
+    width: 30px;
+    height: 20px;
+    border-radius: 20px;
+    border: 1px solid #F1DABF;
+    margin: 5px; 
+}
+
+#searchBookingButton {
+    width: 50px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid #F1DABF;
+    margin: 5px;
+}
+
+/* Resultat af Create Booking Search */
+
+#searchResultContainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    height: auto;
+    margin: 50px auto;
+    padding: 10px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+#searchResultList {
+    font-family: Montserrat, Roboto, "Helvetica Neue";
+    font-size: 28px;
+    list-style-type: none;
+}
+
+#searchResultList li {
+    border: 1px solid #F1DABF;
+    padding: 10px;
+}
+
+/* Update Booking */
+
+#updateBookingSelectAndSearch {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#updateBookingSelect {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#updateBookingSearchInput {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #F1DABF;
+    margin: 5px;
+    padding-left: 10px;
+    font-size: 18px;
+}
+
+#updateBookingSearchButton {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+#updateBookingSearchButton:hover {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 20px;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+#updateBooking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 95%;
+    height: auto;
+    margin: 50px auto;
+    padding: 10px;
+    position: relative;
+    justify-content: space-evenly;
+}
+
+#bookingDetaljer {
+    font-family: Montserrat, Roboto, "Helvetica Neue";
+    font-size: 28px;
+    list-style-type: none;
+}
+
+#bookingDetaljer li {
+    border: 1px solid #F1DABF;
+    padding: 10px;
+}
 
 
 /* Footer CSS */

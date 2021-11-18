@@ -78,6 +78,7 @@ async function getAllCompanies() {
 /*
 async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
   {
+    
     const booking = {
       bookingNr = bookingNr,
       grossPrice = grossPrice,
@@ -90,10 +91,14 @@ async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, 
       carRentals = carRentals,
       greenFees = greenFees
   }
+  
+}
+
   const bookingJson = JSON.stringify(booking)
   
 }const doc = await db.collection("Bookings").doc()
 await doc.set(booking)
+
 return doc.id
 
 }
