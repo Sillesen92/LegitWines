@@ -1,5 +1,6 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Booking
+const Booking = require('../model/Booking');
 class Salesman {
     #name
     #email
@@ -64,21 +65,29 @@ class Salesman {
     //Tilføjer en booking til arrayet af bookinger,
     //hvis ikke denne allerede findes i arrayet.
     addBooking(booking) {
-        if (!this.#bookinger.includes(booking)) {
-            this.#bookinger.push(booking);
-            booking.setSalesman(this);
+        if (booking instanceof Booking) {
+            if (!this.#bookinger.includes(booking)) {
+                this.#bookinger.push(booking);
+                booking.setSalesman(this);
+            }
+        } else {
+            throw new Error("booking er ikke en instans af Booking")
         }
     }
 
     //Fjerner en booking fra arrayet af bookinger,
     //hvis denne allerede er i arrayet.
     removeBooking(booking) {
-        if (this.#bookinger.includes(booking)) {
-            let i = this.#bookinger.indexOf(booking);
-            for (let index = i; index < this.#bookinger.length - 1; index++) {
-                this.#bookinger[index] = this.#bookinger[index + 1];
+        if (booking instanceof Booking) {
+            if (this.#bookinger.includes(booking)) {
+                let i = this.#bookinger.indexOf(booking);
+                for (let index = i; index < this.#bookinger.length - 1; index++) {
+                    this.#bookinger[index] = this.#bookinger[index + 1];
+                }
+                this.#bookinger.length = this.#bookinger.length - 1;
             }
-            this.#bookinger.length = this.#bookinger.length - 1;
+        } else{
+            throw new Error("booking er ikke en instans af Booking")
         }
     }
 

@@ -1,20 +1,22 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
-// Dobbeltrettet 1 Booking
+const Company = require('../model/Company');
 class Greenfee {
     #date
     #teetime
     #nrOfGolfers
-    #Company
-    #Booking
+    #company
 
 
-    constructor(date, teetime, nrOfGolfers, Company, Booking) {
+    constructor(date, teetime, nrOfGolfers, company) {
         this.#date = date;
         this.#teetime = teetime;
         this.#nrOfGolfers = nrOfGolfers;
-        this.#Company = Company;
-        this.#Booking = Booking;
+        if (company instanceof Company) {
+            this.#company = company;
+        } else {
+            throw new Error("Company er ikke en instans af Company");
+        }
     }
 
     get date() {
@@ -30,7 +32,7 @@ class Greenfee {
     }
 
     get Company() {
-        return this.#Company;
+        return this.#company;
     }
 
     get booking() {
@@ -49,26 +51,18 @@ class Greenfee {
         this.#nrOfGolfers = nrOfGolfers;
     }
     //Sætter Company til et andet Company, denne må ikke være null!
-    setCompany(Company) {
-        if (this.#Company != Company && Company != undefined) {
-            const oldCompany = this.#Company;
-            oldCompany.removeGreenfee(this);
-            this.#Company = Company;
-            this.#Company.addGreenfee(this);
+    setCompany(company) {
+        if (company instanceof Company) {
+            if (this.#company != company) {
+                const oldCompany = this.#company;
+                oldCompany.removeGreenfee(this);
+                this.#company = company;
+                this.#company.addGreenfee(this);
+            } else {
+                throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet greenfee'en");
+            }
         } else {
-            throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet greenfee'en");
-        }
-    }
-
-    //Sætter Booking til en anden Booking, denne må ikke være null!
-    setBooking(Booking) {
-        if (this.#Booking != Booking && Booking != undefined) {
-            const oldBooking = this.#Booking;
-            oldBooking.removeGreenfee(this);
-            this.#Booking = Booking;
-            this.#Booking.addGreenfee(this);
-        } else {
-            throw new Error("Du skal angive en booking, der er forskellig fra den booking du allerede har tilknyttet greenfee'en");
+            throw new Error("company er ikke en instans af Company");
         }
     }
 }
