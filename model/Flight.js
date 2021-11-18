@@ -1,7 +1,7 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet ..* Passenger
 //Dobbeltrettet 1 Company
-class Flight{
+class Flight {
     #departAirport
     #date
     #time
@@ -10,7 +10,7 @@ class Flight{
     #passengers
     #Company
 
-    constructor(departAirport, date, time, arrivalAirport, flightNr, Company){
+    constructor(departAirport, date, time, arrivalAirport, flightNr, Company) {
         this.#departAirport = departAirport;
         this.#date = date;
         this.#time = time;
@@ -20,7 +20,7 @@ class Flight{
         this.#Company = Company;
     }
 
-    get departAirport(){
+    get departAirport() {
         return this.#departAirport;
     }
 
@@ -44,47 +44,59 @@ class Flight{
         return this.#passengers;
     }
 
-    get company() {
+    get Company() {
         return this.#Company;
     }
 
-    set departAirport(departAirport){
+    set departAirport(departAirport) {
         this.#departAirport = departAirport;
     }
 
-    set date(date){
+    set date(date) {
         this.#date = date;
     }
 
-    set time(time){
+    set time(time) {
         this.#time = time;
     }
 
-    set arrivalAirport(arrivalAirport){
+    set arrivalAirport(arrivalAirport) {
         this.#arrivalAirport = arrivalAirport;
     }
 
-    set flightNr(flightNr){
+    set flightNr(flightNr) {
         this.#flightNr = flightNr;
     }
 
     //Tilføjer en passager til arrayet af passagerer,
     //hvis ikke denne allerede findes i arrayet.
-    addPassenger(passenger){
-        if(!this.#passenger.includes(passenger)){
+    addPassenger(passenger) {
+        if (!this.#passenger.includes(passenger)) {
             this.#passengers.push(passenger);
         }
     }
 
     //Fjerner en passager i arrayet af passagerer,
     //hvis passageren er tilføjet til dette.
-    removePassenger(passenger){
-        if(this.#passengers.includes(passenger)){
+    removePassenger(passenger) {
+        if (this.#passengers.includes(passenger)) {
             let i = this.#passengers.indexOf(passenger);
-            for(let index = i; index < this.#passengers.length - 1; index++){
+            for (let index = i; index < this.#passengers.length - 1; index++) {
                 this.#passengers[index] = this.#passengers[index + 1];
             }
             this.#passengers.length = this.#passengers.length - 1;
+        }
+    }
+
+    //Sætter Company til et andet Company, denne må ikke være null!
+    setCompany(Company) {
+        if (this.#Company != Company && Company != undefined) {
+            const oldCompany = this.#Company;
+            oldCompany.removeFlight(this);
+            this.#Company = Company;
+            this.#Company.addFlight(this);
+        } else {
+            throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet flyet");
         }
     }
 }
