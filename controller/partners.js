@@ -34,4 +34,4 @@ function getCarRentalCompanies() {
 function getAllCompanies() {
     return repository.getAllCompanies()
 }
-module.exports = {createCompany, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies}
+module.exports = { createCompany, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies }

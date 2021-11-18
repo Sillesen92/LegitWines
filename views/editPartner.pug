@@ -1,18 +1,13 @@
 extends layout 
 block append scripts 
-    script(src="script/editPartner.js" defer)
+    script(src="/script/editPartner.js" defer)
 block content 
     h1 Edit Partner
-    div.Partner(id=${companyPartner.id})
-        input(id="companyName", type="text",placeholder="firma navn", value=${companyPartner.data().companyName})
-        input(id="companyAddress", type="text",placeholder="adresse", value=${companyPartner.data().companyAddress})
-        input(id="companyEmail", type="text", placeholder="email", value=${companyPartner.data().companyEmail})
-        input(id="companyPhone", type="text", placeholder="tlf", value=${companyPartner.data().companyPhone})
-        select(id="companyType")
-            option(value="") --Vælg partnertype--
-            option(value="Hotel") Hotel
-            option(value="Flyselskab") Flyselskab
-            option(value="Billeje") Billeje
-            option(value="Golfbane") Golfbane
-            option(value="Transfer") Transfer
+    div.Partner(id= `${companyPartner.id}`)
+        input(id="companyName", type="text",placeholder="firma navn", value=`${companyPartner.data().companyName}`)
+        input(id="companyAddress", type="text",placeholder="adresse", value=`${companyPartner.data().companyAddress}`)
+        input(id="companyEmail", type="text", placeholder="email", value=`${companyPartner.data().companyEmail}`)
+        input(id="companyPhone", type="text", placeholder="tlf", value=`${companyPartner.data().companyPhone}`)
         button#updatePartner Gem ændringer
+    div.message
+        p#message

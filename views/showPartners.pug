@@ -1,0 +1,23 @@
+extends layout 
+block append scripts 
+    script(src="/script/showPartners.js" defer)
+block content 
+    h1 Liste over samarbejdspartnere 
+    div.typeSelect
+        select(id="companyType")
+            option(value="Alle") Alle partnere
+            option(value="Hotel") Hotel
+            option(value="Flyselskab") Flyselskab
+            option(value="Billeje") Billeje
+            option(value="Golfbane") Golfbane
+            option(value="Transfer") Transfer
+        button#getPartners Hent samarbejdspartnere
+    div.partnerDiv
+        table#partnerTable
+            tr
+                th Firmanavn 
+                th Adresse 
+                th Email 
+                th Telefon
+
+                    
