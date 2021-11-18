@@ -49,10 +49,6 @@ class HotelReservation {
         return this.#company;
     }
 
-    get booking() {
-        return this.#Booking;
-    }
-
     set nrSingleRooms(nrSingleRooms) {
         this.#nrSingleRooms = nrSingleRooms;
     }

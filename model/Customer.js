@@ -86,8 +86,8 @@ class Customer {
     //hvis ikke denne allerede findes i arrayet.
     addBooking(booking) {
         if (booking instanceof Booking) {
-            if (!this.#bookinger.includes(booking)) {
-                this.#bookinger.push(booking);
+            if (!this.#bookings.includes(booking)) {
+                this.#bookings.push(booking);
                 booking.setSalesman(this);
             }
         } else {
@@ -99,12 +99,12 @@ class Customer {
     //hvis denne allerede er i arrayet.
     removeBooking(booking) {
         if (booking instanceof Booking) {
-            if (this.#bookinger.includes(booking)) {
-                let i = this.#bookinger.indexOf(booking);
-                for (let index = i; index < this.#bookinger.length - 1; index++) {
-                    this.#bookinger[index] = this.#bookinger[index + 1];
+            if (this.#bookings.includes(booking)) {
+                let i = this.#bookings.indexOf(booking);
+                for (let index = i; index < this.#bookings.length - 1; index++) {
+                    this.#bookings[index] = this.#bookings[index + 1];
                 }
-                this.#bookinger.length = this.#bookinger.length - 1;
+                this.#bookings.length = this.#bookings.length - 1;
             }
         } else{
             throw new Error("booking er ikke en instans af Booking");

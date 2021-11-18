@@ -7,7 +7,7 @@ class Salesman {
     #phoneNr
     #salesId
     #password
-    #bookinger
+    #bookings
 
     constructor(name, email, phoneNr, salesId, password) {
         this.#name = name;
@@ -15,7 +15,7 @@ class Salesman {
         this.#phoneNr = phoneNr;
         this.#salesId = salesId;
         this.#password = password;
-        this.#bookinger = [];
+        this.#bookings = [];
     }
 
     get name() {
@@ -39,7 +39,7 @@ class Salesman {
     }
 
     get bookinger() {
-        return this.#bookinger;
+        return this.#bookings;
     }
 
     set name(name) {
@@ -66,8 +66,8 @@ class Salesman {
     //hvis ikke denne allerede findes i arrayet.
     addBooking(booking) {
         if (booking instanceof Booking) {
-            if (!this.#bookinger.includes(booking)) {
-                this.#bookinger.push(booking);
+            if (!this.#bookings.includes(booking)) {
+                this.#bookings.push(booking);
                 booking.setSalesman(this);
             }
         } else {
@@ -79,12 +79,12 @@ class Salesman {
     //hvis denne allerede er i arrayet.
     removeBooking(booking) {
         if (booking instanceof Booking) {
-            if (this.#bookinger.includes(booking)) {
-                let i = this.#bookinger.indexOf(booking);
-                for (let index = i; index < this.#bookinger.length - 1; index++) {
-                    this.#bookinger[index] = this.#bookinger[index + 1];
+            if (this.#bookings.includes(booking)) {
+                let i = this.#bookings.indexOf(booking);
+                for (let index = i; index < this.#bookings.length - 1; index++) {
+                    this.#bookings[index] = this.#bookings[index + 1];
                 }
-                this.#bookinger.length = this.#bookinger.length - 1;
+                this.#bookings.length = this.#bookings.length - 1;
             }
         } else{
             throw new Error("booking er ikke en instans af Booking")
@@ -97,17 +97,17 @@ class Salesman {
             grossSales: 0,
             contributionMargin: 0
         }
-        if (this.#bookinger.length > 0) {
-            if (this.#bookinger.length == 1) {
-                salesStats.netSales = this.#bookinger[0].calcNetPrice();
-                salesStats.grossSales = this.#bookinger[0].calcGrossPrice();
-                salesStats.contributionMargin = this.#bookinger[0].calcContributionMarginInDKK();
+        if (this.#bookings.length > 0) {
+            if (this.#bookings.length == 1) {
+                salesStats.netSales = this.#bookings[0].calcNetPrice();
+                salesStats.grossSales = this.#bookings[0].calcGrossPrice();
+                salesStats.contributionMargin = this.#bookings[0].calcContributionMarginInDKK();
                 return salesStats;
             } else {
-                for (let index = i; index < this.#bookinger.length; index++) {
-                    salesStats.netSales += this.#bookinger[i].calcNetPrice();
-                    salesStats.grossSales += this.#bookinger[i].calcGrossPrice();
-                    salesStats.contributionMargin += this.#bookinger[i].calcContributionMarginInDKK();
+                for (let index = i; index < this.#bookings.length; index++) {
+                    salesStats.netSales += this.#bookings[i].calcNetPrice();
+                    salesStats.grossSales += this.#bookings[i].calcGrossPrice();
+                    salesStats.contributionMargin += this.#bookings[i].calcContributionMarginInDKK();
                 }
                 return salesStats;
             }

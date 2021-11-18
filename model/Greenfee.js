@@ -28,12 +28,8 @@ class Greenfee {
         return this.#nrOfGolfers;
     }
 
-    get Company() {
+    get company() {
         return this.#company;
-    }
-
-    get booking() {
-        return this.#Booking;
     }
 
     set date(date) {

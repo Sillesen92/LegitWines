@@ -75,7 +75,7 @@ class Flight {
     //hvis ikke denne allerede findes i arrayet.
     addPassenger(passenger) {
         if (passenger instanceof Passenger) {
-            if (!this.#passenger.includes(passenger)) {
+            if (!this.#passengers.includes(passenger)) {
                 this.#passengers.push(passenger);
                 passenger.addFlight(this);
             }

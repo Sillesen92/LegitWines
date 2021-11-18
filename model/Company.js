@@ -190,7 +190,7 @@ class Company {
     //hvis denne er tilføjet til dette.
     removeGreenfee(greenfee) {
         if (greenfee instanceof Greenfee) {
-            if (this.#greenfee.includes(greenfee)) {
+            if (this.#greenfees.includes(greenfee)) {
                 let i = this.#greenfees.indexOf(greenfee);
                 for (let index = i; index < this.#greenfees.length - 1; index++) {
                     this.#greenfees[index] = this.#greenfees[index + 1];
@@ -220,7 +220,7 @@ class Company {
     //hvis denne er tilføjet til dette.
     removeFlight(flight) {
         if (flight instanceof Flight) {
-            if (this.#flight.includes(flight)) {
+            if (this.#flights.includes(flight)) {
                 let i = this.#flights.indexOf(flight);
                 for (let index = i; index < this.#flights.length - 1; index++) {
                     this.#flights[index] = this.#flights[index + 1];
