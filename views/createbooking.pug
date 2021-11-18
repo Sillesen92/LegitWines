@@ -1,3 +1,27 @@
 block content
-  
-  
+  div#bookingpage
+    h1 Vælg Type:
+    select(name="booking" id="bookingtype")
+      option(value="choose") -- Vælg --
+      option(value="create") Opret
+      option(value="update") Opdater
+    div#createbooking
+      div#searchcontainer
+        input(name="search" type="text" placeholder="Fra:" class="airportSearch")
+        input(name="search" type="text" placeholder="Til:" class="airportSearch")
+        input(name="search" type="date" class="bookingDatePicker")
+        input(name="search" type="date" class="bookingDatePicker")
+        button#minusPersonCounter -
+        input(name="search" type="text" placeholder="Antal:" id="personCounter")
+        button#plusPersonCounter +
+        button#searchBookingButton Søg
+    div#searchResultContainer 
+      ul#searchResultList
+        lh Rejse
+          li Rejse 1
+          li Rejse 2    
+          li Rejse 3
+        lh Rejsebeskrivelse 
+          li Beskrivelse af Rejse 1
+          li Beskrivelse af Rejse 2
+          li Beskrivelse af Rejse 3
