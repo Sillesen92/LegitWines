@@ -6,14 +6,18 @@ class Transfer {
     #date
     #destination
     #bookingId
+    #price
+    #arrivalTime
     #Company
     #Booking
 
-    constructor(departureTime, date, destination, bookingId, Company, Booking) {
+    constructor(departureTime, date, destination, bookingId, price, arrivalTime, Company, Booking) {
         this.#departureTime = departureTime;
         this.#date = date;
         this.#destination = destination;
         this.#bookingId = bookingId;
+        this.#price = price;
+        this.#arrivalTime = arrivalTime;
         this.#Company = Company;
         this.#Booking = Booking;
     }
@@ -32,6 +36,14 @@ class Transfer {
 
     get bookingId() {
         return this.#bookingId;
+    }
+
+    get price() {
+        return this.#price
+    }
+
+    get arrivalTime() {
+        return this.#arrivalTime
     }
 
     get Company() {
@@ -56,6 +68,14 @@ class Transfer {
 
     set bookingId(bookingId) {
         this.#bookingId = bookingId;
+    }
+
+    set price(price) {
+        this.#price = price;
+    }
+
+    set arrivalTime(arrivalTime) {
+        this.#arrivalTime = arrivalTime;
     }
 
     //Sætter Company til et andet Company, denne må ikke være null!

@@ -2,18 +2,26 @@
 //Dobbeltrettet 1 Company
 // Dobbeltrettet 1 Booking
 class CarRental {
+    #type
     #startDate
     #endDate
+    #price
     #bookingId
     #Company
     #Booking
 
-    constructor(startDate, endDate, bookingId, Company, Booking) {
+    constructor(type, startDate, endDate, price, bookingId, Company, Booking) {
+        this.#type = type;
         this.#startDate = startDate;
         this.#endDate = endDate;
+        this.#price = price;
         this.#bookingId = bookingId;
         this.#Company = Company;
         this.#Booking = Booking;
+    }
+
+    get type() {
+        return this.#type;
     }
 
     get startDate() {
@@ -22,6 +30,10 @@ class CarRental {
 
     get endDate() {
         return this.#endDate;
+    }
+
+    get price() {
+        return this.#price;
     }
 
     get bookingId() {
@@ -36,12 +48,20 @@ class CarRental {
         return this.#Booking;
     }
 
+    set type(type) {
+        this.#type = type;
+    }
+
     set startDate(startDate) {
         this.#startDate = startDate;
     }
 
     set endDate(endDate) {
         this.#endDate = endDate;
+    }
+
+    set price(price) {
+        this.#price = price;
     }
 
     set bookingId(bookingId) {
