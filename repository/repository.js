@@ -9,7 +9,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 
-async function getCompany(id) {
+async function getCompanyDoc(id) {
   var doc = undefined;
   if (("" + id).substring(0, 1) == "1") {
     doc = db.collection('partners').doc('companies').collection('hotels').doc(id)
@@ -22,16 +22,32 @@ async function getCompany(id) {
   } else if (("" + id).substring(0, 1) == "5") {
     doc = db.collection('partners').doc('companies').collection('carrentalcompanies').doc(id)
   }
-  const company = await doc.get()
-  return company;
+  return doc;
+}
+
+async function getCompany(id) {
+  return (await getCompanyDoc(id)).get()
 }
 
 async function createCompany() {
 
 }
 
-async function saveCompany(id, company) {
-
+async function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone) {
+  console.log(companyId)
+  console.log(companyName)
+  console.log(companyAddress)
+  console.log(companyEmail)
+  console.log(companyPhone)
+  const doc = await getCompanyDoc(companyId)
+  console.log(doc)
+  const newCompany = {
+    companyName: companyName,
+    companyAddress: companyAddress,
+    companyEmail: companyEmail,
+    companyPhone: companyPhone
+  }
+  doc.set(newCompany)
 }
 
 async function getHotels() {
@@ -145,4 +161,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies }
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany}

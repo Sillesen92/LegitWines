@@ -1,4 +1,3 @@
-const companyId = () => document.getElementsByClassName("Partner")[0].id
 const companyName = () => document.querySelector("#companyName").value
 const companyAddress = () => document.querySelector("#companyAddress").value
 const companyEmail = () => document.querySelector("#companyEmail").value
@@ -8,6 +7,7 @@ const message = document.querySelector("#message")
 
 document.querySelector("#updatePartner").onclick = async (event) => {
     try {
+        const companyId = document.querySelector(".partner").id
         const response = await fetch("/editPartner/" + companyId, {
             method: "PUT",
             headers: {

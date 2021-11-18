@@ -53,6 +53,7 @@ router.get('/editPartner/:id', async (req, resp) => {
 router.put('/editPartner/:id', async (req, resp) => {
     try {
         const { companyName, companyAddress, companyEmail, companyPhone } = req.body;
+        console.log(req.params.id)
         await partnerController.updateCompany(req.params.id, companyName, companyAddress, companyEmail, companyPhone);
         resp.sendStatus(200);
     } catch (error) {

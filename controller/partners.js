@@ -8,6 +8,10 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
     console.log(companyType)
 }
 
+function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone) {
+    repository.updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone);
+}
+
 function getCompany(id) {
     return repository.getCompany(id)
 }
@@ -34,4 +38,4 @@ function getCarRentalCompanies() {
 function getAllCompanies() {
     return repository.getAllCompanies()
 }
-module.exports = { createCompany, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies }
+module.exports = { createCompany, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany }
