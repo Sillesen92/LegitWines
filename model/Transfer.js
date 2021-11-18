@@ -33,20 +33,8 @@ class Transfer {
         return this.#bookingId;
     }
 
-    get price() {
-        return this.#price
-    }
-
-    get arrivalTime() {
-        return this.#arrivalTime
-    }
-
-    get Company() {
+    get company() {
         return this.#company;
-    }
-
-    get booking() {
-        return this.#Booking;
     }
 
     set departureTime(departureTime) {
@@ -63,14 +51,6 @@ class Transfer {
 
     set bookingId(bookingId) {
         this.#bookingId = bookingId;
-    }
-
-    set price(price) {
-        this.#price = price;
-    }
-
-    set arrivalTime(arrivalTime) {
-        this.#arrivalTime = arrivalTime;
     }
 
     //Sætter Company til et andet Company, denne må ikke være null!

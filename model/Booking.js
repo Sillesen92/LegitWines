@@ -48,7 +48,8 @@ class Booking {
         } else {
             throw new Error("Salesman er ikke en instans af Salesman")
         }
-        this.#passengers = [createPassenger(this.#customer.firstName, this.#customer.lastName, this.#customer.gender, false, false, false, undefined)];
+        this.#passengers = [];
+        this.createPassenger(this.#customer.firstName, this.#customer.lastName, this.#customer.gender, false, false, false, undefined)
     }
 
     get bookingNr() {
@@ -195,7 +196,7 @@ class Booking {
     //hvis denne er tilføjet til dette.
     removeGreenfee(greenfee) {
         if (greenfee instanceof Greenfee) {
-            if (this.#greenfee.includes(greenfee)) {
+            if (this.#greenfees.includes(greenfee)) {
                 let i = this.#greenfees.indexOf(greenfee);
                 for (let index = i; index < this.#greenfees.length - 1; index++) {
                     this.#greenfees[index] = this.#greenfees[index + 1];
@@ -211,7 +212,7 @@ class Booking {
     //hvis ikke denne allerede findes i arrayet.
     createPassenger(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
         const passenger = new Passenger(firstName, lastName, gender, meal, golfbag, luggage, Flight);
-        if (!this.#passenger.includes(passenger)) {
+        if (!this.#passengers.includes(passenger)) {
             this.#passengers.push(passenger);
         }
     }
