@@ -8,4 +8,8 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
     console.log(companyType)
 }
 
-module.exports = {createCompany}
+function getCompany(id) {
+    repository.getCompany(id)
+}
+
+module.exports = {createCompany, getCompany}
