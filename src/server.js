@@ -24,7 +24,8 @@ const createPartnerRoute = require('../routes/createPartnerRoute.js')
 app.use(createPartnerRoute)
 const editPartnerRoute = require('../routes/editPartnerRoute.js')
 app.use(editPartnerRoute)
-
+const createBookingRoute = require('../routes/createBookingRoute')
+app.use(createBookingRoute)
 
 /*------------------Routes End------------------*/
 
