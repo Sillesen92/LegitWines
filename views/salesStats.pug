@@ -1,0 +1,22 @@
+include salesman
+block append css
+    link(rel='stylesheet', href='/css/salesman.css', type='text/css')
+block content
+    h1 Vælg en sælger for at se personlig salgs statistik:
+    div#salesmen
+        table#salesmenTable
+            each salesman in salesmen
+                +salesman(salesman.data().id,salesman.data().name)
+            tr.all(onclick=`location.href='/salesStats'`)
+                td
+                    label Alle
+        h3 Sum Net Sales: #{netSales}
+        h3 Sum Gross Sales: #{grossSales}
+        h3 Sum Contribution Margin #{conMargin}
+    div#perioder 
+        div
+            p periode:
+            label fra: 
+            input(name="search" type="date" class="bookingDatePicker")
+            label til: 
+            input(name="search" type="date" class="bookingDatePicker")
