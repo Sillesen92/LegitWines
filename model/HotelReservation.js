@@ -1,5 +1,6 @@
 //Klasse med følgende forbindelser:
 // Dobbeltrettet 1 Company
+const Company = require('../model/Company');
 class HotelReservation{
     #nrSingleRooms
     #nrDoubleRooms
@@ -7,16 +8,20 @@ class HotelReservation{
     #checkinDate
     #checkoutDate
     #pension
-    #Company
+    #company
 
-    constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, Company) {
+    constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, company) {
         this.#nrSingleRooms = nrSingleRooms;
         this.#nrDoubleRooms = nrDoubleRooms;
         this.#comment = comment;
         this.#checkinDate = checkinDate;
         this.#checkoutDate = checkoutDate;
         this.#pension = pension;
-        this.#Company = Company;
+        if(company instanceof Company){
+            this.#company = company;
+        } else{
+            throw new Error("Company er ikke en instans af Company");
+        }
     }
 
     get nrSingleRooms(){
@@ -44,7 +49,7 @@ class HotelReservation{
     }
 
     get company(){
-        return this.#Company;
+        return this.#company;
     }
 
     set nrSingleRooms(nrSingleRooms){

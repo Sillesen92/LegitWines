@@ -1,18 +1,23 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
+const Company = require('../model/Company');
 class Transfer{
     #departureTime
     #date
     #destination
     #bookingId
-    #Company
+    #company
 
-    constructor(departureTime, date, destination, bookingId, Company) {
+    constructor(departureTime, date, destination, bookingId, company) {
         this.#departureTime = departureTime;
         this.#date = date;
         this.#destination = destination;
         this.#bookingId = bookingId;
-        this.#Company = Company;
+        if(company instanceof Company){
+            this.#company = company;
+        } else{
+            throw new Error("Company er ikke en instans af Company");
+        }
    }
 
    get departureTime(){

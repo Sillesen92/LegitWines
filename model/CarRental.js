@@ -1,16 +1,21 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
+const Company = require('../model/Company');
 class CarRental{
     #startDate
     #endDate
     #bookingId
-    #Company
+    #company
 
-    constructor(startDate, endDate, bookingId, Company){
+    constructor(startDate, endDate, bookingId, company){
         this.#startDate = startDate;
         this.#endDate = endDate;
         this.#bookingId = bookingId;
-        this.#Company = Company;
+        if(company instanceof Company){
+            this.#company = company;
+        } else{
+            throw new Error("Company er ikke en instans af Company");
+        }
     }
 
     get startDate(){
@@ -26,7 +31,7 @@ class CarRental{
     }
 
     get company(){
-        return this.#Company;
+        return this.#company;
     }
 
     set startDate(startDate){

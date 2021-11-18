@@ -1,5 +1,6 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Flight
+const Flight = require('../model/Flight');
 class Passenger{
     #firstName
     #lastName
@@ -7,7 +8,7 @@ class Passenger{
     #meal
     #golfbag
     #luggage
-    #Flight
+    #Flight//Nullable
 
     constructor(firstName, lastName, gender, meal, golfbag, luggage, Flight){
         this.#firstName = firstName;
@@ -69,6 +70,14 @@ class Passenger{
 
     set luggage(luggage){
         this.#luggage = luggage;
+    }
+
+    set Flight(flight){
+        if(flight instanceof Flight){
+            this.#Flight = flight;
+        } else{
+            throw new Error("flight er ikke en instans af Flight");
+        }
     }
 }
 

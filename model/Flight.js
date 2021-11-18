@@ -1,26 +1,32 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet ..* Passenger
+const Passenger = require('../model/Passenger');
 //Dobbeltrettet 1 Company
-class Flight{
+const Company = require('../model/Company');
+class Flight {
     #departAirport
     #date
     #time
     #arrivalAirport
     #flightNr
     #passengers
-    #Company
+    #company
 
-    constructor(departAirport, date, time, arrivalAirport, flightNr, Company){
+    constructor(departAirport, date, time, arrivalAirport, flightNr, company) {
         this.#departAirport = departAirport;
         this.#date = date;
         this.#time = time;
         this.#arrivalAirport = arrivalAirport;
         this.#flightNr = flightNr;
         this.#passengers = [];
-        this.#Company = Company;
+        if (company instanceof Company) {
+            this.#company = company;
+        } else {
+            throw new Error("Company er ikke en instans af Company");
+        }
     }
 
-    get departAirport(){
+    get departAirport() {
         return this.#departAirport;
     }
 
@@ -45,46 +51,54 @@ class Flight{
     }
 
     get company() {
-        return this.#Company;
+        return this.#company;
     }
 
-    set departAirport(departAirport){
+    set departAirport(departAirport) {
         this.#departAirport = departAirport;
     }
 
-    set date(date){
+    set date(date) {
         this.#date = date;
     }
 
-    set time(time){
+    set time(time) {
         this.#time = time;
     }
 
-    set arrivalAirport(arrivalAirport){
+    set arrivalAirport(arrivalAirport) {
         this.#arrivalAirport = arrivalAirport;
     }
 
-    set flightNr(flightNr){
+    set flightNr(flightNr) {
         this.#flightNr = flightNr;
     }
 
     //Tilføjer en passager til arrayet af passagerer,
     //hvis ikke denne allerede findes i arrayet.
-    addPassenger(passenger){
-        if(!this.#passenger.includes(passenger)){
-            this.#passengers.push(passenger);
+    addPassenger(passenger) {
+        if (passenger instanceof Passenger) {
+            if (!this.#passenger.includes(passenger)) {
+                this.#passengers.push(passenger);
+            }
+        } else{
+            throw new Error("passenger er ikke en instans af Passenger")
         }
     }
 
     //Fjerner en passager i arrayet af passagerer,
     //hvis passageren er tilføjet til dette.
-    removePassenger(passenger){
-        if(this.#passengers.includes(passenger)){
-            let i = this.#passengers.indexOf(passenger);
-            for(let index = i; index < this.#passengers.length - 1; index++){
-                this.#passengers[index] = this.#passengers[index + 1];
+    removePassenger(passenger) {
+        if (passenger instanceof Passenger) {
+            if (this.#passengers.includes(passenger)) {
+                let i = this.#passengers.indexOf(passenger);
+                for (let index = i; index < this.#passengers.length - 1; index++) {
+                    this.#passengers[index] = this.#passengers[index + 1];
+                }
+                this.#passengers.length = this.#passengers.length - 1;
             }
-            this.#passengers.length = this.#passengers.length - 1;
+        } else{
+            throw new Error("passenger er ikke en instans af Passenger")
         }
     }
 }
