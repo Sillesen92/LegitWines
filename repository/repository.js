@@ -11,15 +11,15 @@ const db = admin.firestore();
 
 async function getCompany(id) {
   var doc = undefined;
-  if ((""+id).substring(0,1) == "1") {
+  if (("" + id).substring(0, 1) == "1") {
     doc = db.collection('partners').doc('companies').collection('hotels').doc(id)
-  } else if ((""+id).substring(0,1) == "2") {
+  } else if (("" + id).substring(0, 1) == "2") {
     doc = db.collection('partners').doc('companies').collection('golfcourses').doc(id)
-  } else if ((""+id).substring(0,1) == "3") {
+  } else if (("" + id).substring(0, 1) == "3") {
     doc = db.collection('partners').doc('companies').collection('flightcompanies').doc(id)
-  } else if ((""+id).substring(0,1) == "4") {
+  } else if (("" + id).substring(0, 1) == "4") {
     doc = db.collection('partners').doc('companies').collection('transfercompanies').doc(id)
-  } else if ((""+id).substring(0,1) == "5") {
+  } else if (("" + id).substring(0, 1) == "5") {
     doc = db.collection('partners').doc('companies').collection('carrentalcompanies').doc(id)
   }
   const company = await doc.get()
@@ -27,7 +27,7 @@ async function getCompany(id) {
 }
 
 async function createCompany() {
-  
+
 }
 
 async function saveCompany(id, company) {
@@ -66,11 +66,27 @@ async function getCarRentalCompanies() {
 
 async function getAllCompanies() {
   const list = []
-  list.push(await getHotels())
-  list.push(await getFlightCompanies())
-  list.push(await getGolfCourses())
-  list.push(await getTransferCompanies())
-  list.push(await getCarRentalCompanies())
+  const hotels = await getHotels();
+  const flightCompanies = await getFlightCompanies();
+  const golfCourses = await getGolfCourses();
+  const transferCompanies = await getTransferCompanies();
+  const carRentalCompanies = await getCarRentalCompanies();
+  hotels.forEach(e => {
+    list.push(e)
+  });
+  flightCompanies.forEach(e => {
+    list.push(e)
+  });
+  golfCourses.forEach(e => {
+    list.push(e)
+  });
+  transferCompanies.forEach(e => {
+    list.push(e)
+  });
+  carRentalCompanies.forEach(e => {
+    list.push(e)
+  });
+  console.log(list)
   return list
 }
 
@@ -129,4 +145,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = {getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies}
+module.exports = { getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies }

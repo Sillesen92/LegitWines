@@ -4,7 +4,7 @@ const companyAddress = () => document.querySelector("#companyAddress").value
 const companyEmail = () => document.querySelector("#companyEmail").value
 const companyPhone = () => document.querySelector("#companyPhone").value
 const companyType = () => document.querySelector("#companyType").value
-const error = document.querySelector("#error")
+const message = document.querySelector("#message")
 
 document.querySelector("#updatePartner").onclick = async (event) => {
     try {
@@ -17,9 +17,9 @@ document.querySelector("#updatePartner").onclick = async (event) => {
             body: JSON.stringify({ companyName: companyName(), companyAddress: companyAddress(), companyEmail: companyEmail(), companyPhone: companyPhone() })
         })
         if (response.ok) {
-            window.location.href = "/editPartner"
+            message.innerHTML = "Samarbejdspartneren er opdateret."
         } else {
-            error.textContent = "Fejl der er fejl i redigeringen af en partner"
+            message.innerHTML = "Fejl i opdateringen af en samarbejdspartner"
         }
     } catch (error) {
         error.textContent = error
