@@ -8,6 +8,7 @@ class HotelReservation {
     #checkinDate
     #checkoutDate
     #pension
+    //company er nullable
     #company
 
     constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, company) {
@@ -17,11 +18,7 @@ class HotelReservation {
         this.#checkinDate = checkinDate;
         this.#checkoutDate = checkoutDate;
         this.#pension = pension;
-        if (company instanceof Company) {
-            this.#company = company;
-        } else {
-            throw new Error("Company er ikke en instans af Company");
-        }
+        this.#company = company;
     }
 
     get nrSingleRooms() {
@@ -92,7 +89,7 @@ class HotelReservation {
                 throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet hotelreservationen");
             }
         } else {
-            throw new Error("company er ikke en instans af Company");
+            this.#company = undefined;
         }
     }
 }

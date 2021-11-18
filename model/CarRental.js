@@ -7,6 +7,7 @@ class CarRental {
     #endDate
     #price
     #bookingId
+    //company er nullable
     #company
 
     constructor(startDate, endDate, bookingId, company) {
@@ -14,11 +15,7 @@ class CarRental {
         this.#endDate = endDate;
         this.#price = price;
         this.#bookingId = bookingId;
-        if (company instanceof Company) {
-            this.#company = company;
-        } else {
-            throw new Error("Company er ikke en instans af Company");
-        }
+        this.#company = company;
     }
 
     get type() {
@@ -76,7 +73,7 @@ class CarRental {
                 throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet billejen");
             }
         } else {
-            throw new Error("company er ikke en instans af Company");
+            this.#company = undefined;
         }
     }
 }

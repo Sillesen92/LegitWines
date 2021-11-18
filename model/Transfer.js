@@ -6,6 +6,7 @@ class Transfer {
     #date
     #destination
     #bookingId
+    //company er nullable
     #company
 
     constructor(departureTime, date, destination, bookingId, company) {
@@ -13,11 +14,7 @@ class Transfer {
         this.#date = date;
         this.#destination = destination;
         this.#bookingId = bookingId;
-        if (company instanceof Company) {
-            this.#company = company;
-        } else {
-            throw new Error("Company er ikke en instans af Company");
-        }
+        this.#company = company;
     }
 
     get departureTime() {
@@ -88,7 +85,7 @@ class Transfer {
                 throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet transferen");
             }
         } else {
-            throw new Error("company er ikke en instans af Company");
+            this.#company = undefined;
         }
     }
 }

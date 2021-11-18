@@ -1,15 +1,15 @@
 //Klasse med følgende forbindelser: 
-//Enkeltrettet komposition 0..* HotelReservation
+//Dobbeltrettet 0..* HotelReservation
 const HotelReservation = require('../model/HotelReservation');
-//Enkeltrettet komposition 0..* CarRental
+//Dobbeltrettet 0..* CarRental
 const CarRental = require('../model/CarRental');
-//Enkeltrettet komposition 0..* Transfer
+//Dobbeltrettet komposition 0..* Transfer
 const Transfer = require('../model/Transfer');
-//Enkeltrettet komposition 0..* Greenfee
+//Dobbeltrettet komposition 0..* Greenfee
 const Greenfee = require('../model/Greenfee');
 //Dobbeltrettet 0..* Flight
 const Flight = require('../model/Flight');
-//Enkeltrettet 0..* Contract
+//Enkeltrettet komposition 0..* Contract
 const Contract = require('../model/Contract')
 class Company {
     #name
@@ -89,6 +89,7 @@ class Company {
         if (hotelReservation instanceof HotelReservation) {
             if (!this.#hotelReservations.includes(hotelReservation)) {
                 this.#hotelReservations.push(hotelReservation);
+                this.#hotelReservations.setCompany(this);
             }
         } else {
             throw new Error("hotelReservation er ikke en instans af HotelReservation")
@@ -105,6 +106,7 @@ class Company {
                     this.#hotelReservations[index] = this.#hotelReservations[index + 1];
                 }
                 this.#hotelReservations.length = this.#hotelReservations.length - 1;
+                hotelReservation.setCompany(undefined);
             }
         } else {
             throw new Error("hotelReservation er ikke en instans af HotelReservation");
@@ -117,6 +119,7 @@ class Company {
         if (carRental instanceof CarRental) {
             if (!this.#carRentals.includes(carRental)) {
                 this.#carRentals.push(carRental);
+                carRental.setCompany(this);
             }
         } else {
             throw new Error("carRental er ikke en instans af CarRental");
@@ -133,6 +136,7 @@ class Company {
                     this.#carRentals[index] = this.#carRentals[index + 1];
                 }
                 this.#carRentals.length = this.#carRentals.length - 1;
+                carRental.setCompany(undefined);
             }
         } else {
             throw new Error("carRental er ikke en instans af CarRental");
@@ -145,6 +149,7 @@ class Company {
         if (transfer instanceof Transfer) {
             if (!this.#transfers.includes(transfer)) {
                 this.#transfers.push(transfer);
+                transfer.setCompany(this);
             }
         } else {
             throw new Error("transfer er ikke en instans af Transfer");
@@ -161,6 +166,7 @@ class Company {
                     this.#transfers[index] = this.#transfers[index + 1];
                 }
                 this.#transfers.length = this.#transfers.length - 1;
+                transfer.setCompany(undefined);
             }
         } else {
             throw new Error("transfer er ikke en instans af Transfer");
@@ -173,6 +179,7 @@ class Company {
         if (greenfee instanceof Greenfee) {
             if (!this.#greenfees.includes(greenfee)) {
                 this.#greenfees.push(greenfee);
+                greenfee.setCompany(this);
             }
         } else {
             throw new Error("greenfee er ikke en instans af Greenfee");
@@ -189,6 +196,7 @@ class Company {
                     this.#greenfees[index] = this.#greenfees[index + 1];
                 }
                 this.#greenfees.length = this.#greenfees.length - 1;
+                greenfee.setCompany(undefined);
             }
         } else {
             throw new Error("greenfee er ikke en instans af Greenfee");
@@ -201,6 +209,7 @@ class Company {
         if (flight instanceof Flight) {
             if (!this.#flights.includes(flight)) {
                 this.#flights.push(flight);
+                flight.setCompany(this);
             }
         } else {
             throw new Error("flight er ikke en instans af Flight");
@@ -217,6 +226,7 @@ class Company {
                     this.#flights[index] = this.#flights[index + 1];
                 }
                 this.#flights.length = this.#flights.length - 1;
+                flight.setCompany(undefined);
             }
         } else {
             throw new Error("flight er ikke en instans af Flight");
