@@ -1,0 +1,15 @@
+extends layout.pug
+
+block append scripts
+    script(src="/script/login.js" defer)
+
+block append css
+    link(rel='stylesheet', href='/css/adminLogin.css', type='text/css' )
+
+block content
+    div.loginOuter
+        div.login
+            input(id="loginName", type="text",placeholder="user name")
+            input(id="loginPassword", type="password",placeholder="password")
+            button#loginForm Login
+        

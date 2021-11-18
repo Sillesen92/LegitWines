@@ -1,5 +1,7 @@
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
+const Repository = require('../repository/repository')
+const controller = require('../controller/partners')
 
 describe('Unit test af oprettelse af Company', () =>{
     beforeAll(()=>{
@@ -34,7 +36,7 @@ describe('Unit test af oprettelse af Company', () =>{
         expect(testCompany.name).toBe("CompanyTest")
         expect(testCompany.businessType).toBe("HotelTest")
         expect(testCompany).toBeInstanceOf(Company)
-        expect(testCompany.contracts().length).toEqual(2)
+        expect(testCompany.contracts.length).toEqual(2)
     })
     test('create Contract', ()=>{
         //assert
@@ -49,9 +51,9 @@ describe('Unit test af oprettelse af Company', () =>{
         //act
         testCompany.removeContract(testContract)
         //assert
-        expect(testCompany.contracts().length).toEqual(1)
-        expect(testCompany.contracts().includes(testContract)).toBeFalsy()
-        expect(testCompany.contracts().includes(testContractTwo)).toBeTruthy()
+        expect(testCompany.contracts.length).toEqual(1)
+        expect(testCompany.contracts.includes(testContract)).toBeFalsy()
+        expect(testCompany.contracts.includes(testContractTwo)).toBeTruthy()
 
     }
     test('get Company from database'), ()=>{
@@ -64,5 +66,28 @@ describe('Unit test af oprettelse af Company', () =>{
         //act
 
         //assert
+    }
+    test('test af getCompany fra firebase', ()=>{
+
+        Repository.createCompany.mockResolvedValue(testCompany)
+        const res = controller.getCompany(testCompany.id)
+        expect(res).toBe(testCompany)
+        expect(res.address).toBe("TestStreet69")
+        expect(res.name).toBe("CompanyTest")
+
+    })
+    test('test af update partner/company fra firebase'), ()=>{
+        const nameToUpdate = "UpdatedName"
+        const companyId = 001
+        const addressToUpdate = "TestStreet69Updated"
+        const emailToUpdate = "test@test.testUpdated"
+        const phoneToUpdate = 21112222
+        const businessTypeToUpdate = "HotelTestUpdated"
+        const updatedCom = Repository.updateCompany.mockResolvedValue(companyId,nameToUpdate, addressToUpdate, emailToUpdate,phoneToUpdate,businessTypeToUpdate)
+        const conUpdatedCompany = controller.getCompany(001)
+
+        expect(conUpdatedCompany.name).toBe("UpdatedName")
+        expect(conUpdatedCompany.phoneToUpdate).toBe(21112222)
+
     }
 })

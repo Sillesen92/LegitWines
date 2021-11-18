@@ -108,7 +108,26 @@ async function getAllCompanies() {
 
 //Mangler de gyldige parametre
 /*
-async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
+async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
+  const doc = await getBooking(bookingNr)
+  const updatedBooking = {
+      grossPrice = grossPrice,
+      contributionMargin = contributionMargin,
+      salesman = salesman,
+      reservations = reservations,
+      transfers = transfers,
+      customer = customer,
+      passengers = passengers,
+      carRentals = carRentals,
+      greenFees = greenFees
+  }
+  const bookingJson = JSON.stringify(updatedBooking)
+  await doc.set(bookingJson)
+  return doc
+}
+
+
+async function createBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
   {
     
     const booking = {
@@ -128,7 +147,7 @@ async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, 
 
   const bookingJson = JSON.stringify(booking)
   
-}const doc = await db.collection("Bookings").doc()
+}const doc = await db.collection("bookings").doc()
 await doc.set(booking)
 
 return doc.id
@@ -138,7 +157,7 @@ return doc.id
 
 async function getBooking(bookingNr){
   try{
-    const querySnapshot = await db.collection("Bookings")
+    const querySnapshot = await db.collection("bookings")
     .where("bookingNr", "==", bookingNr).get()
     const docs = querySnapshot.docs 
     return docs
@@ -150,7 +169,7 @@ async function getBooking(bookingNr){
 //Henter alle bookings fra firestore
 async function getBookings(){
   try{
-    const querySnapshot = await db.collection("Bookings").get();
+    const querySnapshot = await db.collection("bookings").get();
     const docs = querySnapshot.docs
     console.log(docs.length)
     return docs  

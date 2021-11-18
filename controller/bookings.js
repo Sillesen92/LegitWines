@@ -8,9 +8,9 @@ function getBooking(id){
     return repository.getBooking(id);
 }
 
-function saveBooking(parameters){
-    return repository.saveBooking(parameters)
+function createBooking(parameters){
+    return repository.createBooking(parameters)
 }
 
-module.exports = {getBooking, saveBooking, getBookings}
+module.exports = {getBooking, createBooking, getBookings}
 
