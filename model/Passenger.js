@@ -1,5 +1,5 @@
 //Klasse med følgende forbindelser:
-//Dobbeltrettet 1 Flight
+//Dobbeltrettet 0..* Flight
 const Flight = require('../model/Flight');
 class Passenger{
     #firstName
@@ -8,17 +8,16 @@ class Passenger{
     #meal
     #golfbag
     #luggage
-    //flight er nullable
-    #flight
+    #flights
 
-    constructor(firstName, lastName, gender, meal, golfbag, luggage, flight){
+    constructor(firstName, lastName, gender, meal, golfbag, luggage){
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
         this.#meal = meal;
         this.#golfbag = golfbag;
         this.#luggage = luggage;
-        this.#flight = flight;
+        this.#flights = [];
     }
 
     get firstName(){
@@ -45,8 +44,8 @@ class Passenger{
         return this.#luggage;
     }
 
-    get flight(){
-        return this.#flight;
+    get flights(){
+        return this.#flights;
     }
 
     set firstName(firstName){
@@ -73,11 +72,29 @@ class Passenger{
         this.#luggage = luggage;
     }
 
-    setFlight(flight){
-        if(flight instanceof Flight){
-            this.#flight = flight;
-        } else{
-            this.#flight = undefined;
+    addFlight(flight){
+        if (flight instanceof Flight) {
+            if (!this.#flights.includes(flight)) {
+                this.#flights.push(flight);
+                flight.addPassenger(this);
+            }
+        } else {
+            throw new Error("passenger er ikke en instans af Passenger")
+        }
+    }
+
+    removeFlight(flight){
+        if (flight instanceof Flight) {
+            if (this.#flights.includes(flight)) {
+                let i = this.#passengers.indexOf(passenger);
+                for (let index = i; index < this.#passengers.length - 1; index++) {
+                    this.#passengers[index] = this.#passengers[index + 1];
+                }
+                this.#passengers.length = this.#passengers.length - 1;
+                flight.removePassenger(this);
+            }
+        } else {
+            throw new Error("passenger er ikke en instans af Passenger")
         }
     }
 }

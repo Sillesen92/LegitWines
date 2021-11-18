@@ -77,7 +77,7 @@ class Flight {
         if (passenger instanceof Passenger) {
             if (!this.#passenger.includes(passenger)) {
                 this.#passengers.push(passenger);
-                passenger.setFlight(this);
+                passenger.addFlight(this);
             }
         } else {
             throw new Error("passenger er ikke en instans af Passenger")
@@ -95,6 +95,7 @@ class Flight {
                     this.#passengers[index] = this.#passengers[index + 1];
                 }
                 this.#passengers.length = this.#passengers.length - 1;
+                passenger.removeFlight(this);
             }
         } else {
             throw new Error("passenger er ikke en instans af Passenger")
