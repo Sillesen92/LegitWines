@@ -2,17 +2,18 @@ extends layout
 block append scripts 
     script(src="script/createPartner.js" defer)
 block content 
-    h1 Create Partner
+    h1 Opret ny samarbejdspartner
     div.newPartner
         input(id="companyName", type="text",placeholder="firma navn")
         input(id="companyAddress", type="text",placeholder="adresse")
         input(id="companyEmail", type="text", placeholder="email")
-        input(id="companyPhone", type="text", placeholder="tlf")
+        input(id="companyPhone", type="number", placeholder="tlf")
         select(id="companyType")
             option(value="") --Vælg partnertype--
-            option(value="Hotel") Hotel
-            option(value="Flyselskab") Flyselskab
-            option(value="Billeje") Billeje
-            option(value="Golfbane") Golfbane
-            option(value="Transfer") Transfer
-        button#createPartner Opret ny partner
+            option(value="1") Hotel
+            option(value="2") Golfbane
+            option(value="3") Flyselskab
+            option(value="4") Transfer
+            option(value="5") Billeje
+        button#createPartner Opret
+        div#message

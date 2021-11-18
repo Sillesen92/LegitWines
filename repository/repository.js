@@ -29,8 +29,49 @@ async function getCompany(id) {
   return (await getCompanyDoc(id)).get()
 }
 
-async function createCompany() {
-
+async function createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType) {
+  const company = {
+    companyName: companyName,
+    companyAddress: companyAddress,
+    companyEmail: companyEmail,
+    companyPhone: companyPhone
+  }
+  var created = false;
+  var ref = db.collection('partners').doc('companies');
+  if (companyType == "1") {
+    const col = ref.collection('hotels')
+    const count = await (await ref.get()).data().hotelcount
+    const id = 10001+count
+    await (col.doc(""+id).set(company)).then(() => ref.update({hotelcount: count+1})).then(() => created = true)
+  } 
+  else if (companyType == "2") {
+    const col = ref.collection('golfcourses')
+    const count = await (await ref.get()).data().golfcoursecount
+    const id = 20001+count
+    await (col.doc(""+id).set(company)).then(() => ref.update({golfcoursecount: count+1})).then(() => created = true)
+  } 
+  else if (companyType == "3") {
+    const col = ref.collection('flightcompanies')
+    const count = await (await ref.get()).data().flightcompanycount
+    const id = 30001+count
+    await (col.doc(""+id).set(company)).then(() => ref.update({flightcompanycount: count+1})).then(() => created = true)
+  } 
+  else if (companyType == "4") {
+    const col = ref.collection('transfercompanies')
+    const count = await (await ref.get()).data().transfercompanycount
+    const id = 40001+count
+    await (col.doc(""+id).set(company)).then(() => ref.update({transfercompanycount: count+1})).then(() => created = true)
+  } 
+  else if (companyType == "5") {
+    const col = ref.collection('carrentalcompanies')
+    const count = await (await ref.get()).data().carrentalcompanycount
+    const id = 50001+count
+    await (col.doc(""+id).set(company)).then(() => ref.update({carrentalcompanycount: count+1})).then(() => created = true)
+  } 
+  else {
+    throw "Fejl: Ingen partnertype valgt";
+  }
+  return created;
 }
 
 async function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone) {
@@ -180,4 +221,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany}
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany}

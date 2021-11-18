@@ -3,7 +3,7 @@ const companyAddress = () => document.querySelector("#companyAddress").value
 const companyEmail = () => document.querySelector("#companyEmail").value
 const companyPhone = () => document.querySelector("#companyPhone").value
 const companyType = () => document.querySelector("#companyType").value
-const error = document.querySelector("#error")
+const message = document.querySelector("#message")
 
 document.querySelector("#createPartner").onclick = async (event) => {
     try {
@@ -18,9 +18,9 @@ document.querySelector("#createPartner").onclick = async (event) => {
         if (response.ok) {
             window.location.href = "/createPartner"
         } else {
-            error.textContent = "Fejl i oprettelse af samarbejdspartner"
+            message.textContent = (await response.json()).error
         }
     } catch (error) {
-        error.textContent = error
+        message.textContent = error
     }
 }
