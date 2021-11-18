@@ -12,4 +12,26 @@ function getCompany(id) {
     repository.getCompany(id)
 }
 
-module.exports = {createCompany, getCompany}
+function getHotels() {
+    return repository.getHotels()
+}
+
+function getFlightCompanies() {
+    return repository.getFlightCompanies()
+}
+
+function getGolfCourses() {
+    return repository.getGolfCourses()
+}
+
+function getTransferCompanies() {
+    return repository.getTransferCompanies()
+}
+
+function getCarRentalCompanies() {
+    return repository.getCarRentalCompanies()
+}
+function getAllCompanies() {
+    return repository.getAllCompanies()
+}
+module.exports = {createCompany, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies}

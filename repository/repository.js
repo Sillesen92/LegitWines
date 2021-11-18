@@ -34,6 +34,46 @@ async function saveCompany(id, company) {
 
 }
 
+async function getHotels() {
+  const doc = db.collection('partners').doc('companies').collection('hotels');
+  const list = (await doc.get()).docs
+  return list;
+}
+
+async function getFlightCompanies() {
+  const doc = db.collection('partners').doc('companies').collection('flightcompanies');
+  const list = (await doc.get()).docs
+  return list;
+}
+
+async function getGolfCourses() {
+  const doc = db.collection('partners').doc('companies').collection('golfcourses');
+  const list = (await doc.get()).docs
+  return list;
+}
+
+async function getTransferCompanies() {
+  const doc = db.collection('partners').doc('companies').collection('transfercompanies');
+  const list = (await doc.get()).docs
+  return list;
+}
+
+async function getCarRentalCompanies() {
+  const doc = db.collection('partners').doc('companies').collection('carrentalcompanies');
+  const list = (await doc.get()).docs
+  return list;
+}
+
+async function getAllCompanies() {
+  const list = []
+  list.push(await getHotels())
+  list.push(await getFlightCompanies())
+  list.push(await getGolfCourses())
+  list.push(await getTransferCompanies())
+  list.push(await getCarRentalCompanies())
+  return list
+}
+
 //Mangler de gyldige parametre
 /*
 async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
@@ -84,4 +124,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = {getCompany}
+module.exports = {getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies}
