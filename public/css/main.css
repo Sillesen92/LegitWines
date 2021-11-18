@@ -236,6 +236,25 @@ p {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    text-align-last: center;
+}
+
+#updateBookingSelect select {
+    margin: 22px 5px 0px 10px;
+    font-family: Montserrat, Roboto, "Helvetica Neue";
+    font-size: 20px;
+    text-align-last: center;
+}
+
+#searchBookingForUpdate {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+#searchBookingForUpdate h2 {
+    margin: 12px 10px 0 10px;
 }
 
 #updateBookingSearchInput {
@@ -275,7 +294,7 @@ p {
 #updateBooking {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     width: 95%;
@@ -290,11 +309,36 @@ p {
     font-family: Montserrat, Roboto, "Helvetica Neue";
     font-size: 28px;
     list-style-type: none;
+    margin: 10px;
 }
 
 #bookingDetaljer li {
     border: 1px solid #F1DABF;
     padding: 10px;
+}
+
+#saveUpdateButton {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+#saveUpdateButton:hover {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
 }
 
 
