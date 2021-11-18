@@ -9,7 +9,7 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
 }
 
 function getCompany(id) {
-    repository.getCompany(id)
+    return repository.getCompany(id)
 }
 
 function getHotels() {
