@@ -8,6 +8,32 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
+
+async function getCompany(id) {
+  var doc = undefined;
+  if ((""+id).substring(0,1) == "1") {
+    doc = db.collection('partners').doc('companies').collection('hotels').doc(id)
+  } else if ((""+id).substring(0,1) == "2") {
+    doc = db.collection('partners').doc('companies').collection('golfcourses').doc(id)
+  } else if ((""+id).substring(0,1) == "3") {
+    doc = db.collection('partners').doc('companies').collection('flightcompanies').doc(id)
+  } else if ((""+id).substring(0,1) == "4") {
+    doc = db.collection('partners').doc('companies').collection('transfercompanies').doc(id)
+  } else if ((""+id).substring(0,1) == "5") {
+    doc = db.collection('partners').doc('companies').collection('carrentalcompanies').doc(id)
+  }
+  const company = await doc.get()
+  return company;
+}
+
+async function createCompany() {
+  
+}
+
+async function saveCompany(id, company) {
+
+}
+
 //Mangler de gyldige parametre
 /*
 async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
@@ -63,3 +89,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
+module.exports = {getCompany}
