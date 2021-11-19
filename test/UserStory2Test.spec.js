@@ -56,11 +56,6 @@ describe('Unit test af oprettelse af Company', () =>{
         expect(testCompany.contracts.includes(testContractTwo)).toBeTruthy()
 
     }
-    test('get Company from database'), ()=>{
-        //act
-
-        //assert
-    }
     //
     test('save Company to database'), () =>{
         //act
