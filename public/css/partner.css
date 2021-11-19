@@ -35,7 +35,7 @@
     width: 250px;
     height: 36px;
     margin-top: 25px;
-    margin-left: 70px;
+    float: right;
 }
 
 /*Kontrakter til partner*/
@@ -57,6 +57,11 @@ div.contracts{
     overflow-y: scroll;
 }
 
+.wrapper {
+    display: block;
+    float:left;
+}
+
 .contractItem{
     background-color:#FEFFFE;
     color:#276954;
@@ -71,4 +76,11 @@ div.contracts{
 .selected{
     background-color:#276954;
     color:#FEFFFE;
+}
+
+/*Input form kontrakter*/
+
+.contractsForm{
+    display: block;
+    float:left;
 }

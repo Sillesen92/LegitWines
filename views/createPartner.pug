@@ -1,7 +1,6 @@
 extends layout 
 block append scripts 
     script(src="/script/createPartner.js" defer)
-    script(src="/script/contractList.js" defer)
 block append css 
     link(rel='stylesheet', href='/css/partner.css', type='text/css' )
 block content 
@@ -33,9 +32,20 @@ block content
             div#message
     div.contracts
         h2.contractsHeader Kontrakter: 
-        div.contractsList#contracts
-            div.contractItem(id="enkeltværelse_1/11/2021_1/12/2021_500")
-                p Enkeltværelse 1/11/2021-1/12/2021, 500kr
-            each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] 
-                div.contractItem(id=`${val}`)
-                    p=`Kontrakt ${val}`
+        div.wrapper
+            div.contractsList#contracts
+            button#deleteContract(class="greenButton formButton") Slet kontrakt
+        div.contractsForm
+            div.inputRow
+                label.formLabel(for="contractDesc") Beskrivelse: 
+                input.formField(id="contractDesc", type="text",placeholder="beskrivelse")
+            div.inputRow
+                label.formLabel(for="contractStart") Startdato: 
+                input.formField(id="contractStart", type="date",placeholder="")
+            div.inputRow
+                label.formLabel(for="contractEnd") Slutdato: 
+                input.formField(id="contractEnd", type="date", placeholder="")
+            div.inputRow
+                label.formLabel(for="contractPrice") Pris: 
+                input.formField(id="contractPrice", type="number", placeholder="pris")
+            button#addContract(class="greenButton formButton") Tilføj kontrakt

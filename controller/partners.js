@@ -1,11 +1,11 @@
 const repository = require('../repository/repository.js')
 
-async function createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType) {
-    return repository.createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType)
+async function createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType, contracts) {
+    return repository.createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType, contracts)
 }
 
-function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone) {
-    repository.updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone);
+function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone, contracts) {
+    repository.updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone, contracts);
 }
 
 function getCompany(id) {

@@ -37,7 +37,7 @@ router.post('/editPartner', async (req, res) => {
                 companyAddress: p.data().companyAddress,
                 companyPhone: p.data().companyPhone,
                 companyEmail: p.data().companyEmail,
-                companyId: p.id
+                companyId: p.id,
             }
             jsonPartners.push(obj)
         }
@@ -47,14 +47,14 @@ router.post('/editPartner', async (req, res) => {
 
 router.get('/editPartner/:id', async (req, resp) => {
     const companyPartner = await partnerController.getCompany(req.params.id)
-    resp.render('editPartner', { companyPartner: companyPartner })
+    resp.render('editPartner', { companyPartner: companyPartner, contracts: companyPartner.data().contracts })
 })
 
 router.put('/editPartner/:id', async (req, resp) => {
     try {
-        const { companyName, companyAddress, companyEmail, companyPhone } = req.body;
+        const { companyName, companyAddress, companyEmail, companyPhone, contracts } = req.body;
         console.log(req.params.id)
-        await partnerController.updateCompany(req.params.id, companyName, companyAddress, companyEmail, companyPhone);
+        await partnerController.updateCompany(req.params.id, companyName, companyAddress, companyEmail, companyPhone, contracts);
         resp.sendStatus(200);
     } catch (error) {
         resp.sendStatus(400);
