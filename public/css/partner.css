@@ -1,0 +1,86 @@
+
+/*Input form til partner*/
+.partner{
+    margin-left: 50px;
+    display: block;
+    float:left;
+}
+
+.inputRow{
+    margin-top: 10px;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.formLabel{
+    display: inline-block;
+    width:100px;
+    font-style: italic;
+    font-size: large;
+    text-align: right;
+    margin-right:10px;
+}
+
+.formField{
+    width:200px;
+    height:30px
+}
+
+.formDropdown{
+    width: 208px;
+    height: 36px;
+}
+
+.formButton{
+    width: 250px;
+    height: 36px;
+    margin-top: 25px;
+    float: right;
+}
+
+/*Kontrakter til partner*/
+div.contracts{
+    float:left;
+    display:block;
+    height:320px;
+    margin-left: 50px;
+}
+
+.contractsHeader{
+    margin-top: 0px;
+}
+
+.contractsList{
+    border: 2px solid #276954;
+    height: 300px;
+    width: 250px;
+    overflow-y: scroll;
+}
+
+.wrapper {
+    display: block;
+    float:left;
+}
+
+.contractItem{
+    background-color:#FEFFFE;
+    color:#276954;
+    margin: 0px;
+    padding: 5px 0px;
+}
+
+.contractItem > p{
+    margin:0px;
+}
+
+.selected{
+    background-color:#276954;
+    color:#FEFFFE;
+}
+
+/*Input form kontrakter*/
+
+.contractsForm{
+    display: block;
+    float:left;
+}

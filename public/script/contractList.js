@@ -1,46 +1,12 @@
-const companyName = () => document.querySelector("#companyName").value
-const companyAddress = () => document.querySelector("#companyAddress").value
-const companyEmail = () => document.querySelector("#companyEmail").value
-const companyPhone = () => document.querySelector("#companyPhone").value
-const companyType = () => document.querySelector("#companyType").value
-const todayString = () => {
-    const today = new Date()
-    return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
-}
-
-var selected;
-var selectedContract;
-const contracts = []
-const message = document.querySelector("#message")
-
-document.querySelector("#createPartner").onclick = async (event) => {
-    try {
-        const response = await fetch("/createPartner", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({companyName: companyName(), companyAddress: companyAddress(), companyEmail: companyEmail(), companyPhone: companyPhone(), companyType: companyType(), contracts: contracts})
-        })
-        if (response.ok) {
-            window.location.href = "/createPartner"
-        } else {
-            message.textContent = (await response.json()).error
-        }
-    } catch (error) {
-        message.textContent = error
-    }
-}
-
-
-
-/*------------ Contract handling ------------*/
 const contractDesc = () => document.querySelector("#contractDesc").value
 const contractStart = () => document.querySelector("#contractStart").value
 const contractEnd = () => document.querySelector("#contractEnd").value
 const contractPrice = () => document.querySelector("#contractPrice").value
 const contractList = document.querySelector("#contracts")
+var selected;
+var selectedContract;
+
+const contracts = []
 
 for (const div of document.getElementsByClassName("contractItem")) {
     const strArray = div.id.split("_")
@@ -52,13 +18,11 @@ for (const div of document.getElementsByClassName("contractItem")) {
     }
     contracts.push(contract)
     div.onclick = () => {
-        updateSelectedContract(div, contract)
+        updateSelected(div, contract)
     }
 }
 document.querySelector("#deleteContract").onclick = removeContract
 document.querySelector("#addContract").onclick = addContract
-document.querySelector("#contractStart").value = todayString()
-document.querySelector("#contractEnd").value = todayString()
 
 function addContract() {
     const contract = {
@@ -72,13 +36,8 @@ function addContract() {
     div.className = "contractItem"
     div.id = `${contract.description}_${contract.startDate}_${contract.endDate}_${contract.netPrice}`
     div.innerHTML = `<p>${contract.description}\n${contract.startDate} - ${contract.endDate}\n${contract.netPrice}kr.`
-    div.onclick = () => updateSelectedContract(div, contract)
+    div.onclick = () => updateSelected(div, contract)
     contractList.appendChild(div)
-
-
-    document.querySelector("#contractDesc").value = ""
-    document.querySelector("#contractPrice").value = ""
-
 
     console.log(contract)
 
@@ -96,9 +55,15 @@ function removeContract() {
     console.log(contracts)
 }
 
-function updateSelectedContract(div, contract) {
+function updateSelected(div, contract) {
     if (selected != null) selected.classList.remove('selected')
     div.classList.add('selected')
     selected = div;
     selectedContract = contract
 }
+
+function getContracts() {
+    return contracts
+}
+
+module.exports = {getContracts}

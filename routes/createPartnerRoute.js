@@ -8,8 +8,8 @@ router.get('/createPartner', async (req, resp) => {
 
 router.post('/createPartner', async (req, resp) => {
         try {
-                const {companyName, companyAddress, companyEmail, companyPhone, companyType} = req.body;
-                const createSuccess = await partnerController.createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType);
+                const {companyName, companyAddress, companyEmail, companyPhone, companyType, contracts} = req.body;
+                const createSuccess = await partnerController.createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType, contracts);
                 if (createSuccess) {
                         resp.sendStatus(200);
                 } else {

@@ -86,11 +86,11 @@ class Passenger{
     removeFlight(flight){
         if (flight instanceof Flight) {
             if (this.#flights.includes(flight)) {
-                let i = this.#passengers.indexOf(passenger);
-                for (let index = i; index < this.#passengers.length - 1; index++) {
-                    this.#passengers[index] = this.#passengers[index + 1];
+                let i = this.#flights.indexOf(flight);
+                for (let index = i; index < this.#flights.length - 1; index++) {
+                    this.#flights[index] = this.#flights[index + 1];
                 }
-                this.#passengers.length = this.#passengers.length - 1;
+                this.#flights.length = this.#flights.length - 1;
                 flight.removePassenger(this);
             }
         } else {

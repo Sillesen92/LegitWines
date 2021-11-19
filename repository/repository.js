@@ -29,12 +29,13 @@ async function getCompany(id) {
   return (await getCompanyDoc(id)).get()
 }
 
-async function createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType) {
+async function createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType, contracts) {
   const company = {
     companyName: companyName,
     companyAddress: companyAddress,
     companyEmail: companyEmail,
-    companyPhone: companyPhone
+    companyPhone: companyPhone,
+    contracts: contracts
   }
   var created = false;
   var ref = db.collection('partners').doc('companies');
@@ -74,7 +75,7 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
   return created;
 }
 
-async function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone) {
+async function updateCompany(companyId, companyName, companyAddress, companyEmail, companyPhone, contracts) {
   console.log(companyId)
   console.log(companyName)
   console.log(companyAddress)
@@ -86,8 +87,10 @@ async function updateCompany(companyId, companyName, companyAddress, companyEmai
     companyName: companyName,
     companyAddress: companyAddress,
     companyEmail: companyEmail,
-    companyPhone: companyPhone
+    companyPhone: companyPhone,
+    contracts: contracts
   }
+  console.log(newCompany)
   doc.set(newCompany)
 }
 

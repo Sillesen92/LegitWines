@@ -1,19 +1,51 @@
 extends layout 
 block append scripts 
-    script(src="script/createPartner.js" defer)
+    script(src="/script/createPartner.js" defer)
+block append css 
+    link(rel='stylesheet', href='/css/partner.css', type='text/css' )
 block content 
     h1 Opret ny samarbejdspartner
-    div.newPartner
-        input(id="companyName", type="text",placeholder="firma navn")
-        input(id="companyAddress", type="text",placeholder="adresse")
-        input(id="companyEmail", type="text", placeholder="email")
-        input(id="companyPhone", type="number", placeholder="tlf")
-        select(id="companyType")
-            option(value="") --Vælg partnertype--
-            option(value="1") Hotel
-            option(value="2") Golfbane
-            option(value="3") Flyselskab
-            option(value="4") Transfer
-            option(value="5") Billeje
-        button#createPartner Opret
-        div#message
+    div.partner
+        div.inputRow
+            label.formLabel(for="companyName") Firmanavn: 
+            input.formField(id="companyName", type="text",placeholder="firma navn")
+        div.inputRow
+            label.formLabel(for="companyAddress") Adresse: 
+            input.formField(id="companyAddress", type="text",placeholder="adresse")
+        div.inputRow
+            label.formLabel(for="companyEmail") Email: 
+            input.formField(id="companyEmail", type="text", placeholder="email")
+        div.inputRow
+            label.formLabel(for="companyPhone") Telefon: 
+            input.formField(id="companyPhone", type="number", placeholder="tlf")
+        div.inputRow
+            label.formLabel(for="companyType") Type: 
+            select.formDropdown(id="companyType")
+                option(value="") --Vælg partnertype--
+                option(value="1") Hotel
+                option(value="2") Golfbane
+                option(value="3") Flyselskab
+                option(value="4") Transfer
+                option(value="5") Billeje
+        button#createPartner(class="greenButton formButton") Opret
+        div.inputRow
+            div#message
+    div.contracts
+        h2.contractsHeader Kontrakter: 
+        div.wrapper
+            div.contractsList#contracts
+            button#deleteContract(class="greenButton formButton") Slet kontrakt
+        div.contractsForm
+            div.inputRow
+                label.formLabel(for="contractDesc") Beskrivelse: 
+                input.formField(id="contractDesc", type="text",placeholder="beskrivelse")
+            div.inputRow
+                label.formLabel(for="contractStart") Startdato: 
+                input.formField(id="contractStart", type="date",placeholder="")
+            div.inputRow
+                label.formLabel(for="contractEnd") Slutdato: 
+                input.formField(id="contractEnd", type="date", placeholder="")
+            div.inputRow
+                label.formLabel(for="contractPrice") Pris: 
+                input.formField(id="contractPrice", type="number", placeholder="pris")
+            button#addContract(class="greenButton formButton") Tilføj kontrakt
