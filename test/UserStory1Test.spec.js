@@ -6,17 +6,17 @@ const repository = require('../repository/repository')
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
-const testCustomer = null;
-const testSalesman = null;
-const testBooking = null;
-const testHotel = null;
-const testAirline = null;
-const testContractRoom = null;
-const testContractDoubleRoom = null;
-const testHotelReservation = null;
+let testCustomer = null;
+let testSalesman = null;
+let testBooking = null;
+let testHotel = null;
+let testAirline = null;
+let testContractRoom = null;
+let testContractDoubleRoom = null;
+let testHotelReservation = null;
 
 describe('Unit test af Booking klasse', () => {
-    beforeAll(() => {
+    beforeEach(() => {
         // preparation of customer:
         const firstName = 'John';
         const lastName = 'Doe';
@@ -104,8 +104,9 @@ describe('Unit test af Booking klasse', () => {
 
         //preparation af booking med forbindelser til contracts
         testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotel)
-        testHotelReservation.addContract(testContractRoom);
-        testHotelReservation.addContract(testContractDoubleRoom);
+        // testHotelReservation.addContract(testContractRoom);
+        // testHotelReservation.addContract(testContractDoubleRoom);
+        //Kommentar tester: Der er ingen addContract metode på HotelReservation.
 
     })
 

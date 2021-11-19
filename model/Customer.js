@@ -1,6 +1,7 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Booking
-class Customer{
+const Booking = require('../model/Booking');
+class Customer {
     #firstName
     #lastName
     #email
@@ -21,84 +22,92 @@ class Customer{
         this.#bookings = [];
     }
 
-    get firstName(){
+    get firstName() {
         return this.#firstName;
     }
 
-    get lastName(){
+    get lastName() {
         return this.#lastName;
     }
 
-    get email(){
+    get email() {
         return this.#email;
     }
 
-    get gender(){
+    get gender() {
         return this.#gender;
     }
 
-    get address(){
+    get address() {
         return this.#address;
     }
 
-    get phoneNr(){
+    get phoneNr() {
         return this.#phoneNr;
     }
 
-    get dguNr(){
+    get dguNr() {
         return this.#dguNr;
     }
 
-    get bookings(){
+    get bookings() {
         return this.#bookings;
     }
 
-    set firstName(firstName){
+    set firstName(firstName) {
         this.#firstName = firstName;
     }
 
-    set lastName(lastName){
+    set lastName(lastName) {
         this.#lastName = lastName;
     }
 
-    set email(email){
+    set email(email) {
         this.#email = email;
     }
 
-    set gender(gender){
+    set gender(gender) {
         this.#gender = gender;
     }
 
-    set address(address){
+    set address(address) {
         this.#address = address;
     }
 
-    set phoneNr(phoneNr){
+    set phoneNr(phoneNr) {
         this.#phoneNr = phoneNr;
     }
 
-    set dguNr(dguNr){
+    set dguNr(dguNr) {
         this.#dguNr = dguNr;
     }
 
     //Tilføjer en booking til arrayet af bookinger,
     //hvis ikke denne allerede findes i arrayet.
-    addBooking(booking){
-        if(!this.#bookinger.includes(booking)){
-            this.#bookinger.push(booking);
-            booking.setSalesman(this);
+    addBooking(booking) {
+        if (booking instanceof Booking) {
+            if (!this.#bookings.includes(booking)) {
+                this.#bookings.push(booking);
+                booking.setSalesman(this);
+            }
+        } else {
+            throw new Error("booking er ikke en instans af Booking");
         }
     }
 
     //Fjerner en booking fra arrayet af bookinger,
     //hvis denne allerede er i arrayet.
-    removeBooking(booking){
-        if(this.#bookinger.includes(booking)){
-            let i = this.#bookinger.indexOf(booking);
-            for(let index = i; index < this.#bookinger.length - 1; index++){
-                this.#bookinger[index] = this.#bookinger[index + 1];
+    removeBooking(booking) {
+        if (booking instanceof Booking) {
+            if (this.#bookings.includes(booking)) {
+                let i = this.#bookings.indexOf(booking);
+                for (let index = i; index < this.#bookings.length - 1; index++) {
+                    this.#bookings[index] = this.#bookings[index + 1];
+                }
+                this.#bookings.length = this.#bookings.length - 1;
             }
-            this.#bookinger.length = this.#bookinger.length - 1;
+        } else{
+            throw new Error("booking er ikke en instans af Booking");
         }
     }
 }

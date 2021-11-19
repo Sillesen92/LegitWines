@@ -1,5 +1,6 @@
 //Klasse med følgende forbindelser:
-//Dobbeltrettet 1 Flight
+//Dobbeltrettet 0..* Flight
+const Flight = require('../model/Flight');
 class Passenger{
     #firstName
     #lastName
@@ -7,16 +8,16 @@ class Passenger{
     #meal
     #golfbag
     #luggage
-    #Flight
+    #flights
 
-    constructor(firstName, lastName, gender, meal, golfbag, luggage, Flight){
+    constructor(firstName, lastName, gender, meal, golfbag, luggage){
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
         this.#meal = meal;
         this.#golfbag = golfbag;
         this.#luggage = luggage;
-        this.#Flight = Flight;
+        this.#flights = [];
     }
 
     get firstName(){
@@ -43,8 +44,8 @@ class Passenger{
         return this.#luggage;
     }
 
-    get flight(){
-        return this.#Flight;
+    get flights(){
+        return this.#flights;
     }
 
     set firstName(firstName){
@@ -69,6 +70,32 @@ class Passenger{
 
     set luggage(luggage){
         this.#luggage = luggage;
+    }
+
+    addFlight(flight){
+        if (flight instanceof Flight) {
+            if (!this.#flights.includes(flight)) {
+                this.#flights.push(flight);
+                flight.addPassenger(this);
+            }
+        } else {
+            throw new Error("passenger er ikke en instans af Passenger")
+        }
+    }
+
+    removeFlight(flight){
+        if (flight instanceof Flight) {
+            if (this.#flights.includes(flight)) {
+                let i = this.#flights.indexOf(flight);
+                for (let index = i; index < this.#flights.length - 1; index++) {
+                    this.#flights[index] = this.#flights[index + 1];
+                }
+                this.#flights.length = this.#flights.length - 1;
+                flight.removePassenger(this);
+            }
+        } else {
+            throw new Error("passenger er ikke en instans af Passenger")
+        }
     }
 }
 

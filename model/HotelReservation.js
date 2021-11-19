@@ -1,6 +1,6 @@
 //Klasse med følgende forbindelser:
 // Dobbeltrettet 1 Company
-// Dobbeltrettet 1 Booking
+const Company = require('../model/Company');
 class HotelReservation {
     #nrSingleRooms
     #nrDoubleRooms
@@ -8,18 +8,17 @@ class HotelReservation {
     #checkinDate
     #checkoutDate
     #pension
-    #Company
-    #Booking
+    //company er nullable
+    #company
 
-    constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, Company, Booking) {
+    constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, company) {
         this.#nrSingleRooms = nrSingleRooms;
         this.#nrDoubleRooms = nrDoubleRooms;
         this.#comment = comment;
         this.#checkinDate = checkinDate;
         this.#checkoutDate = checkoutDate;
         this.#pension = pension;
-        this.#Company = Company;
-        this.#Booking = Booking;
+        this.#company = company;
     }
 
     get nrSingleRooms() {
@@ -47,11 +46,7 @@ class HotelReservation {
     }
 
     get company() {
-        return this.#Company;
-    }
-
-    get booking() {
-        return this.#Booking;
+        return this.#company;
     }
 
     set nrSingleRooms(nrSingleRooms) {
@@ -79,26 +74,18 @@ class HotelReservation {
     }
 
     //Sætter Company til et andet Company, denne må ikke være null!
-    setCompany(Company) {
-        if (this.#Company != Company && Company != undefined) {
-            const oldCompany = this.#Company;
-            oldCompany.removeHotelReservation(this);
-            this.#Company = Company;
-            this.#Company.addHotelReservation(this);
+    setCompany(company) {
+        if (company instanceof Company) {
+            if (this.#company != company) {
+                const oldCompany = this.#company;
+                oldCompany.removeHotelReservation(this);
+                this.#company = company;
+                this.#company.addHotelReservation(this);
+            } else {
+                throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet hotelreservationen");
+            }
         } else {
-            throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet hotelreservationen");
-        }
-    }
-
-    //Sætter Booking til en anden Booking, denne må ikke være null!
-    setBooking(Booking) {
-        if (this.#Booking != Booking && Booking != undefined) {
-            const oldBooking = this.#Booking;
-            oldBooking.removeHotelReservation(this);
-            this.#Booking = Booking;
-            this.#Booking.addHotelReservation(this);
-        } else {
-            throw new Error("Du skal angive en booking, der er forskellig fra den booking du allerede har tilknyttet hotelreservationen");
+            this.#company = undefined;
         }
     }
 }

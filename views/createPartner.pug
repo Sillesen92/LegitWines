@@ -1,18 +1,41 @@
 extends layout 
 block append scripts 
-    script(src="script/createPartner.js" defer)
+    script(src="/script/createPartner.js" defer)
+    script(src="/script/contractList.js" defer)
+block append css 
+    link(rel='stylesheet', href='/css/partner.css', type='text/css' )
 block content 
-    h1 Create Partner
-    div.newPartner
-        input(id="companyName", type="text",placeholder="firma navn")
-        input(id="companyAddress", type="text",placeholder="adresse")
-        input(id="companyEmail", type="text", placeholder="email")
-        input(id="companyPhone", type="text", placeholder="tlf")
-        select(id="companyType")
-            option(value="") --Vælg partnertype--
-            option(value="Hotel") Hotel
-            option(value="Flyselskab") Flyselskab
-            option(value="Billeje") Billeje
-            option(value="Golfbane") Golfbane
-            option(value="Transfer") Transfer
-        button#createPartner Opret ny partner
+    h1 Opret ny samarbejdspartner
+    div.partner
+        div.inputRow
+            label.formLabel(for="companyName") Firmanavn: 
+            input.formField(id="companyName", type="text",placeholder="firma navn")
+        div.inputRow
+            label.formLabel(for="companyAddress") Adresse: 
+            input.formField(id="companyAddress", type="text",placeholder="adresse")
+        div.inputRow
+            label.formLabel(for="companyEmail") Email: 
+            input.formField(id="companyEmail", type="text", placeholder="email")
+        div.inputRow
+            label.formLabel(for="companyPhone") Telefon: 
+            input.formField(id="companyPhone", type="number", placeholder="tlf")
+        div.inputRow
+            label.formLabel(for="companyType") Type: 
+            select.formDropdown(id="companyType")
+                option(value="") --Vælg partnertype--
+                option(value="1") Hotel
+                option(value="2") Golfbane
+                option(value="3") Flyselskab
+                option(value="4") Transfer
+                option(value="5") Billeje
+        button#createPartner(class="greenButton formButton") Opret
+        div.inputRow
+            div#message
+    div.contracts
+        h2.contractsHeader Kontrakter: 
+        div.contractsList#contracts
+            div.contractItem(id="enkeltværelse_1/11/2021_1/12/2021_500")
+                p Enkeltværelse 1/11/2021-1/12/2021, 500kr
+            each val in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] 
+                div.contractItem(id=`${val}`)
+                    p=`Kontrakt ${val}`
