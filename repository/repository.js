@@ -74,6 +74,30 @@ async function getAllCompanies() {
   return list
 }
 
+//save og get sælgere:
+async function createSalesman(name, email, phoneNr, salesId, password){
+  const salesman = {
+    adminstrator: false,
+    name: name, 
+    email: email,
+    phoneN: phoneNr,
+    salesId: salesId,
+    password: password
+  }
+  const doc = db.collection('salesmen')
+  await doc.set(salesman)
+  salesman.id = doc.id
+  return salesman
+}
+
+async function getSalesman(salesmanId){
+  if ((""+id).substring(0,1) == "6") {
+  const doc = db.collection('salesmen').doc(salesmanId)
+  const salesman = await doc.get()
+  return salesman;
+  }
+}
+
 //Mangler de gyldige parametre
 /*
 async function saveBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
