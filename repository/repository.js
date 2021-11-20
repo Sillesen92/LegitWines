@@ -150,6 +150,64 @@ async function getAllCompanies() {
   return list
 }
 
+//save og get sælgere:
+async function createSalesman(name, email, phoneNr, salesId, password){
+  const salesman = {
+    adminstrator: false,
+    name: name, 
+    email: email,
+    phoneN: phoneNr,
+    salesId: salesId,
+    password: password
+  }
+  const col = db.collection('salesmen')
+    const count = await (await col.get(count)).data().count
+    const id = 60001+count
+    await (col.doc(""+id).set(salesman)).then(() => col.get(count).update({count: count+1}))
+  salesman.id = doc.id
+  return salesman
+}
+
+async function getSalesman(salesmanId){
+  if ((""+salesmanId).substring(0,1) == "6") {
+  const doc = db.collection('salesmen').doc(salesmanId)
+  const salesman = await doc.get()
+  return salesman;
+  }else{
+    return new Error('This is not a salesmanId')
+  }
+}
+
+// returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
+async function getAllBookingSalesman(salesmanId, dateFrom, dateTo){
+  if ((""+salesmanId).substring(0,1) == "6") {
+    let bookingsSalesman=[]
+    const doc = db.collection('booking')
+    const bookings = await doc.get()
+    bookings.forEach(element => {
+      if(element.data().salesmanId == ""+salesmanId){
+        if(dateFrom == undefined && dateTo == undefined){
+          bookingsSalesman.push(element)
+        } else if(dateTo == undefined){
+          if(element.data().date>dateFrom)
+            bookingsSalesman.push(element)
+        }
+        else if(dateFrom == undefined){
+          if(element.data().date < dateTo)
+            bookingsSalesman.push(element)
+        }
+        else{
+          if(element.data().date > dateFrom && element.data().date < dateTo)
+          bookingsSalesman.push(element)
+        }
+      }
+    })
+    return bookingsSalesman;
+    } else {
+      return new error('This is not a salesmanId')
+    }
+}
+
 //Mangler de gyldige parametre
 /*
 async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
@@ -224,4 +282,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany}
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman}
