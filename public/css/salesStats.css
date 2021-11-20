@@ -1,0 +1,14 @@
+#salesmenTable{
+    border-collapse: collapse;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+}
+table, td, tr {
+    border: solid black 3px;
+}
+td {
+    width: 80%;
+    text-align:center;
+}
+
