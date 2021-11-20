@@ -86,7 +86,7 @@ class Salesman {
                 }
                 this.#bookings.length = this.#bookings.length - 1;
             }
-        } else{
+        } else {
             throw new Error("booking er ikke en instans af Booking")
         }
     }
@@ -115,6 +115,36 @@ class Salesman {
             throw new Error("Der er ingen bookinger registreret til denne sælger.")
         }
     }
+
+    getSalesStatisticsForPeriod(startDate, endDate) {
+        const salesStatsForPeriod = {
+            netSales: 0,
+            grossSales: 0,
+            contributionMargin: 0
+        }
+        if (this.#bookings.length > 0) {
+            if (this.#bookings.length == 1 && this.#bookings[0].date >= startDate && this.#bookings[0].date <= endDate) {
+                salesStatsForPeriod.netSales = this.#bookings[0].calcNetPrice();
+                salesStatsForPeriod.grossSales = this.#bookings[0].calcGrossPrice();
+                salesStatsForPeriod.contributionMargin = this.#bookings[0].calcContributionMarginInDKK();
+                return salesStatsForPeriod;
+            } else {
+                for (let index = i; index < this.#bookings.length; index++) {
+                    if (this.#bookings[i].date >= startDate && this.#bookings[i].date <= endDate) {
+                        salesStatsForPeriod.netSales += this.#bookings[i].calcNetPrice();
+                        salesStatsForPeriod.grossSales += this.#bookings[i].calcGrossPrice();
+                        salesStatsForPeriod.contributionMargin += this.#bookings[i].calcContributionMarginInDKK();
+                    }
+                }
+            }
+            return salesStatsForPeriod;
+        } else {
+            throw new Error("Der findes ingen bookingen indenfor den angivet periode.");
+        }
+    }
+
 }
+
+
 
 module.exports = Salesman;
