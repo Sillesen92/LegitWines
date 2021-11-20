@@ -136,8 +136,8 @@ class Salesman {
                         salesStatsForPeriod.contributionMargin += this.#bookings[i].calcContributionMarginInDKK();
                     }
                 }
+                return salesStatsForPeriod;
             }
-            return salesStatsForPeriod;
         } else {
             throw new Error("Der findes ingen bookingen indenfor den angivet periode.");
         }
