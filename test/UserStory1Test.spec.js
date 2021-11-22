@@ -133,7 +133,7 @@ describe('Unit test af Booking klasse', () => {
         const result = testBooking.calcGrossPrice();
 
         // assert -> forventet bruttopris: 1540,5 
-        expect(result).toBe(1540, 5)
+        expect(result).toEqual(1540.5)
     })
 
     test('Unit test af dækningsbidragsberegning', () => {
@@ -141,7 +141,7 @@ describe('Unit test af Booking klasse', () => {
         const result = testBooking.calcContributionMarginInDKK();
 
         // assert -> forventet fortjeneste: 240,5
-        expect(result).toBe(240, 5)
+        expect(result).toEqual(240.5)
     })
 
     test("Hent booking fra repository", async () => {
