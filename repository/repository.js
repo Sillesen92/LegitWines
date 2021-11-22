@@ -207,7 +207,7 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo){
     } else {
       return new error('This is not a salesmanId')
     }
-
+  }
 //Mangler de gyldige parametre
 /*
 async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
@@ -282,5 +282,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman}
