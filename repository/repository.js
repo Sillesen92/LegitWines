@@ -150,20 +150,19 @@ async function getAllCompanies() {
   return list
 }
 
-//Mangler de gyldige parametre
-/*
+
 async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
   const doc = await getBooking(bookingNr)
   const updatedBooking = {
-      grossPrice = grossPrice,
-      contributionMargin = contributionMargin,
-      salesman = salesman,
-      reservations = reservations,
-      transfers = transfers,
-      customer = customer,
-      passengers = passengers,
-      carRentals = carRentals,
-      greenFees = greenFees
+      grossPrice: grossPrice,
+      contributionMargin: contributionMargin,
+      salesman: salesman,
+      reservations: reservations,
+      transfers: transfers,
+      customer: customer,
+      passengers: passengers,
+      carRentals: carRentals,
+      greenFees: greenFees
   }
   const bookingJson = JSON.stringify(updatedBooking)
   await doc.set(bookingJson)
@@ -175,23 +174,23 @@ async function createBooking(bookingNr, grossPrice, contributionMargin, salesman
   {
     
     const booking = {
-      bookingNr = bookingNr,
-      grossPrice = grossPrice,
-      contributionMargin = contributionMargin,
-      salesman = salesman,
-      reservations = reservations,
-      transfers = transfers,
-      customer = customer,
-      passengers = passengers,
-      carRentals = carRentals,
-      greenFees = greenFees
+      bookingNr: bookingNr,
+      grossPrice: grossPrice,
+      contributionMargin: contributionMargin,
+      salesman: salesman,
+      reservations: reservations,
+      transfers: transfers,
+      customer: customer,
+      passengers: passengers,
+      carRentals: carRentals,
+      greenFees: greenFees
   }
   
 }
 
   const bookingJson = JSON.stringify(booking)
   
-}const doc = await db.collection("bookings").doc()
+const doc = await db.collection("bookings").doc()
 await doc.set(booking)
 
 return doc.id
@@ -223,5 +222,5 @@ async function getBookings(){
   
 }
 
-module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany}
+
+module.exports = {updateBooking, getBookings, createBooking, getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany}
