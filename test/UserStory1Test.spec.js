@@ -6,6 +6,8 @@ const repository = require('../repository/repository')
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
+jest.mock('../repository/repository')
+
 let testCustomer = null;
 let testSalesman = null;
 let testBooking = null;
@@ -147,10 +149,10 @@ describe('Unit test af Booking klasse', () => {
     test("Hent booking fra repository", async () => {
         //prepare
         const bookingId = 20210002
-        repository.getBookingByBookingId.mockResolvedValue(new Booking(bookingId, testSalesman, testCustomer))
+        repository.getBooking.mockResolvedValue(new Booking(bookingId, testSalesman, testCustomer))
 
         // act
-        const result = await BookingController.getBookingByBookingId(bookingId)
+        const result = await BookingController.getBooking(bookingId)
         // assert
         expect(result.bookingId).toEqual(bookingId)
         expect(result.salesman.name).toBe("Jonas")

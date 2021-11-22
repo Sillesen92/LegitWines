@@ -169,45 +169,45 @@ async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, sale
   return created
 }
 
-async function getSalesman(salesmanId){
-  if ((""+salesmanId).substring(0,1) == "6") {
-  const doc = db.collection('salesmen').doc(salesmanId)
-  const salesman = await doc.get()
-  return salesman;
-  }else{
+async function getSalesman(salesmanId) {
+  if (("" + salesmanId).substring(0, 1) == "6") {
+    const doc = db.collection('salesmen').doc(salesmanId)
+    const salesman = await doc.get()
+    return salesman;
+  } else {
     return new Error('This is not a salesmanId')
   }
 }
 
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
-async function getAllBookingSalesman(salesmanId, dateFrom, dateTo){
-  if ((""+salesmanId).substring(0,1) == "6") {
-    let bookingsSalesman=[]
+async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
+  if (("" + salesmanId).substring(0, 1) == "6") {
+    let bookingsSalesman = []
     const doc = db.collection('booking')
     const bookings = await doc.get()
     bookings.forEach(element => {
-      if(element.data().salesmanId == ""+salesmanId){
-        if(dateFrom == undefined && dateTo == undefined){
+      if (element.data().salesmanId == "" + salesmanId) {
+        if (dateFrom == undefined && dateTo == undefined) {
           bookingsSalesman.push(element)
-        } else if(dateTo == undefined){
-          if(element.data().date>dateFrom)
+        } else if (dateTo == undefined) {
+          if (element.data().date > dateFrom)
             bookingsSalesman.push(element)
         }
-        else if(dateFrom == undefined){
-          if(element.data().date < dateTo)
+        else if (dateFrom == undefined) {
+          if (element.data().date < dateTo)
             bookingsSalesman.push(element)
         }
-        else{
-          if(element.data().date > dateFrom && element.data().date < dateTo)
-          bookingsSalesman.push(element)
+        else {
+          if (element.data().date > dateFrom && element.data().date < dateTo)
+            bookingsSalesman.push(element)
         }
       }
     })
     return bookingsSalesman;
-    } else {
-      return new error('This is not a salesmanId')
-    }
+  } else {
+    return new error('This is not a salesmanId')
   }
+}
 //Mangler de gyldige parametre
 /*
 async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
@@ -282,4 +282,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman}
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
