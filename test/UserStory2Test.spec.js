@@ -2,6 +2,7 @@ const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const Repository = require('../repository/repository')
 const controller = require('../controller/partners')
+jest.mock('../repository/repository')
 let testCompany = null;
 let testContract = null;
 let testContract2 = null;
