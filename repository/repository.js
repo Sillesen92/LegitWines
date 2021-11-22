@@ -42,33 +42,33 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
   if (companyType == "1") {
     const col = ref.collection('hotels')
     const count = await (await ref.get()).data().hotelcount
-    const id = 10001+count
-    await (col.doc(""+id).set(company)).then(() => ref.update({hotelcount: count+1})).then(() => created = true)
-  } 
+    const id = 10001 + count
+    await (col.doc("" + id).set(company)).then(() => ref.update({ hotelcount: count + 1 })).then(() => created = true)
+  }
   else if (companyType == "2") {
     const col = ref.collection('golfcourses')
     const count = await (await ref.get()).data().golfcoursecount
-    const id = 20001+count
-    await (col.doc(""+id).set(company)).then(() => ref.update({golfcoursecount: count+1})).then(() => created = true)
-  } 
+    const id = 20001 + count
+    await (col.doc("" + id).set(company)).then(() => ref.update({ golfcoursecount: count + 1 })).then(() => created = true)
+  }
   else if (companyType == "3") {
     const col = ref.collection('flightcompanies')
     const count = await (await ref.get()).data().flightcompanycount
-    const id = 30001+count
-    await (col.doc(""+id).set(company)).then(() => ref.update({flightcompanycount: count+1})).then(() => created = true)
-  } 
+    const id = 30001 + count
+    await (col.doc("" + id).set(company)).then(() => ref.update({ flightcompanycount: count + 1 })).then(() => created = true)
+  }
   else if (companyType == "4") {
     const col = ref.collection('transfercompanies')
     const count = await (await ref.get()).data().transfercompanycount
-    const id = 40001+count
-    await (col.doc(""+id).set(company)).then(() => ref.update({transfercompanycount: count+1})).then(() => created = true)
-  } 
+    const id = 40001 + count
+    await (col.doc("" + id).set(company)).then(() => ref.update({ transfercompanycount: count + 1 })).then(() => created = true)
+  }
   else if (companyType == "5") {
     const col = ref.collection('carrentalcompanies')
     const count = await (await ref.get()).data().carrentalcompanycount
-    const id = 50001+count
-    await (col.doc(""+id).set(company)).then(() => ref.update({carrentalcompanycount: count+1})).then(() => created = true)
-  } 
+    const id = 50001 + count
+    await (col.doc("" + id).set(company)).then(() => ref.update({ carrentalcompanycount: count + 1 })).then(() => created = true)
+  }
   else {
     throw "Fejl: Ingen partnertype valgt";
   }
@@ -150,22 +150,22 @@ async function getAllCompanies() {
   return list
 }
 
+
 //save og get sælgere:
-async function createSalesman(name, email, phoneNr, salesId, password){
+async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, salesmanSalesId, salesmanPassword) {
   const salesman = {
-    adminstrator: false,
-    name: name, 
-    email: email,
-    phoneN: phoneNr,
-    salesId: salesId,
-    password: password
+    salesmanName: salesmanName,
+    salesmanEmail: salesmanEmail,
+    salesmanPhoneNr: salesmanPhoneNr,
+    salesmanSalesId: salesmanSalesId,
+    salesmanPassword: salesmanPassword
   }
-  const col = db.collection('salesmen')
-    const count = await (await col.get(count)).data().count
-    const id = 60001+count
-    await (col.doc(""+id).set(salesman)).then(() => col.get(count).update({count: count+1}))
-  salesman.id = doc.id
-  return salesman
+  var created = false;
+  var ref = db.collection('salesmen');
+  const count = await (await ref.doc('count').get()).data().count
+  const id = 60001 + count
+  await (ref.doc("" + id).set(salesman)).then(() => ref.update({ count: count + 1 })).then(() => created = true)
+  return created
 }
 
 async function getSalesman(salesmanId){
@@ -206,22 +206,21 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo){
     } else {
       return new error('This is not a salesmanId')
     }
-}
 
 //Mangler de gyldige parametre
 /*
 async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
   const doc = await getBooking(bookingNr)
   const updatedBooking = {
-      grossPrice = grossPrice,
-      contributionMargin = contributionMargin,
-      salesman = salesman,
-      reservations = reservations,
-      transfers = transfers,
-      customer = customer,
-      passengers = passengers,
-      carRentals = carRentals,
-      greenFees = greenFees
+      grossPrice: grossPrice,
+      contributionMargin: contributionMargin,
+      salesman: salesman,
+      reservations: reservations,
+      transfers: transfers,
+      customer: customer,
+      passengers: passengers,
+      carRentals: carRentals,
+      greenFees: greenFees
   }
   const bookingJson = JSON.stringify(updatedBooking)
   await doc.set(bookingJson)
@@ -233,23 +232,23 @@ async function createBooking(bookingNr, grossPrice, contributionMargin, salesman
   {
     
     const booking = {
-      bookingNr = bookingNr,
-      grossPrice = grossPrice,
-      contributionMargin = contributionMargin,
-      salesman = salesman,
-      reservations = reservations,
-      transfers = transfers,
-      customer = customer,
-      passengers = passengers,
-      carRentals = carRentals,
-      greenFees = greenFees
+      bookingNr: bookingNr,
+      grossPrice: grossPrice,
+      contributionMargin: contributionMargin,
+      salesman: salesman,
+      reservations: reservations,
+      transfers: transfers,
+      customer: customer,
+      passengers: passengers,
+      carRentals: carRentals,
+      greenFees: greenFees
   }
   
 }
 
   const bookingJson = JSON.stringify(booking)
   
-}const doc = await db.collection("bookings").doc()
+const doc = await db.collection("bookings").doc()
 await doc.set(booking)
 
 return doc.id
@@ -282,4 +281,5 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman}
+
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }

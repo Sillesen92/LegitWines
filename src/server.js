@@ -24,10 +24,12 @@ const createPartnerRoute = require('../routes/createPartnerRoute.js')
 app.use(createPartnerRoute)
 const editPartnerRoute = require('../routes/editPartnerRoute.js')
 app.use(editPartnerRoute)
-const createBookingRoute = require('../routes/createBookingRoute')
+const createBookingRoute = require('../routes/createBookingRoute.js')
 app.use(createBookingRoute)
 const loginRoute = require('../routes/loginRoute.js')
 app.use(loginRoute)
+const createSalesmanRoute = require('../routes/createSalesmanRoute.js')
+app.use(createSalesmanRoute)
 
 /*------------------Routes End------------------*/
 

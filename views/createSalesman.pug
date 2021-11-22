@@ -1,0 +1,26 @@
+extends layout 
+block append scripts 
+    script(src="/script/createSalesman.js" defer)
+block append css 
+    link(rel='stylesheet', href='/css/salesman.css', type='text/css' )
+block content 
+    h1 Opret ny sælger
+    div.salesman
+        div.inputRow
+            label.formLabel(for="salesmanName") navn: 
+            input.formField(id="salesmanName", type="text",placeholder="navn")
+        div.inputRow
+            label.formLabel(for="salesmanEmail") Email: 
+            input.formField(id="salesmanEmail", type="text",placeholder="email")
+        div.inputRow
+            label.formLabel(for="salesmanPhoneNr") Telefon: 
+            input.formField(id="salesmanPhoneNr", type="text", placeholder="telefon")
+        div.inputRow
+            label.formLabel(for="salesmanSalesId") SalesId: 
+            input.formField(id="salesmanSalesId", type="text", placeholder="brugernavn")
+        div.inputRow
+            label.formLabel(for="salesmanPassword") Password: 
+            input.formField(id="salesmanPassword", type="password", placeholder="password")
+        button#createSalesman(class="greenButton formButton") Opret
+        div.inputRow
+            div#message
