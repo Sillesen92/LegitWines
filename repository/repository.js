@@ -154,6 +154,7 @@ async function getAllCompanies() {
 //save og get sælgere:
 async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, salesmanSalesId, salesmanPassword) {
   const salesman = {
+    administrator: false,
     salesmanName: salesmanName,
     salesmanEmail: salesmanEmail,
     salesmanPhoneNr: salesmanPhoneNr,
@@ -164,7 +165,7 @@ async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, sale
   var ref = db.collection('salesmen');
   const count = await (await ref.doc('count').get()).data().count
   const id = 60001 + count
-  await (ref.doc("" + id).set(salesman)).then(() => ref.update({ count: count + 1 })).then(() => created = true)
+  await (ref.doc("" + id).set(salesman)).then(() => ref.doc('count').update({ count: count + 1 })).then(() => created = true)
   return created
 }
 
