@@ -1,6 +1,7 @@
 //Klasse med følgende forbindelser:
 // Dobbeltrettet 1 Company
 const Company = require('../model/Company');
+const Contract = require('../model/Contract')
 class HotelReservation {
     #nrSingleRooms
     #nrDoubleRooms
@@ -8,8 +9,9 @@ class HotelReservation {
     #checkinDate
     #checkoutDate
     #pension
-    //company er nullable
+    //company er nullable ::: Kommentar JF: Company må da ikke være nullable? En hotelreservation skal have et company jf. design diagram
     #company
+    #chosenContracts
 
     constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, company) {
         this.#nrSingleRooms = nrSingleRooms;
@@ -19,6 +21,7 @@ class HotelReservation {
         this.#checkoutDate = checkoutDate;
         this.#pension = pension;
         this.#company = company;
+        this.#chosenContracts = [];
     }
 
     get nrSingleRooms() {
@@ -47,6 +50,10 @@ class HotelReservation {
 
     get company() {
         return this.#company;
+    }
+
+    get chosenContracts() {
+        return this.#chosenContracts;
     }
 
     set nrSingleRooms(nrSingleRooms) {
@@ -87,6 +94,33 @@ class HotelReservation {
         } else {
             this.#company = undefined;
         }
+    }
+
+    // Henter alle contracts fra company.
+    getCompanyContracts() {
+        return this.#company.getContracts();
+    }
+
+
+    // Tilføjer en kontrakt fra et Company og tilføjer det til reservationens egen liste over valgte kontrakter. 
+    addContractToChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            if (!this.#chosenContracts.includes(contract)) {
+                chosenContracts.push(contract);
+            } else {
+                throw new Error("Kontrakten er allerede valgt")
+            }
+        }
+    }
+
+    calcNetPriceForReservation() {
+        var price = 0;
+        if (this.#chosenContracts.length > 0) {
+            for (let index = 0; index < this.#chosenContracts; index++) {
+                price += this.#chosenContracts[index].netPrice;
+            }
+        }
+
     }
 }
 
