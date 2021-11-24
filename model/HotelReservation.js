@@ -113,6 +113,8 @@ class HotelReservation {
         }
     }
 
+
+    // Beregner den samlede pris på de valgte hotelkontrakter. **OBS** Metoden er mangelfuld, da det endnu ikke er gennemskuet, hvordan der matches korrekt mellem de valgte kontrakter, og antallet af singlerooms og double rooms. 
     calcNetPriceForReservation() {
         var price = 0;
         if (this.#chosenContracts.length > 0) {
@@ -120,7 +122,7 @@ class HotelReservation {
                 price += this.#chosenContracts[index].netPrice;
             }
         }
-
+        return price;
     }
 }
 
