@@ -203,19 +203,17 @@ describe('Unit test af Booking klasse', () => {
         testHotelReservation.addContractToChosenContracts(testContractSingleRoom);
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
 
-        testTransferReservation = testBooking.createTransfer(new Date(2021, 0, 8, 12, 0), "Tilfældig adresse", "X802", testTransferCompany);
+        testTransferReservation = testBooking.createTransfer(new Date(2021, 10, 16, 12, 0), "Tilfældig adresse", "X802", testTransferCompany);
         testTransferReservation.addContractToChosenContracts(transferContract)
 
-        testCarReservation = testBooking.createCarRental(new Date(2021, 0, 1), new Date(2021, 11, 1), "testBookingId", testCarCompany);
+        testCarReservation = testBooking.createCarRental(new Date(2021, 10, 16), new Date(2021, 10, 18), "testBookingId", testCarCompany);
         testCarReservation.addContractToChosenContracts(carContract1);
         testCarReservation.addContractToChosenContracts(carContract2);
         testCarReservation.addContractToChosenContracts(carContract3);
 
-        testGolfReservation = testBooking.createGreenfee(new Date(2021, 0, 1, 14, 0), testGolfCompany)
+        testGolfReservation = testBooking.createGreenfee(new Date(2021, 10, 17, 10, 0), testGolfCompany)
         testGolfReservation.addContractToChosenContracts(golfContract1);
         testGolfReservation.addContractToChosenContracts(golfContract2);
-
-
 
     })
 
