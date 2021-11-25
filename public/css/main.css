@@ -150,7 +150,7 @@ button:hover.greenButton {
 #createbooking {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     text-align: center;
     width: 95%;
@@ -163,6 +163,9 @@ button:hover.greenButton {
 }
 
 .resCard {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
     border: 2px solid black;
     width: 98%;
     height: 70px;
@@ -174,28 +177,99 @@ button:hover.greenButton {
     font-size: 40px;
     width: 50px;
     height: 50px;
-    border: none;
+    border: 3px solid #276954;
     border-radius: 25px;
     margin: 10px;
+    padding: 0px;
     font-family: Poppins, Roboto, "Helvetica Neue";
-    line-height: 50px;
+    line-height: 47px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .addReservationButton:hover {
-    background-color: #276954;
-    color: #FEFFFE;
+    background-color: #FEFFFE;
+    color: #276954;
     border: 3px solid #276954;
     font-size: 40px;
     width: 50px;
     height: 50px;
-    border: none;
     border-radius: 25px;
     margin: 10px;
     font-family: Poppins, Roboto, "Helvetica Neue";
-    line-height: 50px;
+    line-height: 47px;
     box-sizing: border-box;
+    cursor: pointer;
 }
+
+/* Reservation Modal CSS */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.resModalContent {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.closeResModal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeResModel:hover,
+.closeResModel:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.confirmResButton {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 40px;
+    width: 100px;
+    height: 50px;
+    border: 3px solid #276954;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 0px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 47px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.confirmResButton:hover {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 40px;
+    width: 100px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 47px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
 
 /* Resultat af Create Booking Search */
 
