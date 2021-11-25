@@ -1,78 +1,48 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Flight
 const Flight = require('../model/Flight');
-class Passenger{
+class Passenger {
     #firstName
     #lastName
     #gender
-    #meal
-    #golfbag
-    #luggage
     #flights
 
-    constructor(firstName, lastName, gender, meal, golfbag, luggage){
+    constructor(firstName, lastName, gender) {
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
-        this.#meal = meal;
-        this.#golfbag = golfbag;
-        this.#luggage = luggage;
         this.#flights = [];
     }
 
-    get firstName(){
+    get firstName() {
         return this.#firstName;
     }
 
-    get lastName(){
+    get lastName() {
         return this.#lastName;
     }
 
-    get gender(){
+    get gender() {
         return this.#gender;
     }
 
-    get meal(){
-        return this.#meal;
-    }
-
-    get golfbag(){
-        return this.#golfbag;
-    }
-
-    get luggage(){
-        return this.#luggage;
-    }
-
-    get flights(){
+    get flights() {
         return this.#flights;
     }
 
-    set firstName(firstName){
+    set firstName(firstName) {
         this.#firstName = firstName;
     }
 
-    set lastName(lastName){
+    set lastName(lastName) {
         this.#lastName = lastName;
     }
 
-    set gender(gender){
+    set gender(gender) {
         this.#gender = gender;
     }
 
-    set meal(meal){
-        this.#meal = meal;
-    }
-
-    set golfbag(golfbag){
-        this.#golfbag = golfbag;
-    }
-
-    set luggage(luggage){
-        this.#luggage = luggage;
-    }
-
-    addFlight(flight){
+    addFlight(flight) {
         if (flight instanceof Flight) {
             if (!this.#flights.includes(flight)) {
                 this.#flights.push(flight);
@@ -83,7 +53,7 @@ class Passenger{
         }
     }
 
-    removeFlight(flight){
+    removeFlight(flight) {
         if (flight instanceof Flight) {
             if (this.#flights.includes(flight)) {
                 let i = this.#flights.indexOf(flight);
