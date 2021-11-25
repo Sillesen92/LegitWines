@@ -404,20 +404,23 @@ class Booking {
     //Udregner den samlede kostpris, ud fra
     //nettopriserne hos de valgte samarbejdspartnere
     calcNetPrice() {
-        this.#netPrice = 0;
-        return this.#netPrice;
+        var price = 0;
+        travelDocuments.forEach(doc => {
+            price += doc.calcNetPrice()
+        });
+        return price;
     }
 
     //Udregner den samlede salgspris, 
     //netto prisen ganget med (dækningsbidrag delt med 100 + 1)
     calcGrossPrice() {
-        this.#grossPrice = this.#netPrice * (this.#contributionMargin / 100 + 1);
+        this.#grossPrice = calcNetPrice() * (this.#contributionMargin / 100 + 1);
         return this.#grossPrice;
     }
 
     //Udregner dækningsbidraget i DKK ud fra den samlede pris
     calcContributionMarginInDKK() {
-        return this.#grossPrice - this.#netPrice;
+        return this.calcGrossPrice() - this.calcNetPrice();
     }
 }
 
