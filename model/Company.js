@@ -257,6 +257,7 @@ class Company {
             throw new Error("contract er ikke en instans af Contract");
         }
     }
+    //Bør man have en updateContract?
 }
 
 module.exports = Company;

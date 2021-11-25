@@ -4,12 +4,13 @@ block append scripts
     script(src="/script/login.js" defer)
 
 block append css
-    link(rel='stylesheet', href='/css/adminLogin.css', type='text/css' )
+    link(rel='stylesheet', href='/css/login.css', type='text/css' )
 
 block content
+    h1 Login 
     div.loginOuter
         div.login
             input(id="loginName", type="text",placeholder="user name")
             input(id="loginPassword", type="password",placeholder="password")
-            button#loginForm Login
+            button.greenButton#loginForm Login
         

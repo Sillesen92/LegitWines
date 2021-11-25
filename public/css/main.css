@@ -54,6 +54,25 @@ p {
     justify-content: space-evenly;
 }
 
+/*Global button class?*/
+button.greenButton {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 20px;
+    border: 3px solid #276954;
+    border-radius: 15px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+button:hover.greenButton {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 20px;
+    border-radius: 15px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
 #frontpagebuttons button {
     background-color: #276954;
     color: #FEFFFE;

@@ -1,0 +1,38 @@
+/*Input form til salesman*/
+.salesman{
+    margin-left: 50px;
+    display: block;
+    float:left;
+}
+
+.inputRow{
+    margin-top: 10px;
+    vertical-align: middle;
+    height: 40px;
+}
+
+.formLabel{
+    display: inline-block;
+    width:100px;
+    font-style: italic;
+    font-size: large;
+    text-align: right;
+    margin-right:10px;
+}
+
+.formField{
+    width:200px;
+    height:30px
+}
+
+.formDropdown{
+    width: 208px;
+    height: 36px;
+}
+
+.formButton{
+    width: 250px;
+    height: 36px;
+    margin-top: 25px;
+    float: right;
+}

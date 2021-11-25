@@ -2,6 +2,7 @@ const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const Repository = require('../repository/repository')
 const controller = require('../controller/partners')
+jest.mock('../repository/repository')
 let testCompany = null;
 let testContract = null;
 let testContract2 = null;
@@ -58,12 +59,14 @@ describe('Unit test af oprettelse af Company', () => {
         expect(testCompany.contracts.includes(testContract)).toBeFalsy()
         expect(testCompany.contracts.includes(testContract2)).toBeTruthy()
 
+
     })
     test('get Company from database', () => {
         //act
 
         //assert
     })
+
     //
     test('save Company to database', () => {
         //act

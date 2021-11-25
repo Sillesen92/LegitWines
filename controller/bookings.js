@@ -12,5 +12,9 @@ function createBooking(parameters){
     return repository.createBooking(parameters)
 }
 
-module.exports = {getBooking, createBooking, getBookings}
+function getAllBookingSalesman(salesmanId, dateFrom, dateTo){
+    return repository.getBookingsBySalesman(salesmanId, dateFrom, dateTo)
+}
+
+module.exports = {getBooking, createBooking, getBookings, getAllBookingSalesman}
 
