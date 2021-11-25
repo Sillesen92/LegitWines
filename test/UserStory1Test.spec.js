@@ -120,6 +120,15 @@ describe('Unit test af Booking klasse', () => {
         expect(testBooking).toBeInstanceOf(Booking)
     })
 
+    test('Unit test til udregning af nettopris på reservation', () => {
+
+        //act
+        const result = testHotelReservation.calcNetPrice();
+        //assert -> Forventet nettopris 2600kr
+        expect(result).toBe(2600);
+    })
+
+
     test('Unit test af udregning af nettoprisen', () => {
 
         //act
