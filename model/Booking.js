@@ -179,6 +179,7 @@ class Booking {
         } else {
             throw new Error("Reservationen findes allerede i arrayet.")
         }
+        return carRental;
     }
 
     /* //Fjerner en biludlejning i arrayet af biludlejninger,
@@ -229,6 +230,7 @@ class Booking {
         if (!this.#travelDocuments.includes(transfer)) {
             this.#travelDocuments.push(transfer);
         }
+        return transfer;
     }
 
     /*  //Fjerner en transfer i arrayet af transfers,
@@ -279,6 +281,7 @@ class Booking {
         if (!this.#travelDocuments.includes(greenfee)) {
             this.#travelDocuments.push(greenfee);
         }
+        return greenfee;
     }
 
     /*  //Fjerner en greenfee i arrayet af greenfees,
@@ -324,10 +327,10 @@ class Booking {
 
     //Tilføjer en passager til arrayet af travelDocuments,
     //hvis ikke denne allerede findes i arrayet.
-    createBoardingpass(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
-        const boardingpass = new Boardingpass(firstName, lastName, gender, meal, golfbag, luggage, Flight);
-        if (!this.#boardingpasses.includes(boardingpass)) {
-            this.#boardingpasses.push(boardingpass);
+    createBoardingpass(firstName, lastName, gender, flight) {
+        const boardingpass = new Boardingpass(firstName, lastName, gender, flight);
+        if (!this.#travelDocuments.includes(boardingpass)) {
+            this.#travelDocuments.push(boardingpass);
         }
         return boardingpass;
     }

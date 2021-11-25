@@ -1,6 +1,6 @@
 //Klasse med følgende forbindelser:
-//Dobbeltrettet ..* Passenger
-const Passenger = require('../model/Passenger');
+//Dobbeltrettet ..* Boardingpass
+const Boardingpass = require('./Boardingpass');
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class Flight {
@@ -8,7 +8,7 @@ class Flight {
     #dateTime
     #arrivalAirport
     #flightNr
-    #passengers
+    #boardingpasses
     //company er nullable
     #company
 
@@ -17,7 +17,7 @@ class Flight {
         this.#dateTime = dateTime;
         this.#arrivalAirport = arrivalAirport;
         this.#flightNr = flightNr;
-        this.#passengers = [];
+        this.#boardingpasses = [];
         this.#company = company;
     }
 
@@ -41,8 +41,8 @@ class Flight {
         return this.#flightNr;
     }
 
-    get passengers() {
-        return this.#passengers;
+    get boardingpasses() {
+        return this.#boardingpasses;
     }
 
     get company() {
@@ -53,12 +53,8 @@ class Flight {
         this.#departAirport = departAirport;
     }
 
-    set date(date) {
-        this.#dateTime = date;
-    }
-
-    set time(time) {
-        this.#time = time;
+    set dateTime(dateTime) {
+        this.#dateTime = dateTime;
     }
 
     set arrivalAirport(arrivalAirport) {
@@ -71,32 +67,32 @@ class Flight {
 
     //Tilføjer en passager til arrayet af passagerer,
     //hvis ikke denne allerede findes i arrayet.
-    addPassenger(passenger) {
-        if (passenger instanceof Passenger) {
-            if (!this.#passengers.includes(passenger)) {
-                this.#passengers.push(passenger);
-                passenger.addFlight(this);
+    addBoardingpass(boardingpass) {
+        if (boardingpass instanceof Boardingpass) {
+            if (!this.#boardingpasses.includes(boardingpass)) {
+                this.#boardingpasses.push(boardingpass);
+                boardingpass.setFlight(this);
             }
         } else {
-            throw new Error("passenger er ikke en instans af Passenger")
+            throw new Error("boardingpass er ikke en instans af Boardingpass")
         }
     }
 
     //Fjerner en passager i arrayet af passagerer,
     //hvis passageren er tilføjet til dette.
-    removePassenger(passenger) {
-        if (passenger instanceof Passenger) {
-            if (this.#passengers.includes(passenger)) {
-                passenger.setFlight(undefined);
-                let i = this.#passengers.indexOf(passenger);
-                for (let index = i; index < this.#passengers.length - 1; index++) {
-                    this.#passengers[index] = this.#passengers[index + 1];
+    removeBoardingpass(boardingpass) {
+        if (boardingpass instanceof Boardingpass) {
+            if (this.#boardingpasses.includes(boardingpass)) {
+                boardingpass.setFlight(undefined);
+                let i = this.#boardingpasses.indexOf(boardingpass);
+                for (let index = i; index < this.#boardingpasses.length - 1; index++) {
+                    this.#boardingpasses[index] = this.#boardingpasses[index + 1];
                 }
-                this.#passengers.length = this.#passengers.length - 1;
-                passenger.removeFlight(this);
+                this.#boardingpasses.length = this.#boardingpasses.length - 1;
+                boardingpass.removeFlight(this);
             }
         } else {
-            throw new Error("passenger er ikke en instans af Passenger")
+            throw new Error("boardingpass er ikke en instans af Boardingpass")
         }
     }
 

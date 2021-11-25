@@ -26,7 +26,7 @@ let testContractDoubleRoom = null;
 // test hotel reservation
 let testHotelReservation = null;
 // test Flight reservation
-let testFlightReservation = null;
+let testFlight1 = null;
 // test airline company contracts
 let testAirlineContract1 = null;
 let testAirlineContract2 = null;
@@ -37,6 +37,9 @@ let testAirlineContract4 = null;
 let testBoardingpass1 = null;
 let testBoardingpass2 = null;
 let testBoardingpass3 = null;
+let testBoardingpass4 = null;
+let testBoardingpass5 = null;
+let testBoardingpass6 = null;
 
 // test Transfer company
 let testTransferCompany = null;
@@ -95,7 +98,7 @@ describe('Unit test af Booking klasse', () => {
         const golfEmail = "test@test.dk"
         const golfPhone = 55555555
         const golfBusinessType = "2"
-        testGolf = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
+        testGolfCompany = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
 
 
         //airline
@@ -126,15 +129,6 @@ describe('Unit test af Booking klasse', () => {
 
         testCarCompany = new Company(bilName, bilAdress, bilEmail, bilPhone, bilBusinessType)
 
-
-        //golf
-        const golfName = "golf"
-        const golfAdress = "test 123"
-        const golfEmail = "test@test.dk"
-        const golfPhone = 55555555
-        const golfBusinessType = "golf"
-        testGolfCompany = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
-
         // preparation of booking: 
         const bookingNr = 20210001;
         testBooking = new Booking(bookingNr, testSalesman, testCustomer)
@@ -163,37 +157,59 @@ describe('Unit test af Booking klasse', () => {
         testAirlineContract4 = testAirlineCompany.createContract("Baggage", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
 
         // preparation of Flight Reservation
-        const departAirport = "BLL";
-        const flightDateTime = new Date(2021, 11, 16, 6, 30)
-        const arrivalAirport = "SVQ";
+        const billund = "BLL";
+        const sevilla = "SVQ";
         const flightNr = "JS507"
 
-        testFlightReservation = new Flight(departAirport, flightDateTime, arrivalAirport, flightNr, testAirlineCompany);
+        testFlight1 = new Flight(billund, new Date(2021, 11, 16, 6, 30), sevilla, flightNr, testAirlineCompany);
+        testFlight2 = new Flight(sevilla, new Date(2021, 11, 18, 16, 0), billund, flightNr, testAirlineCompany);
 
         // preparation of boardingpasses
         const firstName1 = "Bolette";
         const lastName1 = "Knudsen";
         const gender1 = "F"
-        testBoardingpass1 = testBooking.createBoardingpass(firstName1, lastName1, gender1);
+        // boardingpass to flight abroad
+        testBoardingpass1 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testFlight1);
+        testBoardingpass1.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass1.addContractToChosenContracts(testAirlineContract3);
+        testBoardingpass1.addContractToChosenContracts(testAirlineContract4);
+
+        // boardingpass to flight home
+        testBoardingpass4 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testFlight2);
+        testBoardingpass4.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass4.addContractToChosenContracts(testAirlineContract3);
+        testBoardingpass4.addContractToChosenContracts(testAirlineContract4);
 
         const firstName2 = "Betina";
         const lastName2 = "Phlüffer";
         const gender2 = "F"
-        testBoardingpass2 = testBooking.createBoardingpass(firstName2, lastName2, gender2);
+        //boardpass to flight abroad
+        testBoardingpass2 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testFlight1);
+        testBoardingpass2.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass2.addContractToChosenContracts(testAirlineContract2);
+        testBoardingpass2.addContractToChosenContracts(testAirlineContract4);
+
+        //boardingass to flight home
+        testBoardingpass5 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testFlight2)
+        testBoardingpass5.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass5.addContractToChosenContracts(testAirlineContract2);
+        testBoardingpass5.addContractToChosenContracts(testAirlineContract4);
+
 
         const firstName3 = "Torben";
         const lastName3 = "Tramper";
         const gender3 = "M"
+        testBoardingpass3 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testFlight1)
+        testBoardingpass3.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass3.addContractToChosenContracts(testAirlineContract3);
 
-        testBoardingpass3 = testBooking.createBoardingpass(firstName3, lastName3, gender3)
+        testBoardingpass6 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testFlight2)
+        testBoardingpass6.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass6.addContractToChosenContracts(testAirlineContract3);
 
-        testBoardingpass1.addFlight(testFlightReservation);
-        testBoardingpass2.addFlight(testFlightReservation);
-        testBoardingpass3.addFlight(testFlightReservation);
 
         // transfer company contracts
         const transferContract1 = testTransferCompany.createContract("Huelva", new Date(2021, 0, 1), new Date(2021, 11, 31), 350)
-        const transferContract2 = testTransferCompany.createContract("Cadiz", new Date(2021, 0, 1), new Date(2021, 11, 31), 350)
 
         // car rental company contract
         const carContract1 = testCarCompany.createContract("Class A", new Date(2021, 0, 1), new Date(2021, 11, 31), 1000)
@@ -215,7 +231,9 @@ describe('Unit test af Booking klasse', () => {
 
         testTransferReservation = testBooking.createTransfer(new Date(2021, 10, 16, 12, 0), "Tilfældig adresse", "X802", testTransferCompany);
         testTransferReservation.addContractToChosenContracts(transferContract1);
-        testTransferReservation.addContractToChosenContracts(transferContract2);
+        testTransferReservation.addContractToChosenContracts(transferContract1);
+        testTransferReservation.addContractToChosenContracts(transferContract1);
+
 
         testCarReservation = testBooking.createCarRental(new Date(2021, 10, 16), new Date(2021, 10, 18), "testBookingId", testCarCompany);
         testCarReservation.addContractToChosenContracts(carContract1);
@@ -236,7 +254,7 @@ describe('Unit test af Booking klasse', () => {
         expect(testBooking).toBeInstanceOf(Booking)
     })
 
-    test('Unit test til udregning af nettopris på reservation', () => {
+    test('Unit test til udregning af nettopris på hotel reservation', () => {
 
         //act
         const result = testHotelReservation.calcNetPrice();
@@ -244,31 +262,91 @@ describe('Unit test af Booking klasse', () => {
         expect(result).toBe(2600);
     })
 
+    test("Unit test til udregning af nettopris på greenfee", () => {
 
-    test('Unit test af udregning af nettoprisen', () => {
+        // act
+        const result = testGolfReservation.calcNetPrice();
+
+        // assert --> forventet pris 700 kr
+
+        expect(result).toBe(750)
+    })
+
+    test("Unit test til udregning af nettopris på boardpasses", () => {
+
+        // act
+        const result1 = testBoardingpass1.calcNetPrice();
+        const result2 = testBoardingpass2.calcNetPrice();
+        const result3 = testBoardingpass3.calcNetPrice();
+        const result4 = testBoardingpass4.calcNetPrice();
+        const result5 = testBoardingpass5.calcNetPrice();
+        const result6 = testBoardingpass6.calcNetPrice();
+
+        const sumResult = result1 + result2 + result3 + result4 + result5 + result6;
+
+        /* assert -->
+        result1 = 2300
+        result2 = 1900
+        result3 = 2100
+        result4 = 2300
+        result5 = 1900
+        result6 = 2100
+        sumResult = 12600kr
+        */
+        expect(result1).toBe(2300)
+        expect(result2).toBe(1900)
+        expect(result3).toBe(2100)
+        expect(result4).toBe(2300)
+        expect(result5).toBe(1900)
+        expect(result6).toBe(2100)
+        expect(sumResult).toBe(12600)
+    })
+
+    test('Unit test af prisberegning på transfer', () => {
+
+        // Act
+        const result = testTransferReservation.calcNetPrice();
+
+        // Assert --> Forventet resultat = 1050
+
+        expect(result).toBe(1050);
+    })
+
+    test('Unit test af prisberegning på billeje', () => {
+
+        // act
+        const result = testCarReservation.calcNetPrice();
+
+        // assert --> forventet resultat = 9000;
+
+        expect(result).toBe(9000);
+    })
+
+
+    test('Unit test af udregning af nettoprisen på booking', () => {
 
         //act
         const result = testBooking.calcNetPrice();
 
-        //assert -> forventet nettopris: 2600kr
-        expect(result).toBe(2600)
+        //assert -> forventet nettopris: 26000kr
+        expect(result).toBe(26000)
 
     })
 
-    test('Unit test af udregning af grossprice', () => {
+    test('Unit test af udregning af grossprice på booking', () => {
         //act
         const result = testBooking.calcGrossPrice();
 
-        // assert -> forventet bruttopris: 3081kr
-        expect(result).toEqual(3081)
+        // assert -> forventet bruttopris: 30810
+        expect(result).toEqual(30810)
     })
 
-    test('Unit test af dækningsbidragsberegning', () => {
+    test('Unit test af dækningsbidragsberegning på booking', () => {
         //act
         const result = testBooking.calcContributionMarginInDKK();
 
-        // assert -> forventet fortjeneste: 481kr
-        expect(result).toEqual(481)
+        // assert -> forventet fortjeneste: 4810kr
+        expect(result).toEqual(4810)
     })
 
     test("Hent booking fra repository", async () => {
@@ -284,4 +362,5 @@ describe('Unit test af Booking klasse', () => {
         expect(result.salesman.name).toBe("Jonas")
         expect(result.customer.email).toBe('john@gmail.com')
     })
+
 })
