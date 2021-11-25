@@ -106,8 +106,8 @@ describe('Unit test af Booking klasse', () => {
 
         //preparation af booking med forbindelser til contracts
         testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotel)
-        // testHotelReservation.addContract(testContractRoom);
-        // testHotelReservation.addContract(testContractDoubleRoom);
+        testHotelReservation.addContractToChosenContracts(testContractRoom);
+        testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
         //Kommentar tester: Der er ingen addContract metode på HotelReservation.
 
     })
@@ -125,8 +125,8 @@ describe('Unit test af Booking klasse', () => {
         //act
         const result = testBooking.calcNetPrice();
 
-        //assert -> forventet nettopris: 1300kr
-        expect(result).toBe(1300)
+        //assert -> forventet nettopris: 2600kr
+        expect(result).toBe(2600)
 
     })
 

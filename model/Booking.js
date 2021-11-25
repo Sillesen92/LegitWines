@@ -126,6 +126,7 @@ class Booking {
         if (!this.#travelDocuments.includes(hotelReservation)) {
             this.#travelDocuments.push(hotelReservation);
         }
+        return hotelReservation;
     }
 
     /* //Fjerne en reservation i arrayet af reservationer,
@@ -405,7 +406,7 @@ class Booking {
     //nettopriserne hos de valgte samarbejdspartnere
     calcNetPrice() {
         var price = 0;
-        travelDocuments.forEach(doc => {
+        this.#travelDocuments.forEach(doc => {
             price += doc.calcNetPrice()
         });
         return price;
