@@ -6,16 +6,59 @@ const repository = require('../repository/repository')
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
+const Flight = require('../model/Flight')
+const Passenger = require('../model/Passenger')
 jest.mock('../repository/repository')
 
+// Test customer
 let testCustomer = null;
+// Test salesman
 let testSalesman = null;
+// Test booking
 let testBooking = null;
+// Test hotel company
 let testHotel = null;
+// Test airline company
 let testAirline = null;
-let testContractRoom = null;
+// test hotel company contracts
+let testContractSingleRoom = null;
 let testContractDoubleRoom = null;
+// test hotel reservation
 let testHotelReservation = null;
+// test Flight reservation
+let testFlightReservation = null;
+// test airline company contracts
+let testAirlineContract1 = null;
+let testAirlineContract2 = null;
+let testAirlineContract3 = null;
+let testAirlineContract4 = null;
+
+// test passengers
+let testPassenger1 = null;
+let testPassenger2 = null;
+let testPassenger3 = null;
+
+// test Transfer company
+let testTransferCompany = null;
+
+// test transfer reservations
+let testTransferReservation = null;
+
+// test Car rental company
+let testCarCompany = null;
+
+// test car reservation
+let testCarReservation = null;
+
+// test golf company
+let testGolfCompany = null;
+
+// test golf reservation
+let testGolfReservation = null;
+
+
+
+
 
 describe('Unit test af Booking klasse', () => {
     beforeEach(() => {
@@ -65,13 +108,13 @@ describe('Unit test af Booking klasse', () => {
         testAirline = new Company(airName, airAdress, airEmail, airPhone, airBusinessType)
 
         //bus
-        const busName = "bus"
-        const busAdress = "test 123"
-        const busEmail = "test@test.dk"
-        const busPhone = 55555555
-        const busBusinessType = "4"
+        const transferName = "bus"
+        const transferAdress = "test 123"
+        const transferEmail = "test@test.dk"
+        const transferPhone = 55555555
+        const transferBusinessType = "bus"
 
-        testBus = new Company(busName, busAdress, busEmail, busPhone, busBusinessType)
+        testTransferCompany = new Company(transferName, transferAdress, transferEmail, transferPhone, transferBusinessType)
 
 
         //billeje
@@ -81,7 +124,16 @@ describe('Unit test af Booking klasse', () => {
         const bilPhone = 55555555
         const bilBusinessType = "5"
 
-        testBil = new Company(bilName, bilAdress, bilEmail, bilPhone, bilBusinessType)
+        testCarCompany = new Company(bilName, bilAdress, bilEmail, bilPhone, bilBusinessType)
+
+
+        //golf
+        const golfName = "golf"
+        const golfAdress = "test 123"
+        const golfEmail = "test@test.dk"
+        const golfPhone = 55555555
+        const golfBusinessType = "golf"
+        testGolfCompany = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
 
         // preparation of booking: 
         const bookingNr = 20210001;
@@ -91,24 +143,86 @@ describe('Unit test af Booking klasse', () => {
         //preparation of hotel contracts
 
         const roomType = "singleRoom";
-        const startDate = new Date(2021, 10, 1);
-        const endDate = new Date(2021, 11, 1);
+        const startDate = new Date(2021, 0, 1);
+        const endDate = new Date(2021, 11, 31);
         const price = 500;
 
-        testContractRoom = testHotel.createContract(roomType, startDate, endDate, price)
+        testContractSingleRoom = testHotel.createContract(roomType, startDate, endDate, price)
 
         const roomTypeDouble = "doubleRoom";
-        const startDateDouble = new Date(2021, 10, 1);
-        const endDateDouble = new Date(2021, 11, 1);
+        const startDateDouble = new Date(2021, 0, 1);
+        const endDateDouble = new Date(2021, 11, 31);
         const priceDouble = 800;
 
         testContractDoubleRoom = testHotel.createContract(roomTypeDouble, startDateDouble, endDateDouble, priceDouble);
 
+        // preparation of airline contracts
+        testAirlineContract1 = testAirline.createContract("Pris", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
+        testAirlineContract2 = testAirline.createContract("Mad", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
+        testAirlineContract3 = testAirline.createContract("Golftaske", new Date(2021, 0, 1), new Date(2021, 1, 1), 600)
+        testAirlineContract4 = testAirline.createContract("Baggage", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
+
+        // preparation of Flight Reservation
+        const departAirport = "BLL";
+        const flightDateTime = new Date(2021, 0, 8, 06, 30)
+        const arrivalAirport = "SVQ";
+        const flightNr = "JS507"
+
+        testFlightReservation = new Flight(departAirport, flightDateTime, arrivalAirport, flightNr, testAirline);
+
+        // preparation of passengers
+        const firstName1 = "Bolette";
+        const lastName1 = "Knudsen";
+        const gender1 = "F"
+        testPassenger1 = testBooking.createPassenger(firstName1, lastName1, gender1);
+
+        const firstName2 = "Betina";
+        const lastName2 = "Phlüffer";
+        const gender2 = "F"
+        testPassenger2 = testBooking.createPassenger(firstName2, lastName2, gender2);
+
+        const firstName3 = "Torben";
+        const lastName3 = "Tramper";
+        const gender3 = "M"
+
+        testPassenger3 = testBooking.createPassenger(firstName3, lastName3, gender3)
+
+        testPassenger1.addFlight(testFlightReservation);
+        testPassenger2.addFlight(testFlightReservation);
+        testPassenger3.addFlight(testFlightReservation);
+
+        // transfer company contracts
+        const transferContract = testTransferCompany.createContract("Bus", new Date(2021, 0, 1), new Date(2021, 11, 31), 500)
+
+        // car rental company contract
+        const carContract1 = testCarCompany.createContract("Class A", new Date(2021, 0, 1), new Date(2021, 11, 31), 1000)
+        const carContract2 = testCarCompany.createContract("Class B", new Date(2021, 0, 1), new Date(2021, 11, 31), 1500)
+        const carContract3 = testCarCompany.createContract("Class C", new Date(2021, 0, 1), new Date(2021, 11, 31), 2000)
+
+        // golf company contracts
+        // Kontrakter: 
+        // 18 huller, 1/1/2021-31/12/2021, 450
+        //9 huller, 1 / 1 / 2021 - 31 / 12 / 2021, 300
+        const golfContract1 = testGolfCompany.createContract("18 huller", new Date(2021, 0, 1), new Date(2021, 11, 31), 450);
+        const golfContract2 = testGolfCompany.createContract("9 huller", new Date(2021, 0, 1), new Date(2021, 11, 31), 300);
+
+
         //preparation af booking med forbindelser til contracts
         testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotel)
-        testHotelReservation.addContractToChosenContracts(testContractRoom);
+        testHotelReservation.addContractToChosenContracts(testContractSingleRoom);
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
-        //Kommentar tester: Der er ingen addContract metode på HotelReservation.
+
+        testTransferReservation = testBooking.createTransfer(new Date(2021, 10, 16, 12, 0), "Tilfældig adresse", "X802", testTransferCompany);
+        testTransferReservation.addContractToChosenContracts(transferContract)
+
+        testCarReservation = testBooking.createCarRental(new Date(2021, 10, 16), new Date(2021, 10, 18), "testBookingId", testCarCompany);
+        testCarReservation.addContractToChosenContracts(carContract1);
+        testCarReservation.addContractToChosenContracts(carContract2);
+        testCarReservation.addContractToChosenContracts(carContract3);
+
+        testGolfReservation = testBooking.createGreenfee(new Date(2021, 10, 17, 10, 0), testGolfCompany)
+        testGolfReservation.addContractToChosenContracts(golfContract1);
+        testGolfReservation.addContractToChosenContracts(golfContract2);
 
     })
 

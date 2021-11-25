@@ -2,47 +2,42 @@
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class Greenfee {
-    #date
-    #teetime
-    #nrOfGolfers
+    #dateTime
     //company er nullable
     #company
+    #chosenContracts
 
 
-    constructor(date, teetime, nrOfGolfers, company) {
-        this.#date = date;
-        this.#teetime = teetime;
-        this.#nrOfGolfers = nrOfGolfers;
+    constructor(dateTime, company) {
+        this.#dateTime = dateTime;
         this.#company = company;
+        this.#chosenContracts = [];
     }
 
     get date() {
-        return this.#date;
+        return this.#dateTime.getFullYear() + " " + this.#dateTime.getMonth() + " " + this.#dateTime.getDate();
     }
 
     get teetime() {
-        return this.#teetime;
-    }
-
-    get nrOfGolfers() {
-        return this.#nrOfGolfers;
+        return this.#dateTime.getHours() + " " + this.#dateTime.getMinutes();
     }
 
     get company() {
         return this.#company;
     }
 
+    get chosenContracts() {
+        return this.#chosenContracts;
+    }
+
     set date(date) {
-        this.#date = date;
+        this.#dateTime = date;
     }
 
     set teetime(teetime) {
         this.#teetime = teetime;
     }
 
-    set nrOfGolfers(nrOfGolfers) {
-        this.#nrOfGolfers = nrOfGolfers;
-    }
     //Sætter Company til et andet Company, denne må ikke være null!
     setCompany(company) {
         if (company instanceof Company) {
@@ -57,6 +52,42 @@ class Greenfee {
         } else {
             this.#company = undefined;
         }
+    }
+
+    //Tilføjer en kontrakt til arrayet af valgte kontrakter,
+    //hvis ikke kontrakten allerede findes i arrayet.
+    addContractToChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            this.#chosenContracts.push(contract);
+        } else {
+            throw new Error("Kontrakten er ikke en instans af Contract");
+        }
+    }
+
+    //Fjerner en kontrakt i arrayet af contracts,
+    //hvis denne er tilføjet til dette.
+    removeContractFromChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            if (this.#chosenContracts.includes(contract)) {
+                let i = this.#chosenContracts.indexOf(contract);
+                for (let index = i; index < this.#chosenContracts.length - 1; index++) {
+                    this.#chosenContracts[index] = this.#chosenContracts[index + 1];
+                }
+                this.#chosenContracts.length = this.#chosenContracts.length - 1;
+            }
+        } else {
+            throw new Error("contract er ikke en instans af Contract");
+        }
+    }
+
+    // Beregner den samlede pris på de valgte transferkontrakter. 
+    calcNetPrice() {
+        if (this.#chosenContracts.length > 0) {
+            for (let index = 0; index < this.#chosenContracts.length; index++) {
+                price += (this.#chosenContracts[index].netPrice);
+            }
+        }
+        return price;
     }
 }
 

@@ -11,6 +11,7 @@ html
             <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
             <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
             <link rel="shortcut icon" type="image/ico" href="images/greensoftlogo.ico"/>
+            script(src="/script/createBooking.js" defer)
 
     body
         div#root
@@ -26,6 +27,34 @@ html
                             div#createbooking
                                 div(class = "resCard")
                                     button(class = "addReservationButton") +
+
+                            div(id = "resModal" class = "modal")
+                                div(class = "resModalContent")
+                                    select(name="reservation" id="reservationType")
+                                        option(value="choose") -- Vælg --
+                                        option(value="Hotel" onclick = renderModalHotel()) Hotel
+                                        option(value="Passager" onclick = renderModalPassager()) Passager
+                                        option(value="Flyafgang" onclick = renderModalFlyafgang()) Flyafgang
+                                        option(value="Transfer" onclick = renderModalTransfer()) Transfer
+                                        option(value="Billeje" onclick = renderModalBilleje()) Billeje
+                                        option(value="Greenfee" onclick = renderModalGreenfee()) Greenfee
+                                    div(class="companyPickerDropdown")
+                                        button(class="companyPickerButton") Dropdown
+                                        div(class="companyPickerDropdownContent")
+                                            <input type="text" placeholder="Search.." id="companyInput" onkeyup="filterFunction()">
+                                                <a href="#about">About</a>
+                                                <a href="#base">Base</a>
+                                                <a href="#blog">Blog</a>
+                                                <a href="#contact">Contact</a>
+                                                <a href="#custom">Custom</a>
+                                                <a href="#support">Support</a>
+                                                <a href="#tools">Tools</a>
+                                    input(type = "date" id = "datepickerCheckIn")
+                                    input(type = "date" id = "datepickerCheckOut")
+                                    span(class = "closeResModal") &times;
+                                    h1 Modal Open
+                                    button(class = "confirmResButton") Bekræft
+
 
 
                         //-

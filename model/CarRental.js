@@ -2,24 +2,18 @@
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class CarRental {
-    #type
     #startDate
     #endDate
-    #price
     #bookingId
-    //company er nullable
     #company
+    #chosenContracts
 
     constructor(startDate, endDate, bookingId, company) {
         this.#startDate = startDate;
         this.#endDate = endDate;
-        this.#price = price;
         this.#bookingId = bookingId;
         this.#company = company;
-    }
-
-    get type() {
-        return this.#type;
+        this.#chosenContracts = [];
     }
 
     get startDate() {
@@ -30,10 +24,6 @@ class CarRental {
         return this.#endDate;
     }
 
-    get price() {
-        return this.#price;
-    }
-
     get bookingId() {
         return this.#bookingId;
     }
@@ -42,8 +32,8 @@ class CarRental {
         return this.#company;
     }
 
-    set type(type) {
-        this.#type = type;
+    get chosenContracts() {
+        return this.#chosenContracts;
     }
 
     set startDate(startDate) {
@@ -54,13 +44,10 @@ class CarRental {
         this.#endDate = endDate;
     }
 
-    set price(price) {
-        this.#price = price;
-    }
-
     set bookingId(bookingId) {
         this.#bookingId = bookingId;
     }
+
     //Sætter Company til et andet Company, denne må ikke være null!
     setCompany(company) {
         if (company instanceof Company) {
@@ -75,6 +62,45 @@ class CarRental {
         } else {
             this.#company = undefined;
         }
+    }
+
+    //Tilføjer en kontrakt til arrayet af valgte kontrakter,
+    //hvis ikke kontrakten allerede findes i arrayet.
+    addContractToChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            this.#chosenContracts.push(contract);
+        } else {
+            throw new Error("Kontrakten er ikke en instans af Contract");
+        }
+    }
+
+    //Fjerner en kontrakt i arrayet af contracts,
+    //hvis denne er tilføjet til dette.
+    removeContractFromChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            if (this.#chosenContracts.includes(contract)) {
+                let i = this.#chosenContracts.indexOf(contract);
+                for (let index = i; index < this.#chosenContracts.length - 1; index++) {
+                    this.#chosenContracts[index] = this.#chosenContracts[index + 1];
+                }
+                this.#chosenContracts.length = this.#chosenContracts.length - 1;
+            }
+        } else {
+            throw new Error("contract er ikke en instans af Contract");
+        }
+    }
+
+    // Beregner den samlede pris på de valgte billejekontrakter. 
+    calcNetPrice() {
+        const timeDifference = this.#startDate.getTime() - this.#endDate.getTime();
+        const dayDifference = timeDifference / (1000 * 3600 * 24);
+        var price = 0;
+        if (this.#chosenContracts.length > 0) {
+            for (let index = 0; index < this.#chosenContracts.length; index++) {
+                price += (this.#chosenContracts[index].netPrice * dayDifference);
+            }
+        }
+        return price;
     }
 }
 

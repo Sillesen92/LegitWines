@@ -117,7 +117,6 @@ class HotelReservation {
 
 
     // Beregner den samlede pris på de valgte hotelkontrakter. 
-    //**OBS** Metoden er mangelfuld, da det endnu ikke er gennemskuet, hvordan der matches korrekt mellem de valgte kontrakter, og antallet af singlerooms og double rooms. **OBS**
     calcNetPrice() {
         const timeDifference = this.#checkoutDate.getTime() - this.#checkinDate.getTime();
         const dayDifference = timeDifference / (1000 * 3600 * 24);
@@ -128,7 +127,6 @@ class HotelReservation {
             }
         }
         return price;
-
     }
 }
 
