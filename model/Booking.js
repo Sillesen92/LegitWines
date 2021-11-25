@@ -408,7 +408,6 @@ class Booking {
         var price = 0;
         this.#travelDocuments.forEach(doc => {
             const docPrice = doc.calcNetPrice();
-            console.log(docPrice);
             price += docPrice;
         });
         return price;

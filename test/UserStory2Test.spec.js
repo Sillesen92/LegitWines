@@ -44,7 +44,7 @@ describe('Unit test af oprettelse af Company', () => {
     })
     test('create Contract', () => {
         //assert
-        expect(testContract.description).toBe("Test af Hotel Contract")
+        expect(testContract.description).toBe("Test of Hotel Contract")
         expect(testContract.startDate).toBe("2022, 0, 15")
         expect(testContract.endDate).toBe("2022, 0, 22")
         expect(testContract.netPrice).toEqual(4000)

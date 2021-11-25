@@ -115,12 +115,9 @@ class HotelReservation {
     calcNetPrice() {
         const timeDifference = this.#checkoutDate.getTime() - this.#checkinDate.getTime();
         const dayDifference = timeDifference / (1000 * 3600 * 24);
-        console.log("Reservation duration: " + dayDifference);
         var price = 0;
-        console.log(this.#chosenContracts)
         if (this.#chosenContracts.length > 0) {
             for (let index = 0; index < this.#chosenContracts.length; index++) {
-                console.log("Contract " + index)
                 price += (this.#chosenContracts[index].netPrice * dayDifference);
             }
         }
