@@ -1,7 +1,8 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Flight
-const Flight = require('../model/Flight');
-class Passenger {
+const Flight = require('./Flight');
+const Contract = require('./Contract')
+class Boardingpass {
     #firstName
     #lastName
     #gender
@@ -52,10 +53,10 @@ class Passenger {
         if (flight instanceof Flight) {
             if (!this.#flights.includes(flight)) {
                 this.#flights.push(flight);
-                flight.addPassenger(this);
+                flight.addBoardingpass(this);
             }
         } else {
-            throw new Error("passenger er ikke en instans af Passenger")
+            throw new Error("Boardingpass er ikke en instans af Boardingpass")
         }
     }
 
@@ -67,10 +68,10 @@ class Passenger {
                     this.#flights[index] = this.#flights[index + 1];
                 }
                 this.#flights.length = this.#flights.length - 1;
-                flight.removePassenger(this);
+                flight.removeBoardingpass(this);
             }
         } else {
-            throw new Error("passenger er ikke en instans af Passenger")
+            throw new Error("Boardingpass er ikke en instans af Boardingpass")
         }
     }
 
@@ -111,4 +112,4 @@ class Passenger {
     }
 }
 
-module.exports = Passenger;
+module.exports = Boardingpass;

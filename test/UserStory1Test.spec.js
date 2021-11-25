@@ -7,7 +7,7 @@ const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
 const Flight = require('../model/Flight')
-const Passenger = require('../model/Passenger')
+const Boardingpass = require('../model/Boardingpass')
 jest.mock('../repository/repository')
 
 // Test customer
@@ -33,10 +33,10 @@ let testAirlineContract2 = null;
 let testAirlineContract3 = null;
 let testAirlineContract4 = null;
 
-// test passengers
-let testPassenger1 = null;
-let testPassenger2 = null;
-let testPassenger3 = null;
+// test boardingpasses
+let testBoardingpass1 = null;
+let testBoardingpass2 = null;
+let testBoardingpass3 = null;
 
 // test Transfer company
 let testTransferCompany = null;
@@ -170,26 +170,26 @@ describe('Unit test af Booking klasse', () => {
 
         testFlightReservation = new Flight(departAirport, flightDateTime, arrivalAirport, flightNr, testAirlineCompany);
 
-        // preparation of passengers
+        // preparation of boardingpasses
         const firstName1 = "Bolette";
         const lastName1 = "Knudsen";
         const gender1 = "F"
-        testPassenger1 = testBooking.createPassenger(firstName1, lastName1, gender1);
+        testBoardingpass1 = testBooking.createBoardingpass(firstName1, lastName1, gender1);
 
         const firstName2 = "Betina";
         const lastName2 = "Phlüffer";
         const gender2 = "F"
-        testPassenger2 = testBooking.createPassenger(firstName2, lastName2, gender2);
+        testBoardingpass2 = testBooking.createBoardingpass(firstName2, lastName2, gender2);
 
         const firstName3 = "Torben";
         const lastName3 = "Tramper";
         const gender3 = "M"
 
-        testPassenger3 = testBooking.createPassenger(firstName3, lastName3, gender3)
+        testBoardingpass3 = testBooking.createBoardingpass(firstName3, lastName3, gender3)
 
-        testPassenger1.addFlight(testFlightReservation);
-        testPassenger2.addFlight(testFlightReservation);
-        testPassenger3.addFlight(testFlightReservation);
+        testBoardingpass1.addFlight(testFlightReservation);
+        testBoardingpass2.addFlight(testFlightReservation);
+        testBoardingpass3.addFlight(testFlightReservation);
 
         // transfer company contracts
         const transferContract1 = testTransferCompany.createContract("Huelva", new Date(2021, 0, 1), new Date(2021, 11, 31), 350)

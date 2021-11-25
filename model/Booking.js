@@ -7,8 +7,8 @@ const CarRental = require('../model/CarRental');
 const Transfer = require('../model/Transfer');
 //Enkeltrettet komposition 0..* Greenfee
 const Greenfee = require('../model/Greenfee');
-//Enkeltrettet komposition 1..* Passenger
-const Passenger = require('../model/Passenger');
+//Enkeltrettet komposition 1..* Boardingpass
+const Boardingpass = require('./Boardingpass');
 //Dobbeltrettet 1 Customer
 const Customer = require('../model/Customer');
 //Dobbeltrettet 1 Salesman
@@ -25,7 +25,7 @@ class Booking {
     #carRentals
     #transfers
     #greenfees
-    #passengers
+    #boardingpasses
     #customer
     #salesman
     #travelDocuments
@@ -50,8 +50,8 @@ class Booking {
         } else {
             throw new Error("Salesman er ikke en instans af Salesman")
         }
-        this.#passengers = [];
-        this.createPassenger(this.#customer.firstName, this.#customer.lastName, this.#customer.gender, false, false, false, undefined)
+        this.#boardingpasses = [];
+        //this.createPassenger(this.#customer.firstName, this.#customer.lastName, this.#customer.gender)
     }
 
     get bookingNr() {
@@ -90,8 +90,8 @@ class Booking {
         return this.#greenfees;
     }
 
-    get passengers() {
-        return this.#passengers;
+    get boardingpasses() {
+        return this.#boardingpasses;
     }
 
     get customer() {
@@ -324,12 +324,12 @@ class Booking {
 
     //Tilføjer en passager til arrayet af travelDocuments,
     //hvis ikke denne allerede findes i arrayet.
-    createPassenger(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
-        const passenger = new Passenger(firstName, lastName, gender, meal, golfbag, luggage, Flight);
-        if (!this.#passengers.includes(passenger)) {
-            this.#passengers.push(passenger);
+    createBoardingpass(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
+        const boardingpass = new Boardingpass(firstName, lastName, gender, meal, golfbag, luggage, Flight);
+        if (!this.#boardingpasses.includes(boardingpass)) {
+            this.#boardingpasses.push(boardingpass);
         }
-        return passenger;
+        return boardingpass;
     }
 
     /*
@@ -352,26 +352,26 @@ class Booking {
 
 
     //private hjælpe metode til at afgøre om travelDocuments indeholder mindst to passengers
-    #numberOfPassengers() {
-        var numberOfPassengers = 0;
-        for (let i = 0; i < this.#passengers.length; i++) {
-            if (this.#passengers[i] instanceof Passenger) {
-                numberOfPassengers++;
+    #numberOfBoardingpasses() {
+        var numberOfBoardingpasses = 0;
+        for (let i = 0; i < this.#boardingpasses.length; i++) {
+            if (this.#boardingpasses[i] instanceof Boardingpass) {
+                numberOfBoardingpasses++;
             }
         }
-        return numberOfPassengers
+        return numberOfBoardingpasses
     }
     //Fjerner en passager i arrayet af travelDocuments,
     //hvis passageren er tilføjet til dette.
     //præbetingelse: Der skal minimum være to passagerer i arrayet
-    removePassenger(passenger) {
-        if (passenger instanceof Passenger) {
-            if (this.#passengers.includes(passenger) && this.#numberOfPassengers() >= 2) {
-                let i = this.#passengers.indexOf(passenger);
-                this.#passengers.splice(i, 1);
+    removeBoardingpass(boardingpass) {
+        if (boardingpass instanceof Boardingpass) {
+            if (this.#boardingpasses.includes(boardingpass) && this.#numberOfBoardingpasses() >= 2) {
+                let i = this.#boardingpasses.indexOf(boardingpass);
+                this.#boardingpasses.splice(i, 1);
             }
         } else {
-            throw new Error("passageren er ikke en instans af Passenger");
+            throw new Error("boardingpass er ikke en instans af Boardingpass");
         }
     }
 
