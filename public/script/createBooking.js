@@ -3,7 +3,6 @@ const modal = document.querySelector("#resModal")
 const span = document.querySelector(".closeResModal");
 
 button.onclick = function () {
-
     modal.style.display = 'block';
 }
 
