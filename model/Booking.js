@@ -19,13 +19,6 @@ class Booking {
     //Contribution margin er en double imellem 0 og 100 (Procent)
     //Skal som standard være 18,5%
     #contributionMargin
-    #netPrice
-    #grossPrice
-    #hotelReservations
-    #carRentals
-    #transfers
-    #greenfees
-    #boardingpasses
     #customer
     #salesman
     #travelDocuments
@@ -33,12 +26,6 @@ class Booking {
     constructor(bookingNr, salesman, customer) {
         this.#bookingNr = bookingNr;
         this.#contributionMargin = 18.5;
-        this.#netPrice = 0;
-        this.#grossPrice = 0;
-        this.#hotelReservations = [];
-        this.#carRentals = [];
-        this.#transfers = [];
-        this.#greenfees = [];
         this.#travelDocuments = [];
         if (customer instanceof Customer) {
             this.#customer = customer;
@@ -50,8 +37,6 @@ class Booking {
         } else {
             throw new Error("Salesman er ikke en instans af Salesman")
         }
-        this.#boardingpasses = [];
-        //this.createPassenger(this.#customer.firstName, this.#customer.lastName, this.#customer.gender)
     }
 
     get bookingNr() {
@@ -66,32 +51,9 @@ class Booking {
         return this.#salesman;
     }
 
-    get netPrice() {
-        return this.#netPrice;
-    }
 
-    get grossPrice() {
-        return this.#grossPrice;
-    }
-
-    get hotelReservations() {
-        return this.#hotelReservations;
-    }
-
-    get carRentals() {
-        return this.#carRentals;
-    }
-
-    get transfers() {
-        return this.#transfers;
-    }
-
-    get greenfees() {
-        return this.#greenfees;
-    }
-
-    get boardingpasses() {
-        return this.#boardingpasses;
+    get travelDocuments() {
+        return this.#travelDocuments;
     }
 
     get customer() {
@@ -110,14 +72,6 @@ class Booking {
         this.#contributionMargin = contributionMargin;
     }
 
-    /*//Tilføjer en hotel reservation til arrayet af  hotel reservationer,
-    //hvis ikke hotel reservationen allerede findes i arrayet.
-    createHotelReservation(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, Company) {
-        const hotelReservation = new HotelReservation(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, Company);
-        if (!this.#hotelReservations.includes(hotelReservation)) {
-            this.#hotelReservations.push(hotelReservation);
-        }
-    }*/
 
     //Tilføjer en hotel reservation til arrayet af  travelsDocuments,
     //hvis ikke hotel reservationen allerede findes i arrayet.
@@ -129,21 +83,6 @@ class Booking {
         return hotelReservation;
     }
 
-    /* //Fjerne en reservation i arrayet af reservationer,
-     //hvis reservationen er tilføjet til dette.
-     removeHotelReservation(hotelReservation) {
-         if (hotelReservation instanceof HotelReservation) {
-             if (this.#hotelReservations.includes(hotelReservation)) {
-                 let i = this.#hotelReservations.indexOf(hotelReservation);
-                 for (let index = i; index < this.#hotelReservations.length - 1; index++) {
-                     this.#hotelReservations[index] = this.#hotelReservations[index + 1];
-                 }
-                 this.#hotelReservations.length = this.#hotelReservations.length - 1;
-             }
-         } else {
-             throw new Error("Hotel reservationen er ikke en instans af HotelReservation")
-         }
-     }*/
 
     //Fjerne en reservation i arrayet af travelDocuments,
     //hvis reservationen er tilføjet til dette.
@@ -161,15 +100,6 @@ class Booking {
         }
     }
 
-    /*//Tilføjer en biludlejning til arrayet af biludlejninger,
-    //hvis ikke biludlejningen allerede findes i arrayet.
-    createCarRental(startDate, endDate, bookingId, Company) {
-        const carRental = new CarRental(startDate, endDate, bookingId, Company);
-        if (!this.#carRentals.includes(carRental)) {
-            this.#carRentals.push(carRental);
-        }
-    } */
-
     //Tilføjer en biludlejning til arrayet af travelDocuments,
     //hvis ikke biludlejningen allerede findes i arrayet.
     createCarRental(startDate, endDate, bookingId, Company) {
@@ -181,22 +111,6 @@ class Booking {
         }
         return carRental;
     }
-
-    /* //Fjerner en biludlejning i arrayet af biludlejninger,
-     //hvis biludlejningen er tilføjet til dette.
-     removeCarRental(carRental) {
-         if (carRental instanceof CarRental) {
-             if (this.#carRentals.includes(carRental)) {
-                 let i = this.#carRentals.indexOf(carRental);
-                 for (let index = i; index < this.#carRentals.length - 1; index++) {
-                     this.#carRentals[index] = this.#carRentals[index + 1];
-                 }
-                 this.#carRentals.length = this.#carRentals.length - 1;
-             }
-         } else {
-             throw new Error("Biludlejningen er ikke en instans af CarRental");
-         }
-     } */
 
     //Fjerner en biludlejning i arrayet af travelDocuments,
     //hvis biludlejningen er tilføjet til dette.
@@ -214,15 +128,6 @@ class Booking {
         }
     }
 
-    /* //Tilføjer en transfer til arrayet af transfers,
-    //hvis ikke tranferen allerede findes i arrayet.
-    createTransfer(departureTime, date, destination, bookingId, Company) {
-        const transfer = new Transfer(departureTime, date, destination, bookingId, Company);
-        if (!this.#transfers.includes(transfer)) {
-            this.#transfers.push(transfer);
-        }
-    } */
-
     //Tilføjer en transfer til arrayet af travelDocuments,
     //hvis ikke tranferen allerede findes i arrayet.
     createTransfer(departureTime, date, destination, bookingId, Company) {
@@ -232,22 +137,6 @@ class Booking {
         }
         return transfer;
     }
-
-    /*  //Fjerner en transfer i arrayet af transfers,
-      //hvis transferen er tilføjet til dette.
-      removeTransfer(transfer) {
-          if (transfer instanceof Transfer) {
-              if (this.#transfers.includes(transfer)) {
-                  let i = this.#transfers.indexOf(transfer);
-                  for (let index = i; index < this.#transfers.length - 1; index++) {
-                      this.#transfers[index] = this.#transfers[index + 1];
-                  }
-                  this.#transfers.length = this.#transfers.length - 1;
-              }
-          } else {
-              throw new Error("transfer er ikke en instans af Transfer");
-          }
-      } */
 
     //Fjerner en transfer i arrayet af travelDocuments,
     //hvis transferen er tilføjet til dette.
@@ -265,15 +154,6 @@ class Booking {
         }
     }
 
-    /*   //Tilføjer en greenfees til arrayet af greenfees,
-       //hvis ikke denne allerede findes i arrayet.
-       createGreenfee(date, teetime, nrOfGolfers, Company) {
-           const greenfee = new Greenfee(date, teetime, nrOfGolfers, Company);
-           if (!this.#greenfees.includes(greenfee)) {
-               this.#greenfees.push(greenfee);
-           }
-       } */
-
     //Tilføjer en greenfees til arrayet af travelDocuments,
     //hvis ikke denne allerede findes i arrayet.
     createGreenfee(date, teetime, nrOfGolfers, Company) {
@@ -283,22 +163,6 @@ class Booking {
         }
         return greenfee;
     }
-
-    /*  //Fjerner en greenfee i arrayet af greenfees,
-      //hvis denne er tilføjet til dette.
-      removeGreenfee(greenfee) {
-          if (greenfee instanceof Greenfee) {
-              if (this.#greenfees.includes(greenfee)) {
-                  let i = this.#greenfees.indexOf(greenfee);
-                  for (let index = i; index < this.#greenfees.length - 1; index++) {
-                      this.#greenfees[index] = this.#greenfees[index + 1];
-                  }
-                  this.#greenfees.length = this.#greenfees.length - 1;
-              }
-          } else {
-              throw new Error("greenfee er ikke en instans af Greenfee");
-          }
-      } */
 
     //Fjerner en greenfee i arrayet af travelDocuments,
     //hvis denne er tilføjet til dette.
@@ -316,15 +180,6 @@ class Booking {
         }
     }
 
-    /*  //Tilføjer en passager til arrayet af passagerer,
-      //hvis ikke denne allerede findes i arrayet.
-      createPassenger(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
-          const passenger = new Passenger(firstName, lastName, gender, meal, golfbag, luggage, Flight);
-          if (!this.#passengers.includes(passenger)) {
-              this.#passengers.push(passenger);
-          }
-      } */
-
     //Tilføjer en passager til arrayet af travelDocuments,
     //hvis ikke denne allerede findes i arrayet.
     createBoardingpass(firstName, lastName, gender, flight) {
@@ -335,43 +190,13 @@ class Booking {
         return boardingpass;
     }
 
-    /*
-    //Fjerner en passager i arrayet af passagerer,
-    //hvis passageren er tilføjet til dette.
-    //præbetingelse: Der skal minimum være to passagerer i arrayet
-    removePassenger(passenger) {
-        if (passenger instanceof Passenger) {
-            if (this.#passengers.includes(passenger) && this.#passengers.length > 1) {
-                let i = this.#passengers.indexOf(passenger);
-                for (let index = i; index < this.#passengers.length - 1; index++) {
-                    this.#passengers[index] = this.#passengers[index + 1];
-                }
-                this.#passengers.length = this.#passengers.length - 1;
-            }
-        } else {
-            throw new Error("passageren er ikke en instans af Passenger");
-        }
-    } */
-
-
-    //private hjælpe metode til at afgøre om travelDocuments indeholder mindst to passengers
-    #numberOfBoardingpasses() {
-        var numberOfBoardingpasses = 0;
-        for (let i = 0; i < this.#boardingpasses.length; i++) {
-            if (this.#boardingpasses[i] instanceof Boardingpass) {
-                numberOfBoardingpasses++;
-            }
-        }
-        return numberOfBoardingpasses
-    }
     //Fjerner en passager i arrayet af travelDocuments,
     //hvis passageren er tilføjet til dette.
-    //præbetingelse: Der skal minimum være to passagerer i arrayet
     removeBoardingpass(boardingpass) {
         if (boardingpass instanceof Boardingpass) {
-            if (this.#boardingpasses.includes(boardingpass) && this.#numberOfBoardingpasses() >= 2) {
-                let i = this.#boardingpasses.indexOf(boardingpass);
-                this.#boardingpasses.splice(i, 1);
+            if (this.#travelDocuments.includes(boardingpass)) {
+                let i = this.#travelDocuments.indexOf(boardingpass);
+                this.#travelDocuments.splice(i, 1);
             }
         } else {
             throw new Error("boardingpass er ikke en instans af Boardingpass");
@@ -420,8 +245,8 @@ class Booking {
     //Udregner den samlede salgspris, 
     //netto prisen ganget med (dækningsbidrag delt med 100 + 1)
     calcGrossPrice() {
-        this.#grossPrice = this.calcNetPrice() * (this.#contributionMargin / 100 + 1);
-        return this.#grossPrice;
+        const grossPrice = this.calcNetPrice() * (this.#contributionMargin / 100 + 1);
+        return grossPrice
     }
 
     //Udregner dækningsbidraget i DKK ud fra den samlede pris
