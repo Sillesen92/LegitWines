@@ -30,14 +30,14 @@ html
 
                             div(id = "resModal" class = "modal")
                                 div(class = "resModalContent")
-                                    select(name="reservation" id="reservationType")
+                                    select(name="reservation" id="reservationType" onchange = "renderModal()")
                                         option(value="choose") -- Vælg --
-                                        option(value="Hotel" onclick = renderModalHotel()) Hotel
-                                        option(value="Passager" onclick = renderModalPassager()) Passager
-                                        option(value="Flyafgang" onclick = renderModalFlyafgang()) Flyafgang
-                                        option(value="Transfer" onclick = renderModalTransfer()) Transfer
-                                        option(value="Billeje" onclick = renderModalBilleje()) Billeje
-                                        option(value="Greenfee" onclick = renderModalGreenfee()) Greenfee
+                                        option(value="Hotel") Hotel
+                                        option(value="Passager") Passager
+                                        option(value="Flyafgang") Flyafgang
+                                        option(value="Transfer") Transfer
+                                        option(value="Billeje") Billeje
+                                        option(value="Greenfee") Greenfee
                                     div(class="companyPickerDropdown")
                                         button(class="companyPickerButton") Dropdown
                                         div(class="companyPickerDropdownContent")
@@ -49,10 +49,8 @@ html
                                                 <a href="#custom">Custom</a>
                                                 <a href="#support">Support</a>
                                                 <a href="#tools">Tools</a>
-                                    input(type = "date" id = "datepickerCheckIn")
-                                    input(type = "date" id = "datepickerCheckOut")
                                     span(class = "closeResModal") &times;
-                                    h1 Modal Open
+                                    div(class = "renderContent")
                                     button(class = "confirmResButton") Bekræft
 
 
