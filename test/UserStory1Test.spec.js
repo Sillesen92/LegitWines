@@ -17,9 +17,9 @@ let testSalesman = null;
 // Test booking
 let testBooking = null;
 // Test hotel company
-let testHotel = null;
+let testHotelCompany = null;
 // Test airline company
-let testAirline = null;
+let testAirlineCompany = null;
 // test hotel company contracts
 let testContractSingleRoom = null;
 let testContractDoubleRoom = null;
@@ -87,7 +87,7 @@ describe('Unit test af Booking klasse', () => {
         const hotPhone = 55555555
         const hotBusinessType = "1"
 
-        testHotel = new Company(hotName, HotAdress, hotEmail, hotPhone, hotBusinessType)
+        testHotelCompany = new Company(hotName, HotAdress, hotEmail, hotPhone, hotBusinessType)
 
         //golf
         const golfName = "golf"
@@ -105,7 +105,7 @@ describe('Unit test af Booking klasse', () => {
         const airPhone = 55555555
         const airBusinessType = "3"
 
-        testAirline = new Company(airName, airAdress, airEmail, airPhone, airBusinessType)
+        testAirlineCompany = new Company(airName, airAdress, airEmail, airPhone, airBusinessType)
 
         //bus
         const transferName = "bus"
@@ -147,28 +147,28 @@ describe('Unit test af Booking klasse', () => {
         const endDate = new Date(2021, 11, 31);
         const price = 500;
 
-        testContractSingleRoom = testHotel.createContract(roomType, startDate, endDate, price)
+        testContractSingleRoom = testHotelCompany.createContract(roomType, startDate, endDate, price)
 
         const roomTypeDouble = "doubleRoom";
         const startDateDouble = new Date(2021, 0, 1);
         const endDateDouble = new Date(2021, 11, 31);
         const priceDouble = 800;
 
-        testContractDoubleRoom = testHotel.createContract(roomTypeDouble, startDateDouble, endDateDouble, priceDouble);
+        testContractDoubleRoom = testHotelCompany.createContract(roomTypeDouble, startDateDouble, endDateDouble, priceDouble);
 
         // preparation of airline contracts
-        testAirlineContract1 = testAirline.createContract("Pris", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
-        testAirlineContract2 = testAirline.createContract("Mad", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
-        testAirlineContract3 = testAirline.createContract("Golftaske", new Date(2021, 0, 1), new Date(2021, 1, 1), 600)
-        testAirlineContract4 = testAirline.createContract("Baggage", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
+        testAirlineContract1 = testAirlineCompany.createContract("Pris", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
+        testAirlineContract2 = testAirlineCompany.createContract("Mad", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
+        testAirlineContract3 = testAirlineCompany.createContract("Golftaske", new Date(2021, 0, 1), new Date(2021, 1, 1), 600)
+        testAirlineContract4 = testAirlineCompany.createContract("Baggage", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
 
         // preparation of Flight Reservation
         const departAirport = "BLL";
-        const flightDateTime = new Date(2021, 0, 8, 06, 30)
+        const flightDateTime = new Date(2021, 11, 16, 6, 30)
         const arrivalAirport = "SVQ";
         const flightNr = "JS507"
 
-        testFlightReservation = new Flight(departAirport, flightDateTime, arrivalAirport, flightNr, testAirline);
+        testFlightReservation = new Flight(departAirport, flightDateTime, arrivalAirport, flightNr, testAirlineCompany);
 
         // preparation of passengers
         const firstName1 = "Bolette";
@@ -209,7 +209,7 @@ describe('Unit test af Booking klasse', () => {
 
 
         //preparation af booking med forbindelser til contracts
-        testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotel)
+        testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotelCompany)
         testHotelReservation.addContractToChosenContracts(testContractSingleRoom);
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
 
