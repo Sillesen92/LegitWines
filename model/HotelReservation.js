@@ -105,11 +105,7 @@ class HotelReservation {
     // Tilføjer en kontrakt fra et Company og tilføjer det til reservationens egen liste over valgte kontrakter. 
     addContractToChosenContracts(contract) {
         if (contract instanceof Contract) {
-            if (!this.#chosenContracts.includes(contract)) {
-                chosenContracts.push(contract);
-            } else {
-                throw new Error("Kontrakten er allerede valgt")
-            }
+                this.#chosenContracts.push(contract);
         }
     }
 
@@ -117,12 +113,14 @@ class HotelReservation {
     // Beregner den samlede pris på de valgte hotelkontrakter. 
     //**OBS** Metoden er mangelfuld, da det endnu ikke er gennemskuet, hvordan der matches korrekt mellem de valgte kontrakter, og antallet af singlerooms og double rooms. **OBS**
     calcNetPrice() {
-        const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
+        const timeDifference = this.#checkoutDate.getTime() - this.#checkinDate.getTime();
         const dayDifference = timeDifference / (1000 * 3600 * 24);
         console.log("Reservation duration: " + dayDifference);
         var price = 0;
+        console.log(this.#chosenContracts)
         if (this.#chosenContracts.length > 0) {
-            for (let index = 0; index < this.#chosenContracts; index++) {
+            for (let index = 0; index < this.#chosenContracts.length; index++) {
+                console.log("Contract " + index)
                 price += (this.#chosenContracts[index].netPrice * dayDifference);
             }
         }
