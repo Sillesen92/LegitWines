@@ -1,6 +1,7 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
+const Contract = require('../model/Contract');
 class CarRental {
     #startDate
     #endDate
@@ -92,7 +93,7 @@ class CarRental {
 
     // Beregner den samlede pris på de valgte billejekontrakter. 
     calcNetPrice() {
-        const timeDifference = this.#startDate.getTime() - this.#endDate.getTime();
+        const timeDifference = this.#endDate.getTime() - this.#startDate.getTime();
         const dayDifference = timeDifference / (1000 * 3600 * 24);
         var price = 0;
         if (this.#chosenContracts.length > 0) {

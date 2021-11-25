@@ -1,18 +1,19 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 0..* Flight
-const Flight = require('../model/Flight');
-class Passenger {
+const Flight = require('./Flight');
+const Contract = require('./Contract')
+class Boardingpass {
     #firstName
     #lastName
     #gender
-    #flights
+    #flight
     #chosenContracts
 
-    constructor(firstName, lastName, gender) {
+    constructor(firstName, lastName, gender, flight) {
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
-        this.#flights = [];
+        this.#flight = flight;
         this.#chosenContracts = [];
     }
 
@@ -28,8 +29,8 @@ class Passenger {
         return this.#gender;
     }
 
-    get flights() {
-        return this.#flights;
+    get flight() {
+        return this.#flight;
     }
 
     get chosenContracts() {
@@ -48,29 +49,18 @@ class Passenger {
         this.#gender = gender;
     }
 
-    addFlight(flight) {
+    setFlight(flight) {
         if (flight instanceof Flight) {
-            if (!this.#flights.includes(flight)) {
-                this.#flights.push(flight);
-                flight.addPassenger(this);
+            if (this.#flight != flight) {
+                const oldFlight = this.#flight;
+                oldFlight.removeFlight(this);
+                this.#flight = flight;
+                this.#flight.addBoardingpass(this);
+            } else {
+                throw new Error("Du skal angive en flyafgang, der er forskellig fra den flyafgang du allerede har tilknyttet");
             }
         } else {
-            throw new Error("passenger er ikke en instans af Passenger")
-        }
-    }
-
-    removeFlight(flight) {
-        if (flight instanceof Flight) {
-            if (this.#flights.includes(flight)) {
-                let i = this.#flights.indexOf(flight);
-                for (let index = i; index < this.#flights.length - 1; index++) {
-                    this.#flights[index] = this.#flights[index + 1];
-                }
-                this.#flights.length = this.#flights.length - 1;
-                flight.removePassenger(this);
-            }
-        } else {
-            throw new Error("passenger er ikke en instans af Passenger")
+            throw new Error("Du skal medgive et object af typen Flight")
         }
     }
 
@@ -102,6 +92,7 @@ class Passenger {
 
     // Beregner den samlede pris på de valgte flykontrakter. 
     calcNetPrice() {
+        var price = 0;
         if (this.#chosenContracts.length > 0) {
             for (let index = 0; index < this.#chosenContracts.length; index++) {
                 price += (this.#chosenContracts[index].netPrice);
@@ -111,4 +102,4 @@ class Passenger {
     }
 }
 
-module.exports = Passenger;
+module.exports = Boardingpass;

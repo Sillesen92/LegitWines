@@ -1,6 +1,7 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
+const Contract = require('../model/Contract');
 class Transfer {
     #dateTime
     #destination
@@ -40,12 +41,8 @@ class Transfer {
         return this.#chosenContracts;
     }
 
-    set departureTime(departureTime) {
-        this.#departureTime = departureTime;
-    }
-
-    set date(date) {
-        this.#dateTime = date;
+    set dateTime(dateTime) {
+        this.#dateTime = dateTime;
     }
 
     set destination(destination) {
@@ -100,6 +97,7 @@ class Transfer {
 
     // Beregner den samlede pris på de valgte transferkontrakter. 
     calcNetPrice() {
+        var price = 0;
         if (this.#chosenContracts.length > 0) {
             for (let index = 0; index < this.#chosenContracts.length; index++) {
                 price += (this.#chosenContracts[index].netPrice);

@@ -1,6 +1,7 @@
 //Klasse med følgende forbindelser:
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
+const Contract = require('../model/Contract')
 class Greenfee {
     #dateTime
     //company er nullable
@@ -30,12 +31,8 @@ class Greenfee {
         return this.#chosenContracts;
     }
 
-    set date(date) {
-        this.#dateTime = date;
-    }
-
-    set teetime(teetime) {
-        this.#teetime = teetime;
+    set dateTime(dateTime) {
+        this.#dateTime = dateTime;
     }
 
     //Sætter Company til et andet Company, denne må ikke være null!
@@ -82,6 +79,7 @@ class Greenfee {
 
     // Beregner den samlede pris på de valgte transferkontrakter. 
     calcNetPrice() {
+        var price = 0;
         if (this.#chosenContracts.length > 0) {
             for (let index = 0; index < this.#chosenContracts.length; index++) {
                 price += (this.#chosenContracts[index].netPrice);
