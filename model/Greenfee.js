@@ -2,24 +2,24 @@
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class Greenfee {
-    #date
-    #teetime
+    #dateTime
+    //company er nullable
     #company
     #chosenContracts
 
-    constructor(date, teetime, company) {
-        this.#date = date;
-        this.#teetime = teetime;
+
+    constructor(dateTime, company) {
+        this.#dateTime = dateTime;
         this.#company = company;
         this.#chosenContracts = [];
     }
 
     get date() {
-        return this.#date;
+        return this.#dateTime.getFullYear() + " " + this.#dateTime.getMonth() + " " + this.#dateTime.getDate();
     }
 
     get teetime() {
-        return this.#teetime;
+        return this.#dateTime.getHours() + " " + this.#dateTime.getMinutes();
     }
 
     get company() {
@@ -31,7 +31,7 @@ class Greenfee {
     }
 
     set date(date) {
-        this.#date = date;
+        this.#dateTime = date;
     }
 
     set teetime(teetime) {

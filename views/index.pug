@@ -30,7 +30,7 @@ html
 
                             div(id = "resModal" class = "modal")
                                 div(class = "resModalContent")
-                                    select(name="reservation" id="reservationType")
+                                    select(name="reservation" id="reservationType" onchange = "renderModal()")
                                         option(value="choose") -- Vælg --
                                         option(value="Hotel") Hotel
                                         option(value="Passager") Passager
@@ -50,7 +50,7 @@ html
                                                 <a href="#support">Support</a>
                                                 <a href="#tools">Tools</a>
                                     span(class = "closeResModal") &times;
-                                    h1 Modal Open
+                                    div(class = "renderContent")
                                     button(class = "confirmResButton") Bekræft
 
 

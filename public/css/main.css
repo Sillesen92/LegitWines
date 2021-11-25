@@ -308,6 +308,8 @@ button:hover.greenButton {
 }
 
 .companyPickerDropdownContent {
+    height : 200px;
+    overflow-y: scroll;
     display: none;
     position: absolute;
     background-color: #f6f6f6;
@@ -325,6 +327,10 @@ button:hover.greenButton {
 
 .companyPickerDropdownContent a:hover {
     background-color: #f1f1f1
+}
+
+.show {
+    display: block;
 }
 
 .confirmResButton {

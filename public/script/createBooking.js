@@ -1,6 +1,9 @@
 const button = document.querySelector('.addReservationButton');
 const modal = document.querySelector("#resModal")
+const modalContent = document.querySelector(".resModalContent")
+const renderContent = document.querySelector(".renderContent")
 const span = document.querySelector(".closeResModal");
+const resDropdown = document.querySelector("#reservationType")
 
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
@@ -21,13 +24,7 @@ window.onclick = function (event) {
 const companyTypeSearchButton = document.querySelector(".companyPickerButton")
 
 companyTypeSearchButton.onclick = function () {
-    const content = document.querySelector(".companyPickerDropdownContent");
-    console.log("piksvin")
-    if (content.style.display = "show") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "show";
-    }
+    document.querySelector(".companyPickerDropdownContent").classList.toggle("show");
 }
 
 function filterFunction() {
@@ -46,4 +43,47 @@ function filterFunction() {
     }
 }
 
+//viser nødvendige informationer for opret hotel
+function renderModal(){
+    renderContent.innerHTML = ""
+    if(resDropdown.value == "Hotel"){
+        //datepicker indtjekningsdato
+        const dateIn = document.createElement("input")
+        dateIn.type = "date"
+        dateIn.id = "dateIn"
+        renderContent.append(dateIn)
+
+        //datepicker udtjekningsdato
+        const dateOut = document.createElement("input")
+        dateOut.type = "date"
+        dateOut.id = "dateOut"
+        renderContent.append(dateOut)
+
+        //dropdown for pension
+        const pension = document.createElement("select")
+        pension.id = "pensionPicker"
+        pension.appendChild(new Option("Ingen"));
+        pension.appendChild(new Option("Halv-Pension"));
+        pension.appendChild(new Option("Hel-Pension"));
+        renderContent.append(pension)
+
+        //kommentarfelt
+        const commentInput = document.createElement("Input")
+        commentInput.type = "text"
+        commentInput.id = "commentInput"
+        renderContent.append(commentInput)
+
+    } else if(resDropdown.value == "Passager"){
+        
+    }else if(resDropdown.value == "Flyafgang"){
+
+    }else if(resDropdown.value == "Transfer"){ }
+    else if(resDropdown.value == "Billeje"){}
+    else if(resDropdown.value == "Greenfee"){}
+    else{}
+    
+    // modal.innerHTML += "<input type = 'date' id = 'datepickerIn'></input>"
+    // modal.innerHTML += "<input type = 'date' id = 'datepickerOut'></input>"
+    // modal.innerHTML += "<>"
+}
 

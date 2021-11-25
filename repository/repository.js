@@ -257,11 +257,11 @@ return doc.id
 }
 //Henter specific booking på bookingNr
 */
-async function getBooking(bookingNr){
-  try{
+async function getBooking(bookingNr) {
+  try {
     const booking = await db.collection("bookings").doc(bookingNr).get()
     return booking
-  }catch(e){
+  } catch (e) {
     console.log(e.message)
   }
 }
