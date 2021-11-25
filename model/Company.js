@@ -240,6 +240,7 @@ class Company {
         if (!this.#contracts.includes(contract)) {
             this.#contracts.push(contract);
         }
+        return contract;
     }
 
     //Fjerner en kontrakt i arrayet af contracts,

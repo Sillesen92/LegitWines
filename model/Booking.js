@@ -32,7 +32,7 @@ class Booking {
 
     constructor(bookingNr, salesman, customer) {
         this.#bookingNr = bookingNr;
-        this.#contributionMargin = 18, 5;
+        this.#contributionMargin = 18.5;
         this.#netPrice = 0;
         this.#grossPrice = 0;
         this.#hotelReservations = [];
@@ -326,8 +326,8 @@ class Booking {
     //hvis ikke denne allerede findes i arrayet.
     createPassenger(firstName, lastName, gender, meal, golfbag, luggage, Flight) {
         const passenger = new Passenger(firstName, lastName, gender, meal, golfbag, luggage, Flight);
-        if (!this.#travelDocuments.includes(passenger)) {
-            this.#travelDocuments.push(passenger);
+        if (!this.#passengers.includes(passenger)) {
+            this.#passengers.push(passenger);
         }
     }
 
@@ -353,8 +353,8 @@ class Booking {
     //private hjælpe metode til at afgøre om travelDocuments indeholder mindst to passengers
     #numberOfPassengers() {
         var numberOfPassengers = 0;
-        for (let i = 0; i < this.#travelDocuments.length; i++) {
-            if (this.#travelDocuments[i] instanceof Passenger) {
+        for (let i = 0; i < this.#passengers.length; i++) {
+            if (this.#passengers[i] instanceof Passenger) {
                 numberOfPassengers++;
             }
         }
@@ -365,9 +365,9 @@ class Booking {
     //præbetingelse: Der skal minimum være to passagerer i arrayet
     removePassenger(passenger) {
         if (passenger instanceof Passenger) {
-            if (this.#travelDocuments.includes(passenger) && this.#numberOfPassengers() >= 2) {
-                let i = this.#travelDocuments.indexOf(passenger);
-                this.#travelDocuments.splice(i, 1);
+            if (this.#passengers.includes(passenger) && this.#numberOfPassengers() >= 2) {
+                let i = this.#passengers.indexOf(passenger);
+                this.#passengers.splice(i, 1);
             }
         } else {
             throw new Error("passageren er ikke en instans af Passenger");
@@ -407,7 +407,9 @@ class Booking {
     calcNetPrice() {
         var price = 0;
         this.#travelDocuments.forEach(doc => {
-            price += doc.calcNetPrice()
+            const docPrice = doc.calcNetPrice();
+            console.log(docPrice);
+            price += docPrice;
         });
         return price;
     }
@@ -415,7 +417,7 @@ class Booking {
     //Udregner den samlede salgspris, 
     //netto prisen ganget med (dækningsbidrag delt med 100 + 1)
     calcGrossPrice() {
-        this.#grossPrice = calcNetPrice() * (this.#contributionMargin / 100 + 1);
+        this.#grossPrice = this.calcNetPrice() * (this.#contributionMargin / 100 + 1);
         return this.#grossPrice;
     }
 

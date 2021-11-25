@@ -134,16 +134,16 @@ describe('Unit test af Booking klasse', () => {
         //act
         const result = testBooking.calcGrossPrice();
 
-        // assert -> forventet bruttopris: 1540,5 
-        expect(result).toEqual(1540.5)
+        // assert -> forventet bruttopris: 3081kr
+        expect(result).toEqual(3081)
     })
 
     test('Unit test af dækningsbidragsberegning', () => {
         //act
         const result = testBooking.calcContributionMarginInDKK();
 
-        // assert -> forventet fortjeneste: 240,5
-        expect(result).toEqual(240.5)
+        // assert -> forventet fortjeneste: 481kr
+        expect(result).toEqual(481)
     })
 
     test("Hent booking fra repository", async () => {
@@ -154,8 +154,8 @@ describe('Unit test af Booking klasse', () => {
         // act
         const result = await BookingController.getBooking(bookingId)
         // assert
-        expect(result.bookingId).toEqual(bookingId)
+        expect(result.bookingId).toBe(bookingId)
         expect(result.salesman.name).toBe("Jonas")
-        expect(result.customer.email).toEqual('john@gmail.com')
+        expect(result.customer.email).toBe('john@gmail.com')
     })
 })
