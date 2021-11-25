@@ -256,18 +256,16 @@ return doc.id
 
 }
 //Henter specific booking på bookingNr
-
+*/
 async function getBooking(bookingNr){
   try{
-    const querySnapshot = await db.collection("bookings")
-    .where("bookingNr", "==", bookingNr).get()
-    const docs = querySnapshot.docs 
-    return docs
+    const booking = await db.collection("bookings").doc(bookingNr).get()
+    return booking
   }catch(e){
     console.log(e.message)
   }
 }
-
+/*
 //Henter alle bookings fra firestore
 async function getBookings(){
   try{
@@ -282,4 +280,4 @@ async function getBookings(){
 }
 
 module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
+module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
