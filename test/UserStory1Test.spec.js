@@ -42,16 +42,25 @@ describe('Unit test af Booking klasse', () => {
         const HotAdress = "test 123"
         const hotEmail = "test@test.dk"
         const hotPhone = 55555555
-        const hotBusinessType = "hotel"
+        const hotBusinessType = "1"
 
         testHotel = new Company(hotName, HotAdress, hotEmail, hotPhone, hotBusinessType)
+
+        //golf
+        const golfName = "golf"
+        const golfAdress = "test 123"
+        const golfEmail = "test@test.dk"
+        const golfPhone = 55555555
+        const golfBusinessType = "2"
+        testGolf = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
+
 
         //airline
         const airName = "airline"
         const airAdress = "test 123"
         const airEmail = "test@test.dk"
         const airPhone = 55555555
-        const airBusinessType = "airline"
+        const airBusinessType = "3"
 
         testAirline = new Company(airName, airAdress, airEmail, airPhone, airBusinessType)
 
@@ -60,7 +69,7 @@ describe('Unit test af Booking klasse', () => {
         const busAdress = "test 123"
         const busEmail = "test@test.dk"
         const busPhone = 55555555
-        const busBusinessType = "bus"
+        const busBusinessType = "4"
 
         testBus = new Company(busName, busAdress, busEmail, busPhone, busBusinessType)
 
@@ -70,18 +79,9 @@ describe('Unit test af Booking klasse', () => {
         const bilAdress = "test 123"
         const bilEmail = "test@test.dk"
         const bilPhone = 55555555
-        const bilBusinessType = "bil"
+        const bilBusinessType = "5"
 
         testBil = new Company(bilName, bilAdress, bilEmail, bilPhone, bilBusinessType)
-
-
-        //golf
-        const golfName = "golf"
-        const golfAdress = "test 123"
-        const golfEmail = "test@test.dk"
-        const golfPhone = 55555555
-        const golfBusinessType = "golf"
-        testGolf = new Company(golfName, golfAdress, golfEmail, golfPhone, golfBusinessType)
 
         // preparation of booking: 
         const bookingNr = 20210001;
