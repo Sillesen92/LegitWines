@@ -1,6 +1,7 @@
 const button = document.querySelector('.addReservationButton');
 const modal = document.querySelector("#resModal")
 const span = document.querySelector(".closeResModal");
+const resDropdown = document.querySelector("#reservationType")
 
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
@@ -21,13 +22,7 @@ window.onclick = function (event) {
 const companyTypeSearchButton = document.querySelector(".companyPickerButton")
 
 companyTypeSearchButton.onclick = function () {
-    const content = document.querySelector(".companyPickerDropdownContent");
-    console.log("piksvin")
-    if (content.style.display = "show") {
-        content.style.display = "none";
-    } else {
-        content.style.display = "show";
-    }
+    document.querySelector(".companyPickerDropdownContent").classList.toggle("show");
 }
 
 function filterFunction() {
