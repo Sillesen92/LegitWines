@@ -116,14 +116,18 @@ class HotelReservation {
 
     // Beregner den samlede pris på de valgte hotelkontrakter. 
     //**OBS** Metoden er mangelfuld, da det endnu ikke er gennemskuet, hvordan der matches korrekt mellem de valgte kontrakter, og antallet af singlerooms og double rooms. **OBS**
-    calcNetPriceForReservation() {
+    calcNetPrice() {
+        const timeDifference = checkoutDate.getTime() - checkinDate.getTime();
+        const dayDifference = timeDifference / (1000 * 3600 * 24);
+        console.log("Reservation duration: " + dayDifference);
         var price = 0;
         if (this.#chosenContracts.length > 0) {
             for (let index = 0; index < this.#chosenContracts; index++) {
-                price += this.#chosenContracts[index].netPrice;
+                price += (this.#chosenContracts[index].netPrice * dayDifference);
             }
         }
         return price;
+
     }
 }
 
