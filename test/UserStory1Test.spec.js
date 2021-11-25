@@ -192,7 +192,8 @@ describe('Unit test af Booking klasse', () => {
         testPassenger3.addFlight(testFlightReservation);
 
         // transfer company contracts
-        const transferContract = testTransferCompany.createContract("Bus", new Date(2021, 0, 1), new Date(2021, 11, 31), 500)
+        const transferContract1 = testTransferCompany.createContract("Huelva", new Date(2021, 0, 1), new Date(2021, 11, 31), 350)
+        const transferContract2 = testTransferCompany.createContract("Cadiz", new Date(2021, 0, 1), new Date(2021, 11, 31), 350)
 
         // car rental company contract
         const carContract1 = testCarCompany.createContract("Class A", new Date(2021, 0, 1), new Date(2021, 11, 31), 1000)
@@ -213,7 +214,8 @@ describe('Unit test af Booking klasse', () => {
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
 
         testTransferReservation = testBooking.createTransfer(new Date(2021, 10, 16, 12, 0), "Tilfældig adresse", "X802", testTransferCompany);
-        testTransferReservation.addContractToChosenContracts(transferContract)
+        testTransferReservation.addContractToChosenContracts(transferContract1);
+        testTransferReservation.addContractToChosenContracts(transferContract2);
 
         testCarReservation = testBooking.createCarRental(new Date(2021, 10, 16), new Date(2021, 10, 18), "testBookingId", testCarCompany);
         testCarReservation.addContractToChosenContracts(carContract1);
