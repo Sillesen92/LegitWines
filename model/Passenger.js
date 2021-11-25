@@ -30,10 +30,13 @@ class Passenger {
 
     get flights() {
         return this.#flights;
+<<<<<<< HEAD
     }
 
     get chosenContracts() {
         return this.#chosenContracts;
+=======
+>>>>>>> Jakob
     }
 
     set firstName(firstName) {

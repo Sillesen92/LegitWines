@@ -2,16 +2,14 @@
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class Transfer {
-    #departureTime
-    #date
+    #dateTime
     #destination
     #bookingId
     #company
     #chosenContracts
 
-    constructor(departureTime, date, destination, bookingId, company) {
-        this.#departureTime = departureTime;
-        this.#date = date;
+    constructor(dateTime, destination, bookingId, company) {
+        this.#dateTime = dateTime;
         this.#destination = destination;
         this.#bookingId = bookingId;
         this.#company = company;
@@ -19,11 +17,11 @@ class Transfer {
     }
 
     get departureTime() {
-        return this.#departureTime;
+        return this.#dateTime.getHours() + ':' + this.#dateTime.getMinutes();
     }
 
     get date() {
-        return this.#date;
+        return this.#dateTime.getFullYear() + " " + this.#dateTime.getMonth() + " " + this.#dateTime.getDate();
     }
 
     get destination() {
@@ -47,7 +45,7 @@ class Transfer {
     }
 
     set date(date) {
-        this.#date = date;
+        this.#dateTime = date;
     }
 
     set destination(destination) {

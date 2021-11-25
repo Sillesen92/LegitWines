@@ -329,6 +329,7 @@ class Booking {
         if (!this.#passengers.includes(passenger)) {
             this.#passengers.push(passenger);
         }
+        return passenger;
     }
 
     /*

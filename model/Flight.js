@@ -5,18 +5,16 @@ const Passenger = require('../model/Passenger');
 const Company = require('../model/Company');
 class Flight {
     #departAirport
-    #date
-    #time
+    #dateTime
     #arrivalAirport
     #flightNr
     #passengers
     //company er nullable
     #company
 
-    constructor(departAirport, date, time, arrivalAirport, flightNr, company) {
+    constructor(departAirport, dateTime, arrivalAirport, flightNr, company) {
         this.#departAirport = departAirport;
-        this.#date = date;
-        this.#time = time;
+        this.#dateTime = dateTime;
         this.#arrivalAirport = arrivalAirport;
         this.#flightNr = flightNr;
         this.#passengers = [];
@@ -28,11 +26,11 @@ class Flight {
     }
 
     get date() {
-        return this.#date;
+        return this.#dateTime.getFullYear() + " " + this.#dateTime.getMonth() + " " + this.#dateTime.getDate();
     }
 
     get time() {
-        return this.#time;
+        return this.#dateTime.getHours() + " " + this.#dateTime.getMinutes();
     }
 
     get arrivalAirport() {
@@ -56,7 +54,7 @@ class Flight {
     }
 
     set date(date) {
-        this.#date = date;
+        this.#dateTime = date;
     }
 
     set time(time) {
