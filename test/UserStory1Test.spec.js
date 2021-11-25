@@ -153,8 +153,9 @@ describe('Unit test af Booking klasse', () => {
 
         // act
         const result = await BookingController.getBooking(bookingId)
+
         // assert
-        expect(result.bookingId).toBe(bookingId)
+        expect(result.bookingNr).toBe(bookingId)
         expect(result.salesman.name).toBe("Jonas")
         expect(result.customer.email).toBe('john@gmail.com')
     })
