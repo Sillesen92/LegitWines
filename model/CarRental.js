@@ -2,7 +2,6 @@
 //Dobbeltrettet 1 Company
 const Company = require('../model/Company');
 class CarRental {
-    #type
     #startDate
     #endDate
     #bookingId
@@ -15,10 +14,6 @@ class CarRental {
         this.#bookingId = bookingId;
         this.#company = company;
         this.#chosenContracts = [];
-    }
-
-    get type() {
-        return this.#type;
     }
 
     get startDate() {
@@ -41,10 +36,6 @@ class CarRental {
         return this.#chosenContracts;
     }
 
-    set type(type) {
-        this.#type = type;
-    }
-
     set startDate(startDate) {
         this.#startDate = startDate;
     }
@@ -56,6 +47,7 @@ class CarRental {
     set bookingId(bookingId) {
         this.#bookingId = bookingId;
     }
+
     //Sætter Company til et andet Company, denne må ikke være null!
     setCompany(company) {
         if (company instanceof Company) {
