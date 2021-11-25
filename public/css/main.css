@@ -135,66 +135,47 @@ p {
     align-items: center;
     text-align: center;
     width: 95%;
-    height: auto;
+    height: 500px;
     margin: 50px auto;
     padding: 10px;
     position: relative;
     justify-content: space-evenly;
+    border: 2px solid black;
 }
 
-#searchcontainer {
-    padding: 20px;
+.resCard {
+    border: 2px solid black;
+    width: 98%;
+    height: 70px;
+}
+
+.addReservationButton {
     background-color: #276954;
-    border-radius: 50px;
-}
-
-.airportSearch {
-    width: 200px;
-    height: 20px;
-    border-radius: 10px;
-    border: 1px solid #F1DABF;
-    margin: 5px;
-}
-
-.bookingDatePicker {
-    width: 75px;
-    height: 20px;
-    border-radius: 10px;
-    border: 1px solid #F1DABF;
-    margin: 5px;
-}
-
-#personCounter {
+    color: #FEFFFE;
+    font-size: 40px;
     width: 50px;
-    height: 20px;
-    border-radius: 10px;
-    border: 1px solid #F1DABF;
-    margin: 5px;
-    text-align: center;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 50px;
+    box-sizing: border-box;
 }
 
-#minusPersonCounter {
-    width: 30px;
-    height: 20px;
-    border-radius: 20px;
-    border: 1px solid #F1DABF;
-    margin: 5px; 
-}
-
-#plusPersonCounter {
-    width: 30px;
-    height: 20px;
-    border-radius: 20px;
-    border: 1px solid #F1DABF;
-    margin: 5px; 
-}
-
-#searchBookingButton {
+.addReservationButton:hover {
+    background-color: #276954;
+    color: #FEFFFE;
+    border: 3px solid #276954;
+    font-size: 40px;
     width: 50px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid #F1DABF;
-    margin: 5px;
+    height: 50px;
+    border: none;
+    border-radius: 25px;
+    margin: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 50px;
+    box-sizing: border-box;
 }
 
 /* Resultat af Create Booking Search */
