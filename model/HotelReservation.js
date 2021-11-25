@@ -96,16 +96,22 @@ class HotelReservation {
         }
     }
 
-    // Henter alle contracts fra company.
-    getCompanyContracts() {
-        return this.#company.getContracts();
-    }
-
 
     // Tilføjer en kontrakt fra et Company og tilføjer det til reservationens egen liste over valgte kontrakter. 
     addContractToChosenContracts(contract) {
         if (contract instanceof Contract) {
-                this.#chosenContracts.push(contract);
+            this.#chosenContracts.push(contract);
+        }
+    }
+
+    removeContractFromChosenContracts(contract) {
+        if (contract instanceof Contract) {
+            if (this.#chosenContracts.includes(contract)) {
+                let i = this.#chosenContracts.indexOf(contract);
+                this.#chosenContracts.splice(i, 1);
+            }
+        } else {
+            throw new Error("contract er ikke en instans af klassen Contract");
         }
     }
 
