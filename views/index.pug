@@ -38,6 +38,17 @@ html
                                         option(value="Transfer") Transfer
                                         option(value="Billeje") Billeje
                                         option(value="Greenfee") Greenfee
+                                    div(class="companyPickerDropdown")
+                                        button(class="companyPickerButton") Dropdown
+                                        div(class="companyPickerDropdownContent")
+                                            <input type="text" placeholder="Search.." id="companyInput" onkeyup="filterFunction()">
+                                                <a href="#about">About</a>
+                                                <a href="#base">Base</a>
+                                                <a href="#blog">Blog</a>
+                                                <a href="#contact">Contact</a>
+                                                <a href="#custom">Custom</a>
+                                                <a href="#support">Support</a>
+                                                <a href="#tools">Tools</a>
                                     span(class = "closeResModal") &times;
                                     h1 Modal Open
                                     button(class = "confirmResButton") Bekræft

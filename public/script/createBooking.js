@@ -2,6 +2,7 @@ const button = document.querySelector('.addReservationButton');
 const modal = document.querySelector("#resModal")
 const span = document.querySelector(".closeResModal");
 
+// Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
     modal.style.display = 'block';
 }
@@ -15,3 +16,34 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+// Åbner dropdown for at kunne søge på valgte company type
+const companyTypeSearchButton = document.querySelector(".companyPickerButton")
+
+companyTypeSearchButton.onclick = function () {
+    const content = document.querySelector(".companyPickerDropdownContent");
+    console.log("piksvin")
+    if (content.style.display = "show") {
+        content.style.display = "none";
+    } else {
+        content.style.display = "show";
+    }
+}
+
+function filterFunction() {
+    var input, filter, ul, li, a, i;
+    input = document.querySelector("#companyInput");
+    filter = input.value.toUpperCase();
+    div = document.querySelector(".companyPickerDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
+
