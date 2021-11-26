@@ -39,6 +39,8 @@ describe('Unit test af oprettelse af Company', () => {
         //assert
         expect(testHotel.name).toBe("CompanyTest")
         expect(testHotel.businessType).toBe("HotelTest")
+        expect(testHotel.email).toBe("test@test.test")
+        expect(testHotel.phone).toEqual(11112222)
         expect(testHotel).toBeInstanceOf(Company)
         expect(testHotel.contracts.length).toEqual(2)
     })

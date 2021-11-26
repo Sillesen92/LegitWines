@@ -13,7 +13,7 @@ document.querySelector("#loginForm").onclick = async (event) => {
             body: JSON.stringify({name: userName(), password: password()})
         })
         if (response.ok) {
-            window.location.href = "/"
+            window.location.href = "/createbooking"
         } else {
             error.textContent = "FAILED TO LOG IN"
         }
