@@ -5,7 +5,7 @@ function getBookings() {
 }
 
 function getBooking(id) {
-    return repository.getBooking(year, id);
+    return repository.getBooking(id);
 }
 
 function createBooking(parameters) {
