@@ -31,6 +31,17 @@ p {
 
 /* Header CSS */
 
+#navigationBar {
+    float: right;
+    background-color: #276954;
+}
+
+#headerLogo{
+    width: 120px;
+    height: 120px;
+    margin-bottom: 50px;
+}
+
 /* Main CSS */
 
 /* Main CSS - Forside */
