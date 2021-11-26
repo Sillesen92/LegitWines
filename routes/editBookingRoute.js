@@ -3,7 +3,8 @@ const bookingController = require('../controller/bookings.js')
 const router = express.Router();
 router.get('/editBooking', async (req, resp) => {
         //resp.render('editBooking', {booking: undefined})
-        await bookingController.getBooking(req.query.bookingId)
+        // await bookingController.getBooking(req.query.bookingId)
+        resp.render('../views/updatebooking')
 })
 
 router.post('/editBooking', (req, resp) => {

@@ -211,19 +211,13 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
 }
 
 
-async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
+async function updateBooking(bookingNr, salesman, customer, travelDocuments) {
   const doc = await getBooking(bookingNr)
   if (doc.exists()) {
     const updatedBooking = {
-      grossPrice: grossPrice,
-      contributionMargin: contributionMargin,
       salesman: salesman,
-      reservations: reservations,
-      transfers: transfers,
       customer: customer,
-      passengers: passengers,
-      carRentals: carRentals,
-      greenFees: greenFees
+      travelDocuments: travelDocuments
     }
 
     doc.set(updatedBooking)
@@ -234,26 +228,26 @@ async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman
 }
 
 
-async function createBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
-  {
+async function createBooking(salesman, customer, travelDocuments) {
 
-    const booking = {
-      bookingNr: bookingNr,
-      grossPrice: grossPrice,
-      contributionMargin: contributionMargin,
-      salesman: salesman,
-      reservations: reservations,
-      transfers: transfers,
-      customer: customer,
-      passengers: passengers,
-      carRentals: carRentals,
-      greenFees: greenFees
-    }
+  const year = new Date().getFullYear();
+  const col = db.collection("bookings").doc(year);
+  const count = await (await col.get()).data().count;
+  const bookingNr = year + count;
 
+
+
+
+
+  const booking = {
+    bookingNr: bookingNr,
+    salesman: salesman,
+    customer: customer,
+    travelDocuments: travelDocuments
   }
 
 
-  const year = bookingNr.substring(0, 3);
+
   const doc = await db.collection("bookings").doc(year)
   await doc.set(booking)
 
@@ -304,4 +298,4 @@ async function getBookingForYear(year) {
 }
 
 
-module.exports = {getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
+module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
