@@ -169,15 +169,16 @@ async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, sale
   return created
 }
 
-async function getSalesman(salesmanId) {
-  if (("" + salesmanId).substring(0, 1) == "6") {
-    const doc = db.collection('salesmen').doc(salesmanId)
-    const salesman = await doc.get()
-    return salesman;
-  } else {
-    return new Error('This is not a salesmanId')
-  }
-}
+ async function getSalesman(salesmanId) {
+   if (("" + salesmanId).substring(0, 1) == "6") {
+     const doc = db.collection('salesmen').doc(salesmanId)
+     const salesman = await doc.get()
+     return salesman;
+   } else {
+     return new Error('This is not a salesmanId')
+   }
+ }
+
 
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
 async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
@@ -208,10 +209,11 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
     return new error('This is not a salesmanId')
   }
 }
-//Mangler de gyldige parametre
-/*
-async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
-  const doc = await getBooking(bookingNr)
+
+
+async function updateBooking(year,bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
+  const doc = await getBooking(year, bookingNr)
+  if(doc.exists()){
   const updatedBooking = {
       grossPrice: grossPrice,
       contributionMargin: contributionMargin,
@@ -223,9 +225,12 @@ async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman
       carRentals: carRentals,
       greenFees: greenFees
   }
-  const bookingJson = JSON.stringify(updatedBooking)
-  await doc.set(bookingJson)
-  return doc
+  
+  doc.set(updatedBooking)
+  
+}else{
+  console.log("booking does not exist")
+}
 }
 
 
@@ -247,22 +252,25 @@ async function createBooking(bookingNr, grossPrice, contributionMargin, salesman
   
 }
 
-  const bookingJson = JSON.stringify(booking)
   
-const doc = await db.collection("bookings").doc()
+  
+const doc = await db.collection("bookings").doc(new Date().getFullYear())
 await doc.set(booking)
 
-return doc.id
+return doc
 
 }
-//Henter specific booking på bookingNr
+/* 
+@params year, bookingNr. 
+year er hvilket år man vil finde booking med bookingNr
 
-async function getBooking(bookingNr){
+*/
+
+async function getBooking(year,bookingNr){
   try{
-    const querySnapshot = await db.collection("bookings")
-    .where("bookingNr", "==", bookingNr).get()
-    const docs = querySnapshot.docs 
-    return docs
+    const booking = await db.collection("bookings").doc(year).collection("bookings")
+    .where("bookingNr", "==", bookingNr).get()  
+    return booking
   }catch(e){
     console.log(e.message)
   }
@@ -280,6 +288,19 @@ async function getBookings(){
   }
   
 }
+/*
+@params year, hvilket år man vil hente alle bookinger fra
+*/
+async function getBookingForYear(year){
+  try{
+    const querySnapshot = await db.collection("bookings").doc(year).collection("bookings").get();
+    const docs = querySnapshot.docs
+    return docs
+  }catch(e){
+    console.log(e.message);
+  }
 
-module.exports = {getBookings, saveBooking}*/
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
+}
+
+
+module.exports = {getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman,getBookings, createBooking,getBookingForYear,updateBooking }
