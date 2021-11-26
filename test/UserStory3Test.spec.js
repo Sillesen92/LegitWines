@@ -44,7 +44,7 @@ describe('Unit test af oprettelse af Salesman', () => {
 
     test('create Booking tilføjes salesman', () => {
         //assert
-        expect(testSalesman.bookinger[0]).toEqual(testBooking)
+        expect(testSalesman.bookings[0]).toEqual(testBooking)
     })
 
     test('login salesman', async () => {

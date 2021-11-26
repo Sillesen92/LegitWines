@@ -38,7 +38,7 @@ class Salesman {
         return this.#password;
     }
 
-    get bookinger() {
+    get bookings() {
         return this.#bookings;
     }
 
@@ -65,11 +65,11 @@ class Salesman {
     //Tilføjer en booking til arrayet af bookinger,
     //hvis ikke denne allerede findes i arrayet.
     addBooking(booking) {
-        if (booking instanceof Booking) {
+        //if (booking instanceof Booking) {
             if (!this.#bookings.includes(booking)) {
                 this.#bookings.push(booking);
                 booking.setSalesman(this);
-            }
+           // }
         } else {
             throw new Error("booking er ikke en instans af Booking")
         }
