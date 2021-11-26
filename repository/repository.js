@@ -211,8 +211,8 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
 }
 
 
-async function updateBooking(year, bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
-  const doc = await getBooking(year, bookingNr)
+async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
+  const doc = await getBooking(bookingNr)
   if (doc.exists()) {
     const updatedBooking = {
       grossPrice: grossPrice,
@@ -253,8 +253,8 @@ async function createBooking(bookingNr, grossPrice, contributionMargin, salesman
   }
 
 
-
-  const doc = await db.collection("bookings").doc(new Date().getFullYear())
+  const year = bookingNr.substring(0, 3);
+  const doc = await db.collection("bookings").doc(year)
   await doc.set(booking)
 
   return doc
@@ -266,8 +266,9 @@ year er hvilket år man vil finde booking med bookingNr
 
 */
 
-async function getBooking(year, bookingNr) {
+async function getBooking(bookingNr) {
   try {
+    const year = bookingNr.substring(0, 3);
     const booking = await db.collection("bookings").doc(year).collection("bookings")
       .where("bookingNr", "==", bookingNr).get()
     return booking
@@ -303,4 +304,4 @@ async function getBookingForYear(year) {
 }
 
 
-module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
+module.exports = {getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
