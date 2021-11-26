@@ -179,6 +179,7 @@ async function getSalesman(salesmanId) {
   }
 }
 
+
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
 async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
   if (("" + salesmanId).substring(0, 1) == "6") {
@@ -208,11 +209,12 @@ async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
     return new error('This is not a salesmanId')
   }
 }
-//Mangler de gyldige parametre
-/*
-async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
-  const doc = await getBooking(bookingNr)
-  const updatedBooking = {
+
+
+async function updateBooking(year, bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
+  const doc = await getBooking(year, bookingNr)
+  if (doc.exists()) {
+    const updatedBooking = {
       grossPrice: grossPrice,
       contributionMargin: contributionMargin,
       salesman: salesman,
@@ -222,16 +224,19 @@ async function updateBooking(bookingNr, grossPrice, contributionMargin, salesman
       passengers: passengers,
       carRentals: carRentals,
       greenFees: greenFees
+    }
+
+    doc.set(updatedBooking)
+
+  } else {
+    console.log("booking does not exist")
   }
-  const bookingJson = JSON.stringify(updatedBooking)
-  await doc.set(bookingJson)
-  return doc
 }
 
 
-async function createBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees){
+async function createBooking(bookingNr, grossPrice, contributionMargin, salesman, reservations, transfers, customer, customers, carRentals, greenFees) {
   {
-    
+
     const booking = {
       bookingNr: bookingNr,
       grossPrice: grossPrice,
@@ -243,41 +248,59 @@ async function createBooking(bookingNr, grossPrice, contributionMargin, salesman
       passengers: passengers,
       carRentals: carRentals,
       greenFees: greenFees
+    }
+
   }
-  
-}
 
-  const bookingJson = JSON.stringify(booking)
-  
-const doc = await db.collection("bookings").doc()
-await doc.set(booking)
 
-return doc.id
+
+  const doc = await db.collection("bookings").doc(new Date().getFullYear())
+  await doc.set(booking)
+
+  return doc
 
 }
-//Henter specific booking på bookingNr
+/* 
+@params year, bookingNr. 
+year er hvilket år man vil finde booking med bookingNr
+
 */
-async function getBooking(bookingNr) {
+
+async function getBooking(year, bookingNr) {
   try {
-    const booking = await db.collection("bookings").doc(bookingNr).get()
+    const booking = await db.collection("bookings").doc(year).collection("bookings")
+      .where("bookingNr", "==", bookingNr).get()
     return booking
   } catch (e) {
     console.log(e.message)
   }
 }
-/*
+
 //Henter alle bookings fra firestore
-async function getBookings(){
-  try{
+async function getBookings() {
+  try {
     const querySnapshot = await db.collection("bookings").get();
     const docs = querySnapshot.docs
     console.log(docs.length)
-    return docs  
-  }catch(e){
+    return docs
+  } catch (e) {
     console.log(e.message)
   }
-  
+
+}
+/*
+@params year, hvilket år man vil hente alle bookinger fra
+*/
+async function getBookingForYear(year) {
+  try {
+    const querySnapshot = await db.collection("bookings").doc(year).collection("bookings").get();
+    const docs = querySnapshot.docs
+    return docs
+  } catch (e) {
+    console.log(e.message);
+  }
+
 }
 
-module.exports = {getBookings, saveBooking}*/
-module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman }
+
+module.exports = { getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }

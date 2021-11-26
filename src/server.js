@@ -12,6 +12,8 @@ app.set('view engine', 'pug')
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.json())
 app.use(session({ secret: 'ADCC58BA-6703-4795-B94D-6C562784DAEB', saveUninitialized: true, resave: true }))
+
+
 /*------------------Middleware End------------------*/
 
 
@@ -29,6 +31,7 @@ app.use(createBookingRoute)
 const loginRoute = require('../routes/loginRoute.js')
 app.use(loginRoute)
 const createSalesmanRoute = require('../routes/createSalesmanRoute.js')
+const { url } = require('inspector')
 app.use(createSalesmanRoute)
 
 /*------------------Routes End------------------*/
