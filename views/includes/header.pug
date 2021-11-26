@@ -1,6 +1,8 @@
+block append scripts
+    script(src="/script/header.js" defer)
 div#header
     h1#headerText GreenSoft
-    select(name="navBar" id="navigationBar")
+    select(name="navBar" id="navigationBar" onchange="navigateTo()")
         option(value="choose") -- Vælg --
         option(value="createBooking") Opret booking 
         option(value="editBooking") Rediger booking
@@ -8,4 +10,3 @@ div#header
         option(value="editPartner") Rediger samarbejdspartnere
         option(value="salesStats") Salgsstatistik
         option(value="customers") Kundekartotek
-        
