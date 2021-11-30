@@ -38,7 +38,7 @@ class Salesman {
         return this.#password;
     }
 
-    get bookinger() {
+    get bookings() {
         return this.#bookings;
     }
 

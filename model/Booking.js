@@ -27,16 +27,10 @@ class Booking {
         this.#bookingNr = bookingNr;
         this.#contributionMargin = 18.5;
         this.#travelDocuments = [];
-        if (customer instanceof Customer) {
-            this.#customer = customer;
-        } else {
-            throw new Error("Customer er ikke en instans af Customer")
-        }
-        if (salesman instanceof Salesman) {
-            this.#salesman = salesman;
-        } else {
-            throw new Error("Salesman er ikke en instans af Salesman")
-        }
+        this.#customer = customer;
+        customer.bookings.push(this);
+        this.#salesman = salesman;
+        salesman.bookings.push(this);
     }
 
     get bookingNr() {
@@ -208,7 +202,7 @@ class Booking {
         if (customer instanceof Customer) {
             if (this.#customer != customer) {
                 const oldCustomer = this.#customer;
-                oldCustomer.removeBooking(this);
+                if (oldCustomer != undefined) {oldCustomer.removeBooking(this);}
                 this.#customer = customer;
                 this.#customer.addBooking(this);
             }
@@ -222,7 +216,7 @@ class Booking {
         if (salesman instanceof Salesman) {
             if (this.#salesman != salesman) {
                 const oldSalesman = this.#salesman;
-                oldSalesman.removeBooking(this);
+                if (oldSalesman != undefined) {oldSalesman.removeBooking(this);}
                 this.#salesman = salesman;
                 this.#salesman.addBooking(this);
             }
@@ -254,5 +248,6 @@ class Booking {
         return this.calcGrossPrice() - this.calcNetPrice();
     }
 }
+
 
 module.exports = Booking;

@@ -1,27 +1,43 @@
+extends layout
+block css
+    link(rel='stylesheet', href='css/main.css', type='text/css' )
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/ico" href="images/greensoftlogo.ico"/>
+    script(src="/script/createBooking.js" defer)
 block content
   div#bookingpage
-    h1 Vælg Type:
-    select(name="booking" id="bookingtype")
-      option(value="choose") -- Vælg --
-      option(value="create") Opret
-      option(value="update") Opdater
-    div#createbooking
-      div#searchcontainer
-        input(name="search" type="text" placeholder="Fra:" class="airportSearch")
-        input(name="search" type="text" placeholder="Til:" class="airportSearch")
-        input(name="search" type="date" class="bookingDatePicker")
-        input(name="search" type="date" class="bookingDatePicker")
-        button#minusPersonCounter -
-        input(name="search" type="text" placeholder="Antal:" id="personCounter")
-        button#plusPersonCounter +
-        button#searchBookingButton Søg
-    div#searchResultContainer 
-      ul#searchResultList
-        lh Rejse
-          li Rejse 1
-          li Rejse 2    
-          li Rejse 3
-        lh Rejsebeskrivelse 
-          li Beskrivelse af Rejse 1
-          li Beskrivelse af Rejse 2
-          li Beskrivelse af Rejse 3
+      h1 Vælg Type:
+      select(name="booking" id="bookingtype")
+          option(value="choose") -- Vælg --
+          option(value="create") Opret
+          option(value="update") Opdater
+      div#createbooking
+          div(class = "resCard")
+              button(class = "addReservationButton") +
+
+      div(id = "resModal" class = "modal")
+          div(class = "resModalContent")
+              select(name="reservation" id="reservationType" onchange = "renderModal()")
+                  option(value="choose") -- Vælg --
+                  option(value="Hotel") Hotel
+                  option(value="Passager") Passager
+                  option(value="Flyafgang") Flyafgang
+                  option(value="Transfer") Transfer
+                  option(value="Billeje") Billeje
+                  option(value="Greenfee") Greenfee
+              div(class="companyPickerDropdown")
+                  button(class="companyPickerButton") Dropdown
+                  div(class="companyPickerDropdownContent")
+                      <input type="text" placeholder="Search.." id="companyInput" onkeyup="filterFunction()">
+                          <a href="#about">About</a>
+                          <a href="#base">Base</a>
+                          <a href="#blog">Blog</a>
+                          <a href="#contact">Contact</a>
+                          <a href="#custom">Custom</a>
+                          <a href="#support">Support</a>
+                          <a href="#tools">Tools</a>
+              span(class = "closeResModal") &times;
+              div(class = "renderContent")
+              button(class = "confirmResButton") Bekræft
