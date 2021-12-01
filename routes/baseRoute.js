@@ -13,7 +13,7 @@ router.get('/*', (req, resp, next) => {
 })
 //  router.get('/', (req, resp) => {
 // //         // if(req.session.userId){
-        // resp.render('../views/index', {loggedIn: true, userName: req.session.userName})
+// resp.render('../views/index', {loggedIn: true, userName: req.session.userName})
 // //         // } else {
 // //         //         resp.render('../views/loginpage', {loggedIn : false})
 // //         // }
