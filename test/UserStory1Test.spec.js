@@ -225,7 +225,7 @@ describe('Unit test af Booking klasse', () => {
 
 
         //preparation af booking med forbindelser til contracts
-        testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotelCompany)
+        testHotelReservation = testBooking.createHotelReservation("ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), testHotelCompany)
         testHotelReservation.addContractToChosenContracts(testContractSingleRoom);
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
 
