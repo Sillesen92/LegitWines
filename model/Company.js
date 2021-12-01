@@ -259,6 +259,11 @@ class Company {
         }
     }
     //Bør man have en updateContract?
+
+    //toString til company
+    toString() {
+        return this.#name;
+    };
 }
 
 module.exports = Company;
