@@ -573,10 +573,12 @@ button:hover.greenButton {
     flex-direction: row;
     flex-wrap: wrap;
     border: 1px solid black;
-    position:absolute;
+    position:bottom;
     bottom:0;
     height:60px;
     width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
     box-sizing: border-box;
 }
 
