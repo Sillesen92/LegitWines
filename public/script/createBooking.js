@@ -73,6 +73,7 @@ async function renderModal() {
                     }
                 });
             }
+
             //datepicker indtjekningsdato
             const dateIn = document.createElement("input")
             dateIn.type = "date"
@@ -125,6 +126,33 @@ async function renderModal() {
             renderContent.append(gender)
 
         } else if (resDropdown.value == "Flyafgang") {
+            //lig flyafgange ind i dropdown
+            const response = await fetch("/getCompanies", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify({ companyType: 'Flyafgang' })
+            })
+            if (response.ok) {
+                const resp = await response.json();
+                resp.forEach(element => {
+                    const a = document.createElement("A")
+                    document.querySelector(".companyPickerDropdownContent").appendChild(a)
+                    a.href = `#${element.companyName}`
+                    a.innerHTML = `${element.companyName}`
+                    a.onclick = () => {
+                        const contracts = document.querySelector("#contractPicker");
+                        contracts.innerHTML = ""
+                        element.contracts.forEach(contract => {
+                            //check om contract er indenfor datoerne
+                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
+                        });
+                    }
+                });
+            }
+
             //dropdown til tur derned eller retur
             const turRetur = document.createElement("select")
             turRetur.id = "turReturPicker"
@@ -153,6 +181,32 @@ async function renderModal() {
             renderContent.append(contracts)
 
         } else if (resDropdown.value == "Transfer") {
+            //lig transfer ind i dropdown
+            const response = await fetch("/getCompanies", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify({ companyType: 'Transfer' })
+            })
+            if (response.ok) {
+                const resp = await response.json();
+                resp.forEach(element => {
+                    const a = document.createElement("A")
+                    document.querySelector(".companyPickerDropdownContent").appendChild(a)
+                    a.href = `#${element.companyName}`
+                    a.innerHTML = `${element.companyName}`
+                    a.onclick = () => {
+                        const contracts = document.querySelector("#contractPicker");
+                        contracts.innerHTML = ""
+                        element.contracts.forEach(contract => {
+                            //check om contract er indenfor datoerne
+                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
+                        });
+                    }
+                });
+            }
             //Dato og tid via datetimepicker
             const date = document.createElement("input")
             date.type = "datetime-local"
@@ -174,6 +228,32 @@ async function renderModal() {
             renderContent.append(contracts)
         }
         else if (resDropdown.value == "Billeje") {
+            //lig billejer ind i dropdown
+            const response = await fetch("/getCompanies", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify({ companyType: 'Billeje' })
+            })
+            if (response.ok) {
+                const resp = await response.json();
+                resp.forEach(element => {
+                    const a = document.createElement("A")
+                    document.querySelector(".companyPickerDropdownContent").appendChild(a)
+                    a.href = `#${element.companyName}`
+                    a.innerHTML = `${element.companyName}`
+                    a.onclick = () => {
+                        const contracts = document.querySelector("#contractPicker");
+                        contracts.innerHTML = ""
+                        element.contracts.forEach(contract => {
+                            //check om contract er indenfor datoerne
+                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
+                        });
+                    }
+                });
+            }
             //datepicker dato fra
             const dateFrom = document.createElement("input")
             dateFrom.type = "date"
@@ -195,6 +275,32 @@ async function renderModal() {
             renderContent.append(contracts)
         }
         else if (resDropdown.value == "Greenfee") {
+            //lig transfer ind i dropdown
+            const response = await fetch("/getCompanies", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "application/json"
+                },
+                body: JSON.stringify({ companyType: 'Greenfee' })
+            })
+            if (response.ok) {
+                const resp = await response.json();
+                resp.forEach(element => {
+                    const a = document.createElement("A")
+                    document.querySelector(".companyPickerDropdownContent").appendChild(a)
+                    a.href = `#${element.companyName}`
+                    a.innerHTML = `${element.companyName}`
+                    a.onclick = () => {
+                        const contracts = document.querySelector("#contractPicker");
+                        contracts.innerHTML = ""
+                        element.contracts.forEach(contract => {
+                            //check om contract er indenfor datoerne
+                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
+                        });
+                    }
+                });
+            }
             //Dato og tid via datetimepicker
             const date = document.createElement("input")
             date.type = "datetime-local"
