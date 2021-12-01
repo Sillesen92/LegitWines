@@ -44,9 +44,9 @@ function filterFunction() {
 }
 
 //viser nødvendige informationer for opret hotel
-function renderModal(){
+function renderModal() {
     renderContent.innerHTML = ""
-    if(resDropdown.value == "Hotel"){
+    if (resDropdown.value == "Hotel") {
         //datepicker indtjekningsdato
         const dateIn = document.createElement("input")
         dateIn.type = "date"
@@ -81,13 +81,15 @@ function renderModal(){
         contracts.appendChild(new Option("contract 2"));
         renderContent.append(contracts)
 
-    } else if(resDropdown.value == "Passager"){
+        //Tilføjelse af hoteller til dropdown
+
+    } else if (resDropdown.value == "Passager") {
         //tekstfelt til fornavn
         const firstName = document.createElement("input")
         firstName.id = "firstName"
         firstName.type = "text"
         renderContent.append(firstName);
-        
+
         //tekstfelt til efternavn
         const lastName = document.createElement("input")
         lastName.id = "lastName"
@@ -101,7 +103,7 @@ function renderModal(){
         gender.appendChild(new Option("Kvinde"))
         renderContent.append(gender)
 
-    }else if(resDropdown.value == "Flyafgang"){
+    } else if (resDropdown.value == "Flyafgang") {
         //dropdown til tur derned eller retur
         const turRetur = document.createElement("select")
         turRetur.id = "turReturPicker"
@@ -129,7 +131,7 @@ function renderModal(){
         contracts.appendChild(new Option("contract 2"));
         renderContent.append(contracts)
 
-    }else if(resDropdown.value == "Transfer"){
+    } else if (resDropdown.value == "Transfer") {
         //Dato og tid via datetimepicker
         const date = document.createElement("input")
         date.type = "datetime-local"
@@ -150,7 +152,7 @@ function renderModal(){
         contracts.appendChild(new Option("contract 2"));
         renderContent.append(contracts)
     }
-    else if(resDropdown.value == "Billeje"){
+    else if (resDropdown.value == "Billeje") {
         //datepicker dato fra
         const dateFrom = document.createElement("input")
         dateFrom.type = "date"
@@ -171,7 +173,7 @@ function renderModal(){
         contracts.appendChild(new Option("contract 2"));
         renderContent.append(contracts)
     }
-    else if(resDropdown.value == "Greenfee"){
+    else if (resDropdown.value == "Greenfee") {
         //Dato og tid via datetimepicker
         const date = document.createElement("input")
         date.type = "datetime-local"
@@ -186,5 +188,5 @@ function renderModal(){
         contracts.appendChild(new Option("contract 2"));
         renderContent.append(contracts)
     }
-    else{}
+    else { }
 }
