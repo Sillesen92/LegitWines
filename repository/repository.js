@@ -262,9 +262,11 @@ year er hvilket år man vil finde booking med bookingNr
 
 async function getBooking(bookingNr) {
   try {
-    const year = bookingNr.substring(0, 3);
+    const year = bookingNr.substring(0, 4);
+
     const booking = await db.collection("bookings").doc(year).collection("bookings")
-      .where("bookingNr", "==", bookingNr).get()
+      .doc(bookingNr).get()
+
     return booking
   } catch (e) {
     console.log(e.message)

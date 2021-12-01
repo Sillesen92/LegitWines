@@ -1,5 +1,11 @@
 extends layout
-content block
+block css
+  
+  link(rel='stylesheet', href='css/updatebooking.css', type='text/css' )  
+block append scripts  
+  script(src="/script/updatebooking.js" defer)
+  
+block content 
   div#bookingpage
     h1 Vælg Type:
     select(name="booking" id="bookingtype")
@@ -10,7 +16,8 @@ content block
       div#searchBookingForUpdate
         h2 Søg:
         input(name="search" type="text" placeholder="Booking" id="updateBookingSearchInput")
-        button#updateBookingSearchButton
+        button#updateBookingSearchButton Søg
       div#bookingContains
-        div#infoArea
-          textarea(name="bookingInfo" type= "text" id="bookingInfoArea")
+        div(class = "resInfo")
+          input(name="salesman" type="text" id="salesmanID")
+          button(class = "editRes")  

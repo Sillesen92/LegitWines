@@ -12,8 +12,9 @@ router.post('/editBooking', async (req, resp) => {
                 const { bookingNr } = req.body;
                 /*TODO: Metode til håndtering af redigering af booking*/
                 const booking = await bookingController.getBooking(bookingNr)
+                console.log(new Date().getFullYear())
                 console.log(booking.data())
-                if (booking.data().bookingNr == bookingNr) {
+                if (booking) {
                         const bookingToSend = {
                                 bookingNr: booking.data().bookingNr,
                                 salesman: booking.data().salesman,

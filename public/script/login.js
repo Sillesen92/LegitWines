@@ -10,7 +10,7 @@ document.querySelector("#loginForm").onclick = async (event) => {
                 "content-type": "application/json",
                 "accept": "application/json"
             },
-            body: JSON.stringify({name: userName(), password: password()})
+            body: JSON.stringify({ name: userName(), password: password() })
         })
         if (response.ok) {
             window.location.href = "/createbooking"
