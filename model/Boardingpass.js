@@ -1,19 +1,19 @@
 //Klasse med følgende forbindelser:
-//Dobbeltrettet 0..* Flight
-const Flight = require('./Flight');
+//Dobbeltrettet 1 Company
+const Company = require('./Company');
 const Contract = require('./Contract')
 class Boardingpass {
     #firstName
     #lastName
     #gender
-    #flight
+    #company
     #chosenContracts
 
-    constructor(firstName, lastName, gender, flight) {
+    constructor(firstName, lastName, gender, company) {
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gender = gender;
-        this.#flight = flight;
+        this.#company = company;
         this.#chosenContracts = [];
     }
 
@@ -29,8 +29,8 @@ class Boardingpass {
         return this.#gender;
     }
 
-    get flight() {
-        return this.#flight;
+    get company() {
+        return this.#company;
     }
 
     get chosenContracts() {
@@ -49,18 +49,18 @@ class Boardingpass {
         this.#gender = gender;
     }
 
-    setFlight(flight) {
-        if (flight instanceof Flight) {
-            if (this.#flight != flight) {
-                const oldFlight = this.#flight;
-                oldFlight.removeFlight(this);
-                this.#flight = flight;
-                this.#flight.addBoardingpass(this);
+    setCompany(company) {
+        if (company instanceof Company) {
+            if (this.#company != company) {
+                const oldCompany = this.#company;
+                oldCompany.removeHotelReservation(this);
+                this.#company = company;
+                this.#company.addHotelReservation(this);
             } else {
-                throw new Error("Du skal angive en flyafgang, der er forskellig fra den flyafgang du allerede har tilknyttet");
+                throw new Error("Du skal angive en virksomhed, der er forskellig fra den virksomhed du allerede har tilknyttet hotelreservationen");
             }
         } else {
-            throw new Error("Du skal medgive et object af typen Flight")
+            this.#company = undefined;
         }
     }
 
