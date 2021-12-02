@@ -161,6 +161,20 @@ button:hover.greenButton {
     font-family: Poppins, Roboto, "Helvetica Neue";
 }
 
+button.redButton {
+    background-color: darkred;
+    color: #FEFFFE;
+    border: 3px solid black;
+    font-size: 20px;
+    border-radius: 15 px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
+
+button:hover.redButton{
+    background-color: #FEFFFE;
+    color: darkred
+}
+
 #frontpagebuttons button {
     background-color: #276954;
     color: #FEFFFE;
