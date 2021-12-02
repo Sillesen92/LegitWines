@@ -10,11 +10,11 @@ router.get('/login', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    req.sessionID.destroy(err => {
+    req.session.destroy(err => {
         if (err) {
             console.log(err)
         } else {
-            response.redirect('/')
+            res.redirect('/')
         }
     })
 })

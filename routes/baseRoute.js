@@ -12,4 +12,8 @@ router.get('/*', (req, resp, next) => {
     }
 })
 
+router.get('/', (req, resp, next) => {
+    resp.render('../views/frontPage.pug', { loggedIn: false, admin: false });
+})
+
 module.exports = router
