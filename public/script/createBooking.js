@@ -4,6 +4,7 @@ const modalContent = document.querySelector(".resModalContent")
 const renderContent = document.querySelector(".renderContent")
 const span = document.querySelector(".closeResModal");
 const resDropdown = document.querySelector("#reservationType")
+let publicContracts = []
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
     modal.style.display = 'block';
@@ -42,6 +43,13 @@ function filterFunction() {
     }
 }
 
+function addContract(id) {
+    let i = id.split('-')
+    console.log(parseInt(i))
+    const contract = publicContracts[parseInt(i[1])]
+    console.log(contract)
+}
+
 //viser nødvendige informationer for opret hotel
 async function renderModal() {
     try {
@@ -58,6 +66,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -65,11 +74,23 @@ async function renderModal() {
                     a.innerHTML = `${element.companyName}`
                     a.onclick = () => {
                         const contracts = document.querySelector("#contractPicker");
-                        contracts.innerHTML = ""
+                        contracts.innerHTML = "<div> Kontrakter </div>"
+                        let index = 0
+                        publicContracts = []
                         element.contracts.forEach(contract => {
                             //check om contract er indenfor datoerne
-                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
-                        });
+                            publicContracts.push({
+                                description: contract.description,
+                                startDate: contract.startDate,
+                                endDate: contract.endDate,
+                                netPrice: contract.netPrice
+                            })
+                            console.log(contract)
+                            contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
+                            index++
+
+                        })
+
                     }
                 });
             }
@@ -101,11 +122,14 @@ async function renderModal() {
             renderContent.append(commentInput)
 
             //dropdown for kontrakter
-            const contracts = document.createElement("select")
+            const contracts = document.createElement("div")
             contracts.id = "contractPicker"
             renderContent.append(contracts)
+            const title = document.createElement('div')
+            title.innerHTML = "Kontrakter"
+            contracts.appendChild(title)
 
-        } else if (resDropdown.value == "Passager") {
+        } else if (resDropdown.value == "BoardingPass") {
             //tekstfelt til fornavn
             const firstName = document.createElement("input")
             firstName.id = "firstName"
@@ -137,6 +161,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -192,6 +217,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -239,6 +265,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -286,6 +313,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)

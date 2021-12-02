@@ -3,11 +3,11 @@ include salesman
 block append css
     link(rel='stylesheet', href='/css/salesStats.css', type='text/css')
 block content
-    h1 Vælg en sælger for at se personlig salgs statistik:
+    h1 Vælg en sælger for at se personlig salgsstatistik:
     div#salesmen
         table#salesmenTable
             each salesman in salesmen
-                +salesman(salesman.data().id,salesman.data().name)
+                +salesman(salesman.id,salesman.name)
             tr.all(onclick=`location.href='/salesStats'`)
                 td
                     label Alle
