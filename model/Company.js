@@ -7,8 +7,8 @@ const CarRental = require('../model/CarRental');
 const Transfer = require('../model/Transfer');
 //Dobbeltrettet komposition 0..* Greenfee
 const Greenfee = require('../model/Greenfee');
-//Dobbeltrettet 0..* Flight
-const Flight = require('../model/Flight');
+//Dobbeltrettet 0..* Boardingpass
+const Boardingpass = require('../model/Boardingpass');
 //Enkeltrettet komposition 0..* Contract
 const Contract = require('../model/Contract')
 class Company {
@@ -21,7 +21,7 @@ class Company {
     #carRentals
     #transfers
     #greenfees
-    #flights
+    #boardingpasses
     #contracts
 
     constructor(name, address, email, phone, businessType) {
@@ -35,7 +35,7 @@ class Company {
         this.#carRentals = [];
         this.#transfers = [];
         this.#greenfees = [];
-        this.#flights = [];
+        this.#boardingpasses = [];
         this.#contracts = [];
     }
 
@@ -75,8 +75,8 @@ class Company {
         return this.#greenfees;
     }
 
-    get flights() {
-        return this.#flights;
+    get boardingpasses() {
+        return this.#boardingpasses;
     }
 
     get contracts() {
@@ -205,11 +205,11 @@ class Company {
 
     //Tilføjer en flyafgang til arrayet af flights,
     //hvis ikke den allerede findes i arrayet.
-    addFlight(flight) {
-        if (flight instanceof Flight) {
-            if (!this.#flights.includes(flight)) {
-                this.#flights.push(flight);
-                flight.setCompany(this);
+    addBoardingpass(boardingpass) {
+        if (boardingpass instanceof Boardingpass) {
+            if (!this.#boardingpasses.includes(boardingpass)) {
+                this.#boardingpasses.push(boardingpass);
+                boardingpass.setCompany(this);
             }
         } else {
             throw new Error("flight er ikke en instans af Flight");
@@ -218,15 +218,15 @@ class Company {
 
     //Fjerner en flyafgang i arrayet af flights,
     //hvis denne er tilføjet til dette.
-    removeFlight(flight) {
-        if (flight instanceof Flight) {
-            if (this.#flights.includes(flight)) {
-                let i = this.#flights.indexOf(flight);
-                for (let index = i; index < this.#flights.length - 1; index++) {
-                    this.#flights[index] = this.#flights[index + 1];
+    removeBoardingpass(boardingpass) {
+        if (boardingpass instanceof Boardingpass) {
+            if (this.#boardingpasses.includes(boardingpass)) {
+                let i = this.#boardingpasses.indexOf(boardingpass);
+                for (let index = i; index < this.#boardingpasses.length - 1; index++) {
+                    this.#boardingpasses[index] = this.#boardingpasses[index + 1];
                 }
-                this.#flights.length = this.#flights.length - 1;
-                flight.setCompany(undefined);
+                this.#boardingpasses.length = this.#boardingpasses.length - 1;
+                boardingpass.setCompany(undefined);
             }
         } else {
             throw new Error("flight er ikke en instans af Flight");
@@ -259,6 +259,11 @@ class Company {
         }
     }
     //Bør man have en updateContract?
+
+    //toString til company
+    toString() {
+        return this.#name;
+    };
 }
 
 module.exports = Company;
