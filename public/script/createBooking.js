@@ -42,6 +42,8 @@ function filterFunction() {
     }
 }
 
+function addContract()
+
 //viser nødvendige informationer for opret hotel
 async function renderModal() {
     try {
@@ -58,6 +60,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -68,7 +71,7 @@ async function renderModal() {
                         contracts.innerHTML = ""
                         element.contracts.forEach(contract => {
                             //check om contract er indenfor datoerne
-                            contracts.innerHTML += `<option>${contract.description} + ${contract.netPrice}kr.</option>`;
+                            contracts.innerHTML += `<option onclick = >${contract.description} + ${contract.netPrice}kr.</option>`;
                         });
                     }
                 });
@@ -105,7 +108,7 @@ async function renderModal() {
             contracts.id = "contractPicker"
             renderContent.append(contracts)
 
-        } else if (resDropdown.value == "Passager") {
+        } else if (resDropdown.value == "BoardingPass") {
             //tekstfelt til fornavn
             const firstName = document.createElement("input")
             firstName.id = "firstName"
@@ -137,6 +140,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -192,6 +196,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -239,6 +244,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
@@ -286,6 +292,7 @@ async function renderModal() {
             })
             if (response.ok) {
                 const resp = await response.json();
+                document.querySelector(".companyPickerDropdownContent").innerHTML = ""
                 resp.forEach(element => {
                     const a = document.createElement("A")
                     document.querySelector(".companyPickerDropdownContent").appendChild(a)
