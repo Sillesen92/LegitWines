@@ -88,6 +88,17 @@ p {
 /* Main CSS */
 
 /* Main CSS - Forside */
+.frontPageLogo {
+    display: flex;
+    margin-left:  auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.welcome{
+    text-align: center;
+}
+
 #greensoftlogo {
     width: 340px;
     height: 350px;

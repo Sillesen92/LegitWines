@@ -1,15 +1,8 @@
 const express = require('express');
 const router = express.Router();
-router.get('/*', (req, resp, next) => {
-    if (req.url != "/login" && req.url != "/") {
-        if (req.session.userId == undefined) {
-            resp.redirect("/login")
-        } else {
-            next()
-        }
-    } else {
-        next()
-    }
+
+router.get('/', (req, resp, next) => {
+    resp.render('../views/frontPage.pug');
 })
 //  router.get('/', (req, resp) => {
 // //         // if(req.session.userId){
