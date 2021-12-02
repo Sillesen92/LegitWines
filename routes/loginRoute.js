@@ -31,6 +31,7 @@ router.post('/login', async (req, res) => {
             console.log(user.data().salesmanSalesId)
             req.session.userId = user.data().salesmanSalesId
             req.session.name = user.data().salesmanName
+            req.session.admin = user.data().administrator
             console.log(req.session.name)
             console.log(req.session.userId)
             req.session.isAuth = true;

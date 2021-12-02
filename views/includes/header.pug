@@ -2,11 +2,17 @@ block append scripts
     script(src="/script/header.js" defer)
 div#header
     h1#headerText GreenSoft
-    select(name="navBar" id="navigationBar" onchange="navigateTo()")
-        option(value="choose") -- Vælg --
-        option(value="createBooking") Opret booking 
-        option(value="editBooking") Rediger booking
-        option(value="createPartner") Opret samarbejdspartnere
-        option(value="editPartner") Rediger samarbejdspartnere
-        option(value="salesStats") Salgsstatistik
-        option(value="customers") Kundekartotek
+    if loggedIn
+        select(name="navBar" id="navigationBar" onchange="navigateTo()")
+            option(value="choose") -- Vælg --
+            option(value="createBooking") Opret booking 
+            option(value="editBooking") Rediger booking
+            if admin
+                option(value="createPartner") Opret samarbejdspartnere
+                option(value="editPartner") Rediger samarbejdspartnere
+                option(value="salesStats") Salgsstatistik
+                option(value="customers") Kundekartotek
+                option(value="createSalesman") Opret ny sælger
+                option(value="editSalesman") Rediger sælger
+    else 
+        button.greenButton(onclick="location.href='/login'") Log ind

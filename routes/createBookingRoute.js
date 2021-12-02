@@ -4,7 +4,7 @@ const companyController = require('../controller/partners')
 const router = express.Router();
 
 router.get('/createBooking', async (req, resp) => {
-        resp.render('createBooking', { companies: [] })
+        resp.render('createBooking', { companies: [], loggedIn: true, admin: req.session.admin })
 })
 
 router.post('/createBooking', async (req, resp) => {
