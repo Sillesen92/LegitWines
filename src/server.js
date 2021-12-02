@@ -34,6 +34,9 @@ const createSalesmanRoute = require('../routes/createSalesmanRoute.js')
 const { url } = require('inspector')
 app.use(createSalesmanRoute)
 
+const salesStatsRoute = require('../routes/salesStatRoute.js')
+app.use(salesStatsRoute);
+
 /*------------------Routes End------------------*/
 
 app.listen(PORT, () => console.log(`Server listening on port ${PORT}`))

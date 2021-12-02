@@ -179,6 +179,12 @@ async function getSalesman(salesmanId) {
   }
 }
 
+async function getAllSalesmen() {
+  const doc = db.collection('salesmen');
+  const salesmen = await doc.get();
+  return salesmen;
+}
+
 
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
 async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
@@ -299,4 +305,4 @@ async function getBookingForYear(year) {
 }
 
 
-module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
+module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking, getAllSalesmen }
