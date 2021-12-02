@@ -6,7 +6,6 @@ const repository = require('../repository/repository')
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
-const Flight = require('../model/Flight')
 const Boardingpass = require('../model/Boardingpass')
 jest.mock('../repository/repository')
 

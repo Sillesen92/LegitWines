@@ -220,13 +220,15 @@ async function updateBooking(bookingNr, salesman, customer, travelDocuments) {
       travelDocuments: travelDocuments
     }
 
-    doc.set(updatedBooking)
+    doc.update(updatedBooking)
 
   } else {
     console.log("booking does not exist")
   }
 }
-
+/*
+Opretter booking, dernæst placeres travelDocuments i en subcollection på booking
+*/
 
 async function createBooking(salesman, customer, travelDocuments) {
 
@@ -235,28 +237,25 @@ async function createBooking(salesman, customer, travelDocuments) {
   const count = await (await col.get()).data().count;
   const bookingNr = year + count;
 
-
-
-
-
   const booking = {
     bookingNr: bookingNr,
     salesman: salesman,
-    customer: customer,
-    travelDocuments: travelDocuments
+    customer: customer
   }
-
-
 
   const doc = await db.collection("bookings").doc(year)
   await doc.set(booking)
+  const bookingToAddDoc = await getBooking(bookingNr)
+  for (i = 0; i < travelDocuments.length; i++) {
+    bookingToAddDoc.collection("travelDocuments").add(travelDocuments[i])
+  }
 
   return doc
 
 }
 /* 
-@params year, bookingNr. 
-year er hvilket år man vil finde booking med bookingNr
+@params bookingNr
+finder booking med bookingNr
 
 */
 
