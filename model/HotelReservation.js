@@ -3,33 +3,19 @@
 const Company = require('../model/Company');
 const Contract = require('../model/Contract')
 class HotelReservation {
-    #nrSingleRooms
-    #nrDoubleRooms
     #comment
     #checkinDate
     #checkoutDate
-    #pension
     //company er nullable ::: Kommentar JF: Company må da ikke være nullable? En hotelreservation skal have et company jf. design diagram
     #company
     #chosenContracts
 
-    constructor(nrSingleRooms, nrDoubleRooms, comment, checkinDate, checkoutDate, pension, company) {
-        this.#nrSingleRooms = nrSingleRooms;
-        this.#nrDoubleRooms = nrDoubleRooms;
+    constructor(comment, checkinDate, checkoutDate, company) {
         this.#comment = comment;
         this.#checkinDate = checkinDate;
         this.#checkoutDate = checkoutDate;
-        this.#pension = pension;
         this.#company = company;
         this.#chosenContracts = [];
-    }
-
-    get nrSingleRooms() {
-        return this.#nrSingleRooms;
-    }
-
-    get nrDoubleRooms() {
-        return this.#nrDoubleRooms;
     }
 
     get comment() {
@@ -44,24 +30,12 @@ class HotelReservation {
         return this.#checkoutDate;
     }
 
-    get pension() {
-        return this.#pension;
-    }
-
     get company() {
         return this.#company;
     }
 
     get chosenContracts() {
         return this.#chosenContracts;
-    }
-
-    set nrSingleRooms(nrSingleRooms) {
-        this.#nrSingleRooms = nrSingleRooms;
-    }
-
-    set nrDoubleRooms(nrDoubleRooms) {
-        this.#nrDoubleRooms = nrDoubleRooms;
     }
 
     set comment(comment) {
@@ -74,10 +48,6 @@ class HotelReservation {
 
     set checkoutDate(checkoutDate) {
         this.#checkoutDate = checkoutDate;
-    }
-
-    set pension(pension) {
-        this.#pension = pension;
     }
 
     //Sætter Company til et andet Company, denne må ikke være null!

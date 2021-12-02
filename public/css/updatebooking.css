@@ -109,13 +109,14 @@ p {
 }
 
 /*Global button class?*/
-button.greenButton {
-    background-color: #276954;
+#updateBookingSearchButton {
+    background-color: #27695486;
     color: #FEFFFE;
     font-size: 20px;
     border: 3px solid #276954;
     border-radius: 15px;
     font-family: Poppins, Roboto, "Helvetica Neue";
+    
 }
 
 button:hover.greenButton {
@@ -126,8 +127,17 @@ button:hover.greenButton {
     border-radius: 15px;
     font-family: Poppins, Roboto, "Helvetica Neue";
 }
+#updateBookingSearchInput{
+    padding-top: 20;
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 20px;
+    border: 3px solid #276954;
+    border-radius: 15px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+}
 
-#frontpagebuttons button {
+/* #frontpagebuttons button {
     background-color: #276954;
     color: #FEFFFE;
     font-size: 28px;
@@ -137,9 +147,9 @@ button:hover.greenButton {
     border-radius: 25px;
     margin: 10px;
     font-family: Poppins, Roboto, "Helvetica Neue";
-}
+} */
 
-#frontpagebuttons button:hover {
+/* #frontpagebuttons button:hover {
     background-color: #FEFFFE;
     color: #276954;
     border: 3px solid #276954;
@@ -149,7 +159,7 @@ button:hover.greenButton {
     border-radius: 25px;
     margin: 10px;
     font-family: Poppins, Roboto, "Helvetica Neue";
-}
+} */
 
 /* Main CSS - Bookingside */
 

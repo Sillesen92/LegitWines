@@ -6,7 +6,6 @@ const repository = require('../repository/repository')
 const Company = require('../model/Company')
 const Contract = require('../model/Contract')
 const HotelReservation = require('../model/HotelReservation')
-const Flight = require('../model/Flight')
 const Boardingpass = require('../model/Boardingpass')
 jest.mock('../repository/repository')
 
@@ -25,10 +24,10 @@ let testContractSingleRoom = null;
 let testContractDoubleRoom = null;
 // test hotel reservation
 let testHotelReservation = null;
-// test Flight reservation
-let testFlight1 = null;
 // test airline company contracts
-let testAirlineContract1 = null;
+let testFlightContract1 = null;
+let testFlightContract2 = null;
+
 let testAirlineContract2 = null;
 let testAirlineContract3 = null;
 let testAirlineContract4 = null;
@@ -151,32 +150,26 @@ describe('Unit test af Booking klasse', () => {
         testContractDoubleRoom = testHotelCompany.createContract(roomTypeDouble, startDateDouble, endDateDouble, priceDouble);
 
         // preparation of airline contracts
-        testAirlineContract1 = testAirlineCompany.createContract("Pris", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
         testAirlineContract2 = testAirlineCompany.createContract("Mad", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
         testAirlineContract3 = testAirlineCompany.createContract("Golftaske", new Date(2021, 0, 1), new Date(2021, 1, 1), 600)
         testAirlineContract4 = testAirlineCompany.createContract("Baggage", new Date(2021, 0, 1), new Date(2021, 1, 1), 200)
 
-        // preparation of Flight Reservation
-        const billund = "BLL";
-        const sevilla = "SVQ";
-        const flightNr = "JS507"
-
-        testFlight1 = new Flight(billund, new Date(2021, 11, 16, 6, 30), sevilla, flightNr, testAirlineCompany);
-        testFlight2 = new Flight(sevilla, new Date(2021, 11, 18, 16, 0), billund, flightNr, testAirlineCompany);
+        testFlightContract1 = testAirlineCompany.createContract("BLL-SVQ", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
+        testFlightContract2 = testAirlineCompany.createContract("SVQ-BLL", new Date(2021, 0, 1), new Date(2021, 1, 1), 1500)
 
         // preparation of boardingpasses
         const firstName1 = "Bolette";
         const lastName1 = "Knudsen";
         const gender1 = "F"
         // boardingpass to flight abroad
-        testBoardingpass1 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testFlight1);
-        testBoardingpass1.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass1 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testAirlineCompany);
+        testBoardingpass1.addContractToChosenContracts(testFlightContract1);
         testBoardingpass1.addContractToChosenContracts(testAirlineContract3);
         testBoardingpass1.addContractToChosenContracts(testAirlineContract4);
 
         // boardingpass to flight home
-        testBoardingpass4 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testFlight2);
-        testBoardingpass4.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass4 = testBooking.createBoardingpass(firstName1, lastName1, gender1, testAirlineCompany);
+        testBoardingpass4.addContractToChosenContracts(testFlightContract2)
         testBoardingpass4.addContractToChosenContracts(testAirlineContract3);
         testBoardingpass4.addContractToChosenContracts(testAirlineContract4);
 
@@ -184,14 +177,14 @@ describe('Unit test af Booking klasse', () => {
         const lastName2 = "Phlüffer";
         const gender2 = "F"
         //boardpass to flight abroad
-        testBoardingpass2 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testFlight1);
-        testBoardingpass2.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass2 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testAirlineCompany);
+        testBoardingpass2.addContractToChosenContracts(testFlightContract1)
         testBoardingpass2.addContractToChosenContracts(testAirlineContract2);
         testBoardingpass2.addContractToChosenContracts(testAirlineContract4);
 
         //boardingass to flight home
-        testBoardingpass5 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testFlight2)
-        testBoardingpass5.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass5 = testBooking.createBoardingpass(firstName2, lastName2, gender2, testAirlineCompany);
+        testBoardingpass5.addContractToChosenContracts(testFlightContract2);
         testBoardingpass5.addContractToChosenContracts(testAirlineContract2);
         testBoardingpass5.addContractToChosenContracts(testAirlineContract4);
 
@@ -199,12 +192,12 @@ describe('Unit test af Booking klasse', () => {
         const firstName3 = "Torben";
         const lastName3 = "Tramper";
         const gender3 = "M"
-        testBoardingpass3 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testFlight1)
-        testBoardingpass3.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass3 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testAirlineCompany)
+        testBoardingpass3.addContractToChosenContracts(testFlightContract1);
         testBoardingpass3.addContractToChosenContracts(testAirlineContract3);
 
-        testBoardingpass6 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testFlight2)
-        testBoardingpass6.addContractToChosenContracts(testAirlineContract1);
+        testBoardingpass6 = testBooking.createBoardingpass(firstName3, lastName3, gender3, testAirlineCompany)
+        testBoardingpass6.addContractToChosenContracts(testFlightContract2);
         testBoardingpass6.addContractToChosenContracts(testAirlineContract3);
 
 
@@ -225,7 +218,7 @@ describe('Unit test af Booking klasse', () => {
 
 
         //preparation af booking med forbindelser til contracts
-        testHotelReservation = testBooking.createHotelReservation(1, 1, "ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), "FUCK", testHotelCompany)
+        testHotelReservation = testBooking.createHotelReservation("ingen kommentar", new Date(2021, 10, 16), new Date(2021, 10, 18), testHotelCompany)
         testHotelReservation.addContractToChosenContracts(testContractSingleRoom);
         testHotelReservation.addContractToChosenContracts(testContractDoubleRoom);
 
