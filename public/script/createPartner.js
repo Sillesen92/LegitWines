@@ -13,7 +13,7 @@ var selectedContract;
 const contracts = []
 const message = document.querySelector("#message")
 
-document.querySelector("#createPartner").onclick = async (event) => {
+document.querySelector("#savePartner").onclick = async (event) => {
     try {
         const response = await fetch("/createPartner", {
             method: "POST",

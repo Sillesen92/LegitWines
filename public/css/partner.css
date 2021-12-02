@@ -1,8 +1,8 @@
 
 /*Input form til partner*/
 .partner{
-    margin-left: 50px;
-    display: block;
+    display: flex;
+    flex-direction: column;
     float:left;
 }
 
@@ -22,8 +22,13 @@
 }
 
 .formField{
-    width:200px;
+    width:400px;
     height:30px
+}
+
+.contractField{
+    width:200px;
+    height:30px;
 }
 
 .formDropdown{
@@ -40,25 +45,30 @@
 
 /*Kontrakter til partner*/
 div.contracts{
-    float:left;
-    display:block;
-    height:320px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr auto auto;
+    height:fit-content;
+    width:fit-content;
     margin-left: 50px;
 }
 
 .contractsHeader{
+    grid-row: 1 / 1;
+    grid-column: 1 / span 2;
     margin-top: 0px;
 }
 
 .contractsList{
     border: 2px solid #276954;
-    height: 300px;
-    width: 250px;
+    height: 200px;
+    width: 350px;
     overflow-y: scroll;
 }
 
 .wrapper {
-    display: block;
+    display: flex;
+    flex-direction:column;
     float:left;
 }
 
@@ -81,6 +91,16 @@ div.contracts{
 /*Input form kontrakter*/
 
 .contractsForm{
-    display: block;
-    float:left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.greenButton{
+    justify-self: center;
+}
+
+#savePartner{
+    grid-column: 1 / span 2;
+    grid-row: 4 / 4;
 }

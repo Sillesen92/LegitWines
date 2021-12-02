@@ -15,7 +15,7 @@ var selected;
 var selectedContract;
 const contracts = []
 
-document.querySelector("#updatePartner").onclick = async (event) => {
+document.querySelector("#savePartner").onclick = async (event) => {
     try {
         const companyId = document.querySelector(".partner").id
         const response = await fetch("/editPartner/" + companyId, {
