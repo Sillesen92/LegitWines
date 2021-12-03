@@ -16,7 +16,7 @@ async function getCompanyDoc(id) {
   } else if (("" + id).substring(0, 1) == "2") {
     doc = db.collection('partners').doc('companies').collection('golfcourses').doc(id)
   } else if (("" + id).substring(0, 1) == "3") {
-    doc = db.collection('partners').doc('companies').collection('flightcompanies').doc(id)
+    doc = db.collection('partners').doc('companies').collection('airlinecompanies').doc(id)
   } else if (("" + id).substring(0, 1) == "4") {
     doc = db.collection('partners').doc('companies').collection('transfercompanies').doc(id)
   } else if (("" + id).substring(0, 1) == "5") {
@@ -52,10 +52,10 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
     await (col.doc("" + id).set(company)).then(() => ref.update({ golfcoursecount: count + 1 })).then(() => created = true)
   }
   else if (companyType == "3") {
-    const col = ref.collection('flightcompanies')
+    const col = ref.collection('airlinecompanies')
     const count = await (await ref.get()).data().flightcompanycount
     const id = 30001 + count
-    await (col.doc("" + id).set(company)).then(() => ref.update({ flightcompanycount: count + 1 })).then(() => created = true)
+    await (col.doc("" + id).set(company)).then(() => ref.update({ airlinecompaniescount: count + 1 })).then(() => created = true)
   }
   else if (companyType == "4") {
     const col = ref.collection('transfercompanies')
@@ -101,7 +101,7 @@ async function getHotels() {
 }
 
 async function getFlightCompanies() {
-  const doc = db.collection('partners').doc('companies').collection('flightcompanies');
+  const doc = db.collection('partners').doc('companies').collection('airlinecompanies');
   const list = (await doc.get()).docs
   return list;
 }
