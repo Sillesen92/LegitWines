@@ -5,12 +5,12 @@ const companyPhone = () => document.querySelector("#companyPhone").value
 const companyType = () => document.querySelector("#companyType").value
 const todayString = () => {
     const today = new Date()
-    return `${today.getFullYear()}-${today.getMonth()+1}-${today.getDate()}`
+    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
 }
 
 var selected;
 var selectedContract;
-const contracts = []
+const chosenContracts = []
 const message = document.querySelector("#message")
 
 document.querySelector("#savePartner").onclick = async (event) => {
@@ -21,7 +21,7 @@ document.querySelector("#savePartner").onclick = async (event) => {
                 "content-type": "application/json",
                 "accept": "application/json"
             },
-            body: JSON.stringify({companyName: companyName(), companyAddress: companyAddress(), companyEmail: companyEmail(), companyPhone: companyPhone(), companyType: companyType(), contracts: contracts})
+            body: JSON.stringify({ companyName: companyName(), companyAddress: companyAddress(), companyEmail: companyEmail(), companyPhone: companyPhone(), companyType: companyType(), contracts: chosenContracts })
         })
         if (response.ok) {
             window.location.href = "/createPartner"
@@ -50,7 +50,7 @@ for (const div of document.getElementsByClassName("contractItem")) {
         endDate: strArray[2],
         netPrice: strArray[3]
     }
-    contracts.push(contract)
+    chosenContracts.push(contract)
     div.onclick = () => {
         updateSelectedContract(div, contract)
     }
@@ -67,7 +67,7 @@ function addContract() {
         endDate: contractEnd(),
         netPrice: contractPrice()
     }
-    contracts.push(contract)
+    chosenContracts.push(contract)
     var div = document.createElement("DIV")
     div.className = "contractItem"
     div.id = `${contract.description}_${contract.startDate}_${contract.endDate}_${contract.netPrice}`
@@ -86,14 +86,14 @@ function addContract() {
 
 function removeContract() {
     console.log(selectedContract)
-    for (let i = 0; i < contracts.length; i++) {
-        const element = contracts[i];
+    for (let i = 0; i < chosenContracts.length; i++) {
+        const element = chosenContracts[i];
         if (selectedContract == element) {
-            contracts.splice(i,1)
+            chosenContracts.splice(i, 1)
             contractList.removeChild(selected)
         }
     }
-    console.log(contracts)
+    console.log(chosenContracts)
 }
 
 function updateSelectedContract(div, contract) {
