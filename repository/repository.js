@@ -179,6 +179,18 @@ async function getSalesman(salesmanId) {
   }
 }
 
+async function loginSalesman(username, password) {
+  const ref = db.collection('salesmen');
+  const query = ref.where('salesmanSalesId', "==", username).where('salesmanPassword', "==", password);
+  const salesman = await query.get();
+  if (salesman.empty) {
+    return undefined;
+  } else {
+    return salesman.docs[0];
+  }
+
+}
+
 async function getAllSalesmen() {
   const doc = db.collection('salesmen');
   const salesmen = await doc.get();
@@ -305,4 +317,4 @@ async function getBookingForYear(year) {
 }
 
 
-module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking, getAllSalesmen }
+module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking, getAllSalesmen, loginSalesman }

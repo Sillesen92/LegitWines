@@ -22,10 +22,10 @@ router.get('/logout', (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { name, password } = req.body
-        const user = await salesmenController.getSalesman(name)
+        const user = await salesmenController.loginSalesman(name, password)
 
 
-        if (user && user.data().salesmanPassword == password) {
+        if (user) {
             console.log("Du er logged ind")
             console.log(user.data())
             console.log(user.data().salesmanSalesId)
