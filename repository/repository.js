@@ -278,13 +278,13 @@ async function createBooking(salesman, customer, travelDocuments) {
     console.log(e.message)
   }
   return newDoc
-  await doc.set(booking)
-  const bookingToAddDoc = await getBooking(bookingNr)
-  for (i = 0; i < travelDocuments.length; i++) {
-    bookingToAddDoc.collection("travelDocuments").add(travelDocuments[i])
-  }
+  // await doc.set(booking)
+  // const bookingToAddDoc = await getBooking(bookingNr)
+  // for (i = 0; i < travelDocuments.length; i++) {
+  //   bookingToAddDoc.collection("travelDocuments").add(travelDocuments[i])
+  // }
 
-  return doc
+  // return doc
 
 }
 /* 
