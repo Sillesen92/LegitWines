@@ -2,7 +2,7 @@
 .salesman{
     margin-left: 50px;
     display: block;
-    float:left;
+    float: left;
 }
 
 .inputRow{
@@ -14,7 +14,7 @@
 .formLabel{
     display: inline-block;
     width:100px;
-    font-style: italic;
+    font-family: Poppins, Roboto, "Helvetica Neue";
     font-size: large;
     text-align: right;
     margin-right:10px;
@@ -22,7 +22,9 @@
 
 .formField{
     width:200px;
-    height:30px
+    height:30px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    font-size: large;
 }
 
 .formDropdown{
@@ -32,7 +34,7 @@
 
 .formButton{
     width: 250px;
-    height: 36px;
+    height: 50px;
     margin-top: 25px;
     float: right;
 }
