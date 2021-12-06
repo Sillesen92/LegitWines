@@ -7,14 +7,14 @@ block css
     <link rel="shortcut icon" type="image/ico" href="images/greensoftlogo.ico"/>
     script(src="/script/createBooking.js" defer)
 block content
-  div#bookingpage
-      div#createbooking
-          div(class = "resCard")
-              button(class = "addReservationButton") +
-                button.confirmBookingButton Bekræft
+    div#bookingpage
+        div#createbooking
+            div(class = "resCard")
+                button(class = "addReservationButton") +
+            button.confirmBookingButton Bekræft
 
-      div(id = "resModal" class = "modal")
-          div(class = "resModalContent")
+    div(id = "resModal" class = "modal")
+        div(class = "resModalContent")
             div(class = "modalHeader")
                 select(name="reservation" id="reservationType" onchange = "renderModal()")
                     option(value="choose") -- Vælg --

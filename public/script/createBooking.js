@@ -90,6 +90,7 @@ function addDocument(documentType, data) {
         body.innerHTML = `${data.checkinDate.toLocaleDateString("da-DK")} - ${data.checkoutDate.toLocaleDateString("da-DK")}`
         content.append(title);
         content.append(body);
+        content.className = "resCardContent";
         div.append(content);
     }
     else if (documentType == "Transfer") {}
@@ -100,10 +101,11 @@ function addDocument(documentType, data) {
 
     const button = document.createElement("BUTTON")
     button.className = "removeReservationButton";
+    button.innerHTML = "-"
     div.append(button)
 
     documents.push(doc);
-    documentList.insertBefore(div, documentList.lastChild);
+    documentList.insertBefore(div, documentList.childNodes[documentList.childNodes.length-2]);
     button.onclick = () => removeReservation(div, doc);
 }
 
