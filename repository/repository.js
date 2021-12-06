@@ -53,7 +53,7 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
   }
   else if (companyType == "3") {
     const col = ref.collection('airlinecompanies')
-    const count = await (await ref.get()).data().flightcompanycount
+    const count = await (await ref.get()).data().airlinecompaniescount
     const id = 30001 + count
     await (col.doc("" + id).set(company)).then(() => ref.update({ airlinecompaniescount: count + 1 })).then(() => created = true)
   }
