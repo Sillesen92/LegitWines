@@ -3,7 +3,7 @@ const partnerController = require('../controller/partners.js')
 const router = express.Router();
 
 router.get('/editPartner', async (req, res) => {
-    res.render("showPartners");
+    res.render("showPartners", { loggedIn: true, admin: req.session.admin });
 
 })
 
@@ -47,7 +47,7 @@ router.post('/editPartner', async (req, res) => {
 
 router.get('/editPartner/:id', async (req, resp) => {
     const companyPartner = await partnerController.getCompany(req.params.id)
-    resp.render('editPartner', { companyPartner: companyPartner, contracts: companyPartner.data().contracts })
+    resp.render('editPartner', { companyPartner: companyPartner, contracts: companyPartner.data().contracts, loggedIn: true, admin: req.session.admin })
 })
 
 router.put('/editPartner/:id', async (req, resp) => {

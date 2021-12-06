@@ -1,0 +1,52 @@
+.wrapper{
+    display:flex;
+    flex-direction:column;
+    min-height: 500px;
+    width: 850px;
+}
+
+.partnerDiv{
+
+}
+
+#partnerTable {
+    width:100%;
+    table-layout:fixed;
+    border-collapse:collapse;
+    border: 2px solid #276954;
+
+}
+
+
+/*Alle rækker*/
+#partnerTable tr {
+    border: 0px;
+}
+
+/*Alle ulige rækker*/
+#partnerTable tr:nth-child(odd){
+    height: 40px;
+    background-color: #3e8e41;
+    color: #FFFFFF;
+}
+/*Alle lige rækker*/
+#partnerTable tr:nth-child(even){
+    height: 40px;
+    background-color: #FFFFFF;
+    color: #3e8e41;
+}
+
+/*Headline rækken*/
+#partnerTable tr:first-child {
+    background-color: #7C90A0;
+    color: #FFFFFF;
+    height: 30px;
+    border: 1px solid #276954;
+}
+
+/*Alle celler*/
+#partnerTable td {
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    font-weight: regular;
+   text-align:center;
+}

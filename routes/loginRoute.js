@@ -10,11 +10,11 @@ router.get('/login', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
-    req.sessionID.destroy(err => {
+    req.session.destroy(err => {
         if (err) {
             console.log(err)
         } else {
-            response.redirect('/')
+            res.redirect('/')
         }
     })
 })
@@ -22,15 +22,16 @@ router.get('/logout', (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { name, password } = req.body
-        const user = await salesmenController.getSalesman(name)
+        const user = await salesmenController.loginSalesman(name, password)
 
 
-        if (user && user.data().salesmanPassword == password) {
+        if (user) {
             console.log("Du er logged ind")
             console.log(user.data())
             console.log(user.data().salesmanSalesId)
             req.session.userId = user.data().salesmanSalesId
             req.session.name = user.data().salesmanName
+            req.session.admin = user.data().administrator
             console.log(req.session.name)
             console.log(req.session.userId)
             req.session.isAuth = true;
