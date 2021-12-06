@@ -6,6 +6,8 @@ const span = document.querySelector(".closeResModal");
 const resDropdown = document.querySelector("#reservationType")
 let publicContracts = []
 let chosenContracts = []
+let selectedCompany;
+let documents = [];
 let divIdIndexContract = 1
 
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
@@ -71,6 +73,49 @@ function removeContract(div, contract) {
     console.log(chosenContracts)
 }
 
+function addDocument(documentType, data) {
+    const documentList = document.querySelector("#createbooking")
+    var doc;
+    var div = document.createElement("DIV");
+    div.className = "resCard"
+    if (documentType == "Hotel") {
+        doc = {
+            type: "Hotel",
+            data: data
+        }
+        const content = document.createElement("DIV")
+        const title = document.createElement("P")
+        title.innerHTML = `Hotel - ${data.companyName}`
+        const body = document.createElement("P")
+        body.innerHTML = `${data.checkinDate.toLocaleDateString("da-DK")} - ${data.checkoutDate.toLocaleDateString("da-DK")}`
+        content.append(title);
+        content.append(body);
+        div.append(content);
+    }
+    else if (documentType == "Transfer") {}
+    else if (documentType == "Billeje") {}
+    else if (documentType == "Greenfee") {}
+    else if (documentType == "Passager") {}
+    else if (documentType == "Flyafgang") {}
+
+    const button = document.createElement("BUTTON")
+    button.className = "removeReservationButton";
+    div.append(button)
+
+    documents.push(doc);
+    documentList.insertBefore(div, documentList.lastChild);
+    button.onclick = () => removeReservation(div, doc);
+}
+
+function removeReservation(div, doc) {
+    console.log(div)
+    console.log(doc)
+    const documentList = document.querySelector("#createbooking")
+    documents.splice(documents.indexOf(doc,0),1)
+    documentList.removeChild(div);
+
+}
+
 //viser nødvendige informationer for opret hotel
 async function renderModal() {
     try {
@@ -94,8 +139,9 @@ async function renderModal() {
                     a.href = `#${element.companyName}`
                     a.innerHTML = `${element.companyName}`
                     a.onclick = () => {
+                        selectedCompany = element;
                         const contracts = document.querySelector("#contractPicker");
-                        contracts.innerHTML = "<div> Kontrakter </div>"
+                        contracts.innerHTML = ""
                         let index = 0
                         publicContracts = []
                         element.contracts.forEach(contract => {
@@ -115,46 +161,83 @@ async function renderModal() {
             }
 
             //datepicker indtjekningsdato
+            const divDateIn = document.createElement("DIV")
+            divDateIn.className = "colDiv"
+            const lblDateIn = document.createElement("P")
+            lblDateIn.innerHTML = "Check-in dato"
             const dateIn = document.createElement("input")
             dateIn.type = "date"
             dateIn.id = "dateIn"
-            renderContent.append(dateIn)
+            divDateIn.append(lblDateIn)
+            divDateIn.append(dateIn)
+            renderContent.append(divDateIn)
 
             //datepicker udtjekningsdato
+            const divDateOut = document.createElement("DIV")
+            divDateOut.className = "colDiv"
+            const lblDateOut = document.createElement("P")
+            lblDateOut.innerHTML = "Check-ud dato"
             const dateOut = document.createElement("input")
             dateOut.type = "date"
             dateOut.id = "dateOut"
-            renderContent.append(dateOut)
+            divDateOut.append(lblDateOut)
+            divDateOut.append(dateOut)
+            renderContent.append(divDateOut)
 
-            //dropdown for pension
+/*             //dropdown for pension
             const pension = document.createElement("select")
             pension.id = "pensionPicker"
             pension.appendChild(new Option("Ingen"));
             pension.appendChild(new Option("Halv-Pension"));
             pension.appendChild(new Option("Hel-Pension"));
-            renderContent.append(pension)
+            renderContent.append(pension) */
 
             //kommentarfelt
+            const divComment = document.createElement("DIV")
+            divComment.className = "colDiv"
+            const lblComment = document.createElement("P")
+            lblComment.innerHTML = "Kommentar"
             const commentInput = document.createElement("Input")
             commentInput.type = "text"
             commentInput.id = "commentInput"
-            renderContent.append(commentInput)
+            divComment.append(lblComment)
+            divComment.append(commentInput)
+            renderContent.append(divComment)
 
             //div for kontrakter
             const contracts = document.createElement("div")
-            contracts.id = "contractPicker"
-            renderContent.append(contracts)
-            const title = document.createElement('div')
+            const contractPicker = document.createElement("div")
+            contractPicker.id = "contractPicker"
+            const titleDiv = document.createElement('div')
+            const title = document.createElement('p')
             title.innerHTML = "Kontrakter"
-            contracts.appendChild(title)
+            titleDiv.append(title)
+            contracts.appendChild(titleDiv)
+            contracts.appendChild(contractPicker)
+            renderContent.append(contracts)
 
             //div med valgte kontrakter
-            const chosenContracts = document.createElement('div')
-            chosenContracts.id = 'chosenContracts'
-            renderContent.append(chosenContracts)
-            const chosenTitle = document.createElement('div')
+            const divChosenContracts = document.createElement('div')
+            divChosenContracts.id = 'chosenContracts'
+            renderContent.append(divChosenContracts)
+            const chosenTitleDiv = document.createElement('div')
+            const chosenTitle = document.createElement('p')
             chosenTitle.innerHTML = 'Valgte kontrakter'
-            chosenContracts.appendChild(chosenTitle)
+            chosenTitleDiv.append(chosenTitle)
+            divChosenContracts.appendChild(chosenTitleDiv)
+
+            //bekræft-knap funktionalitet
+            const button = document.querySelector("#confirmResButton")
+            button.onclick = () => {
+                const doc = {
+                    companyName: selectedCompany.companyName,
+                    checkinDate: dateIn.valueAsDate,
+                    checkoutDate: dateOut.valueAsDate,
+                    comment: commentInput.value,
+                    contracts: chosenContracts
+                }
+                addDocument("Hotel", doc)
+            }
 
         } else if (resDropdown.value == "BoardingPass") {
             //tekstfelt til fornavn
@@ -243,12 +326,12 @@ async function renderModal() {
             contracts.appendChild(title)
 
             //div med valgte kontrakter
-            const chosenContracts = document.createElement('div')
-            chosenContracts.id = 'chosenContracts'
-            renderContent.append(chosenContracts)
+            const divChosenContracts = document.createElement('div')
+            divChosenContracts.id = 'chosenContracts'
+            renderContent.append(divChosenContracts)
             const chosenTitle = document.createElement('div')
             chosenTitle.innerHTML = 'Valgte kontrakter'
-            chosenContracts.appendChild(chosenTitle)
+            divChosenContracts.appendChild(chosenTitle)
 
         } else if (resDropdown.value == "Transfer") {
             //lig transfer ind i dropdown
@@ -309,12 +392,12 @@ async function renderModal() {
             contracts.appendChild(title)
 
             //div med valgte kontrakter
-            const chosenContracts = document.createElement('div')
-            chosenContracts.id = 'chosenContracts'
-            renderContent.append(chosenContracts)
+            const divChosenContracts = document.createElement('div')
+            divChosenContracts.id = 'chosenContracts'
+            renderContent.append(divChosenContracts)
             const chosenTitle = document.createElement('div')
             chosenTitle.innerHTML = 'Valgte kontrakter'
-            chosenContracts.appendChild(chosenTitle)
+            divChosenContracts.appendChild(chosenTitle)
         }
         else if (resDropdown.value == "Billeje") {
             //lig billejer ind i dropdown
@@ -375,12 +458,12 @@ async function renderModal() {
             contracts.appendChild(title)
 
             //div med valgte kontrakter
-            const chosenContracts = document.createElement('div')
-            chosenContracts.id = 'chosenContracts'
-            renderContent.append(chosenContracts)
+            const divChosenContracts = document.createElement('div')
+            divChosenContracts.id = 'chosenContracts'
+            renderContent.append(divChosenContracts)
             const chosenTitle = document.createElement('div')
             chosenTitle.innerHTML = 'Valgte kontrakter'
-            chosenContracts.appendChild(chosenTitle)
+            divChosenContracts.appendChild(chosenTitle)
         }
         else if (resDropdown.value == "Greenfee") {
             //lig transfer ind i dropdown
