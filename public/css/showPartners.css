@@ -2,7 +2,7 @@
     display:flex;
     flex-direction:column;
     min-height: 500px;
-    width: 850px;
+    width: 1250px;
 }
 
 .partnerDiv{
@@ -49,4 +49,64 @@
     font-family: Poppins, Roboto, "Helvetica Neue";
     font-weight: regular;
    text-align:center;
+}
+
+/* Show partners */
+
+#companyType {
+    border: 2px solid #276954;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; 
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align-last: center;
+}
+
+#companyType:hover {
+    border: 2px solid #276954;
+    font-size: 20px;
+    width: 200px;
+    height: 50px;
+    box-shadow: 3px 4px 5px #cccc;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px; 
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align-last: center;
+}
+
+#getPartners {
+    background-color: #276954;
+    color: #FEFFFE;
+    font-size: 18px;
+    width: 100px;
+    height: 50px;
+    border: 3px solid #276954;
+    border-radius: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    cursor: pointer;
+    margin: 0px 0px 0px 10px;
+}
+
+#getPartners:hover {
+    background-color: #FEFFFE;
+    color: #276954;
+    border: 3px solid #276954;
+    font-size: 18px;
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    cursor: pointer;
+}
+
+/* CSS for tabel der viser partnere */
+
+#partnerTable th {
+    font-family: Poppins, Roboto, "Helvetica Neue";
 }

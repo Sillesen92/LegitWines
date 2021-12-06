@@ -95,10 +95,9 @@ p {
 #navigationBar:hover {
     float: right;
     background-color: #F1DABF;
-    border: 2px solid #F1DABF;
+    border: 2px solid #FEFFFE;
     width: 200px;
     height: 50px;
-    box-shadow: 3px 4px 5px #cccc;
     border-radius: 5px;
     cursor: pointer;
 }
