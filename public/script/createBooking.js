@@ -9,6 +9,8 @@ let chosenContracts = []
 let selectedCompany;
 let documents = [];
 let divIdIndexContract = 1
+let fromdate;
+let todate;
 
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
@@ -35,6 +37,7 @@ companyTypeSearchButton.onclick = function () {
 function filterFunction() {
     var input, filter, ul, li, a, i;
     input = document.querySelector("#companyInput");
+    console.log(input);
     filter = input.value.toUpperCase();
     div = document.querySelector(".companyPickerDropdown");
     a = div.getElementsByTagName("a");
@@ -78,6 +81,8 @@ function addDocument(documentType, data) {
     var doc;
     var div = document.createElement("DIV");
     div.className = "resCard"
+
+    //TODO: Fix duplicate kode?
     if (documentType == "Hotel") {
         doc = {
             type: "Hotel",
@@ -95,7 +100,22 @@ function addDocument(documentType, data) {
     }
     else if (documentType == "Transfer") {}
     else if (documentType == "Billeje") {}
-    else if (documentType == "Greenfee") {}
+    else if (documentType == "Greenfee") {
+        doc = {
+            type: "Greenfee",
+            data: data
+        }
+        const content = document.createElement("DIV")
+        const title = document.createElement("P")
+        title.innerHTML = `Greenfee - ${data.companyName}`
+        const body = document.createElement("P")
+        body.innerHTML = `${data.date.toLocaleDateString("da-DK")}`
+        content.append(title);
+        content.append(body);
+        content.className = "resCardContent";
+        div.append(content);
+
+    }
     else if (documentType == "Passager") {}
     else if (documentType == "Flyafgang") {}
 
@@ -161,89 +181,151 @@ async function renderModal() {
 }
 
 async function renderHotels() {
-        //lig hoteller ind i dropdown
-        const response = await fetch("/getCompanies", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({ companyType: 'hotel' })
-        })
-        if (response.ok) {
-            const resp = await response.json();
-            document.querySelector(".companyPickerDropdownContent").innerHTML = ""
-            resp.forEach(element => {
-                const a = document.createElement("A")
-                document.querySelector(".companyPickerDropdownContent").appendChild(a)
-                a.href = `#${element.companyName}`
-                a.innerHTML = `${element.companyName}`
-                a.onclick = () => {
-                    selectedCompany = element;
-                    const contracts = document.querySelector("#contractPicker");
-                    contracts.innerHTML = ""
-                    let index = 0
-                    publicContracts = []
-                    element.contracts.forEach(contract => {
-                        //check om contract er indenfor datoerne
-                        publicContracts.push({
-                            description: contract.description,
-                            startDate: contract.startDate,
-                            endDate: contract.endDate,
-                            netPrice: contract.netPrice
-                        })
-                        console.log(contract)
-                        contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
-                        index++
-                    })
-                }
-            });
+        //Render hotel partner side
+        renderCompanyDropDown("hotel")
+        const dateIn = renderDatePicker("Check-in dato", "dateIn", updateShownContracts)
+        const dateOut = renderDatePicker("Check-ud dato", "dateOut", updateShownContracts)
+        const commentInput = renderTextInput("Kommentar", "commentInput", null)
+        renderContractPicker();
+
+        //Bekræft-knap funktionalitet
+        const button = document.querySelector("#confirmResButton")
+        button.onclick = () => {
+            const doc = {
+                companyName: selectedCompany.companyName,
+                checkinDate: dateIn.valueAsDate,
+                checkoutDate: dateOut.valueAsDate,
+                comment: commentInput.value,
+                contracts: chosenContracts
+            }
+            addDocument("Hotel", doc)
         }
 
-        //datepicker indtjekningsdato
-        const divDateIn = document.createElement("DIV")
-        divDateIn.className = "colDiv"
-        const lblDateIn = document.createElement("P")
-        lblDateIn.innerHTML = "Check-in dato"
-        const dateIn = document.createElement("input")
-        dateIn.type = "date"
-        dateIn.id = "dateIn"
-        divDateIn.append(lblDateIn)
-        divDateIn.append(dateIn)
-        renderContent.append(divDateIn)
+}
 
-        //datepicker udtjekningsdato
-        const divDateOut = document.createElement("DIV")
-        divDateOut.className = "colDiv"
-        const lblDateOut = document.createElement("P")
-        lblDateOut.innerHTML = "Check-ud dato"
-        const dateOut = document.createElement("input")
-        dateOut.type = "date"
-        dateOut.id = "dateOut"
-        divDateOut.append(lblDateOut)
-        divDateOut.append(dateOut)
-        renderContent.append(divDateOut)
+//TODO: fix
+async function renderFlights() {
+    renderCompanyDropDown("Flyafgang")
 
-/*             //dropdown for pension
-        const pension = document.createElement("select")
-        pension.id = "pensionPicker"
-        pension.appendChild(new Option("Ingen"));
-        pension.appendChild(new Option("Halv-Pension"));
-        pension.appendChild(new Option("Hel-Pension"));
-        renderContent.append(pension) */
+    //dropdown til tur derned eller retur
+    const turRetur = document.createElement("select")
+    turRetur.id = "turReturPicker"
+    turRetur.appendChild(new Option("tur"))
+    turRetur.appendChild(new Option("Retur"))
+    renderContent.append(turRetur)
 
-        //kommentarfelt
-        const divComment = document.createElement("DIV")
-        divComment.className = "colDiv"
-        const lblComment = document.createElement("P")
-        lblComment.innerHTML = "Kommentar"
-        const commentInput = document.createElement("Input")
-        commentInput.type = "text"
-        commentInput.id = "commentInput"
-        divComment.append(lblComment)
-        divComment.append(commentInput)
-        renderContent.append(divComment)
+    const date = renderDatePicker("Dato", "date", updateShownContracts)
 
+    //dropdown til all flyafgange
+    const flights = document.createElement("select")
+    flights.id = "flightPicker"
+    flights.appendChild(new Option("fly1"))
+    renderContent.append(flights)
+
+    renderContractPicker();
+
+    //TODO: Bekræft-knap funktionalitet
+    const button = document.querySelector("#confirmResButton")
+    button.onclick = () => {
+        const doc = {
+
+        }
+        addDocument("Flyafgang", doc)
+    }
+
+}
+async function renderTransfers() {
+        renderCompanyDropDown("Transfer")
+        const date = renderDatePicker("Dato", "date", updateShownContracts)
+        const destination = renderTextInput("Destination", "destination", null)
+        renderContractPicker();
+
+        //TODO: Bekræft-knap funktionalitet
+        const button = document.querySelector("#confirmResButton")
+        button.onclick = () => {
+            const doc = {
+
+            }
+            addDocument("Transfer", doc)
+        }
+}
+//TODO: fix
+async function renderCarRentals() {
+        renderCompanyDropDown("Billeje")
+        const dateIn = renderDatePicker("Fra-dato", "dateIn", updateShownContracts)
+        const dateOut = renderDatePicker("Til-dato", "dateOut", updateShownContracts)
+        renderContractPicker();
+
+        //TODO: Bekræft-knap funktionalitet
+        const button = document.querySelector("#confirmResButton")
+        button.onclick = () => {
+            const doc = {
+                
+            }
+            addDocument("Billeje", doc)
+        }
+}
+
+async function renderCourses() {
+        //Render greenfee partner side
+        renderCompanyDropDown("Greenfee")
+        const date = renderDatePicker("Dato", "dateIn", updateShownContracts)
+        renderContractPicker()
+
+        //Bekræft-knap funktionalitet
+        const button = document.querySelector("#confirmResButton")
+        button.onclick = () => {
+            const doc = {
+                companyName: selectedCompany.companyName,
+                date: date.valueAsDate,
+                contracts: chosenContracts
+            }
+            addDocument("Greenfee", doc)
+        }
+}
+
+
+
+//On-change funktion til at opdatere viste kontrakter
+function updateShownContracts() {
+    let startDate = null;
+    let endDate = null;
+    if (document.querySelector("#dateIn")) startDate = document.querySelector("#dateIn").valueAsDate
+    if(document.querySelector("#dateOut")) endDate = document.querySelector("#dateOut").valueAsDate
+    document.querySelector("#contractPicker").innerHTML = ""
+
+    publicContracts.forEach(contract => {
+        let valid = true
+        let contractStart = new Date(contract.startDate);
+        let contractEnd = new Date(contract.endDate);
+        //TODO: Logik?
+        if (startDate != null) {
+            if (contractStart < startDate){
+                valid = false
+            }
+        }
+        if (endDate != null) {
+            if (contractEnd < endDate) {
+                valid = false;
+            }
+        }
+        if (valid === true) {
+            addContractToList(contract);
+        }
+    });
+
+}
+
+//Tilføj en given kontrakt til listen over viste kontrakter
+function addContractToList(contract) {
+    const contracts = document.querySelector("#contractPicker");
+    let index = publicContracts.indexOf(contract)
+    contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
+}
+
+
+//Render liste til at vælge og vise valgte kontrakter
+function renderContractPicker() {
         //div for kontrakter
         const contracts = document.createElement("div")
         const contractPicker = document.createElement("div")
@@ -259,296 +341,85 @@ async function renderHotels() {
         //div med valgte kontrakter
         const divChosenContracts = document.createElement('div')
         divChosenContracts.id = 'chosenContracts'
-        renderContent.append(divChosenContracts)
         const chosenTitleDiv = document.createElement('div')
         const chosenTitle = document.createElement('p')
         chosenTitle.innerHTML = 'Valgte kontrakter'
         chosenTitleDiv.append(chosenTitle)
         divChosenContracts.appendChild(chosenTitleDiv)
-
-        //bekræft-knap funktionalitet
-        const button = document.querySelector("#confirmResButton")
-        button.onclick = () => {
-            const doc = {
-                companyName: selectedCompany.companyName,
-                checkinDate: dateIn.valueAsDate,
-                checkoutDate: dateOut.valueAsDate,
-                comment: commentInput.value,
-                contracts: chosenContracts
-            }
-            addDocument("Hotel", doc)
-        }
-
+        renderContent.append(divChosenContracts)
 }
 
-
-async function renderFlights() {
-    //lig flyafgange ind i dropdown
+//Render listen af firmaer i dropdown
+async function renderCompanyDropDown(type) {
     const response = await fetch("/getCompanies", {
         method: "POST",
         headers: {
             "content-type": "application/json",
             "accept": "application/json"
         },
-        body: JSON.stringify({ companyType: 'Flyafgang' })
+        body: JSON.stringify({ companyType: type })
     })
     if (response.ok) {
         const resp = await response.json();
-        document.querySelector(".companyPickerDropdownContent").innerHTML = ""
+        const dropdown = document.querySelector(".companyPickerDropdownContent")
+        dropdown.innerHTML = ""
+
+        //Søgefelt
+        const search = document.createElement("INPUT");
+        search.type = "text";
+        search.placeholder = "Søg...";
+        search.id ="companyInput";
+        search.onkeyup = filterFunction;
+        dropdown.appendChild(search);
+
+        //Elementer
         resp.forEach(element => {
             const a = document.createElement("A")
-            document.querySelector(".companyPickerDropdownContent").appendChild(a)
+            dropdown.appendChild(a)
             a.href = `#${element.companyName}`
             a.innerHTML = `${element.companyName}`
             a.onclick = () => {
-                const contracts = document.querySelector("#contractPicker");
-                contracts.innerHTML = "<div> Kontrakter </div>"
-                let index = 0
+                selectedCompany = element;
                 publicContracts = []
                 element.contracts.forEach(contract => {
-                    //check om contract er indenfor datoerne
-                    publicContracts.push({
-                        description: contract.description,
-                        startDate: contract.startDate,
-                        endDate: contract.endDate,
-                        netPrice: contract.netPrice
-                    })
-                    console.log(contract)
-                    contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
-                    index++
+                    publicContracts.push(contract)
                 })
+                updateShownContracts()
             }
         });
     }
-
-    //dropdown til tur derned eller retur
-    const turRetur = document.createElement("select")
-    turRetur.id = "turReturPicker"
-    turRetur.appendChild(new Option("tur"))
-    turRetur.appendChild(new Option("Retur"))
-    renderContent.append(turRetur)
-
-    //Dato
-    const date = document.createElement("input")
-    date.type = "date"
-    date.id = "date"
-    renderContent.append(date)
-
-    //dropdown til all flyafgange
-    const flights = document.createElement("select")
-    flights.id = "flightPicker"
-    flights.appendChild(new Option("fly1"))
-    renderContent.append(flights)
-
-    //div for kontrakter
-    const contracts = document.createElement("div")
-    contracts.id = "contractPicker"
-    renderContent.append(contracts)
-    const title = document.createElement('div')
-    title.innerHTML = "Kontrakter"
-    contracts.appendChild(title)
-
-    //div med valgte kontrakter
-    const divChosenContracts = document.createElement('div')
-    divChosenContracts.id = 'chosenContracts'
-    renderContent.append(divChosenContracts)
-    const chosenTitle = document.createElement('div')
-    chosenTitle.innerHTML = 'Valgte kontrakter'
-    divChosenContracts.appendChild(chosenTitle)
-
 }
 
-async function renderTransfers() {
-        //lig transfer ind i dropdown
-        const response = await fetch("/getCompanies", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({ companyType: 'Transfer' })
-        })
-        if (response.ok) {
-            const resp = await response.json();
-            document.querySelector(".companyPickerDropdownContent").innerHTML = ""
-            resp.forEach(element => {
-                const a = document.createElement("A")
-                document.querySelector(".companyPickerDropdownContent").appendChild(a)
-                a.href = `#${element.companyName}`
-                a.innerHTML = `${element.companyName}`
-                a.onclick = () => {
-                    const contracts = document.querySelector("#contractPicker");
-                    contracts.innerHTML = "<div> Kontrakter </div>"
-                    let index = 0
-                    publicContracts = []
-                    element.contracts.forEach(contract => {
-                        //check om contract er indenfor datoerne
-                        publicContracts.push({
-                            description: contract.description,
-                            startDate: contract.startDate,
-                            endDate: contract.endDate,
-                            netPrice: contract.netPrice
-                        })
-                        console.log(contract)
-                        contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
-                        index++
-                    })
-                }
-            });
-        }
-        //Dato og tid via datetimepicker
-        const date = document.createElement("input")
-        date.type = "datetime-local"
-        date.id = "dateTime"
-        renderContent.append(date)
 
-        //destiantion tekstfelt
-        const destination = document.createElement("input")
-        destination.id = "destination"
-        destination.type = "text"
-        renderContent.append(destination);
+//Render og returnér en datepicker
+function renderDatePicker(title, id, onchange) {
 
-        //div for kontrakter
-        const contracts = document.createElement("div")
-        contracts.id = "contractPicker"
-        renderContent.append(contracts)
-        const title = document.createElement('div')
-        title.innerHTML = "Kontrakter"
-        contracts.appendChild(title)
-
-        //div med valgte kontrakter
-        const divChosenContracts = document.createElement('div')
-        divChosenContracts.id = 'chosenContracts'
-        renderContent.append(divChosenContracts)
-        const chosenTitle = document.createElement('div')
-        chosenTitle.innerHTML = 'Valgte kontrakter'
-        divChosenContracts.appendChild(chosenTitle)
+        const container = document.createElement("DIV")
+        container.className = "colDiv"
+        const lblTitle = document.createElement("P")
+        lblTitle.innerHTML = title
+        const datepicker = document.createElement("input")
+        datepicker.type = "date"
+        datepicker.id = id
+        datepicker.addEventListener("change", onchange)
+        container.append(lblTitle)
+        container.append(datepicker)
+        renderContent.append(container)
+        return datepicker;
 }
 
-async function renderCarRentals() {
-        //lig billejer ind i dropdown
-        const response = await fetch("/getCompanies", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({ companyType: 'Billeje' })
-        })
-        if (response.ok) {
-            const resp = await response.json();
-            document.querySelector(".companyPickerDropdownContent").innerHTML = ""
-            resp.forEach(element => {
-                const a = document.createElement("A")
-                document.querySelector(".companyPickerDropdownContent").appendChild(a)
-                a.href = `#${element.companyName}`
-                a.innerHTML = `${element.companyName}`
-                a.onclick = () => {
-                    const contracts = document.querySelector("#contractPicker");
-                    contracts.innerHTML = "<div> Kontrakter </div>"
-                    let index = 0
-                    publicContracts = []
-                    element.contracts.forEach(contract => {
-                        //check om contract er indenfor datoerne
-                        publicContracts.push({
-                            description: contract.description,
-                            startDate: contract.startDate,
-                            endDate: contract.endDate,
-                            netPrice: contract.netPrice
-                        })
-                        console.log(contract)
-                        contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
-                        index++
-                    })
-                }
-            });
-        }
-        //datepicker dato fra
-        const dateFrom = document.createElement("input")
-        dateFrom.type = "date"
-        dateFrom.id = "dateFrom"
-        renderContent.append(dateFrom)
 
-        //datepicker dato til
-        const dateTo = document.createElement("input")
-        dateTo.type = "date"
-        dateTo.id = "dateTo"
-        renderContent.append(dateTo)
-
-        //div for kontrakter
-        const contracts = document.createElement("div")
-        contracts.id = "contractPicker"
-        renderContent.append(contracts)
-        const title = document.createElement('div')
-        title.innerHTML = "Kontrakter"
-        contracts.appendChild(title)
-
-        //div med valgte kontrakter
-        const divChosenContracts = document.createElement('div')
-        divChosenContracts.id = 'chosenContracts'
-        renderContent.append(divChosenContracts)
-        const chosenTitle = document.createElement('div')
-        chosenTitle.innerHTML = 'Valgte kontrakter'
-        divChosenContracts.appendChild(chosenTitle)
-}
-
-async function renderCourses() {
-        //lig transfer ind i dropdown
-        const response = await fetch("/getCompanies", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-                "accept": "application/json"
-            },
-            body: JSON.stringify({ companyType: 'Greenfee' })
-        })
-        if (response.ok) {
-            const resp = await response.json();
-            document.querySelector(".companyPickerDropdownContent").innerHTML = ""
-            resp.forEach(element => {
-                const a = document.createElement("A")
-                document.querySelector(".companyPickerDropdownContent").appendChild(a)
-                a.href = `#${element.companyName}`
-                a.innerHTML = `${element.companyName}`
-                a.onclick = () => {
-                    const contracts = document.querySelector("#contractPicker");
-                    contracts.innerHTML = "<div> Kontrakter </div>"
-                    let index = 0
-                    publicContracts = []
-                    element.contracts.forEach(contract => {
-                        //check om contract er indenfor datoerne
-                        publicContracts.push({
-                            description: contract.description,
-                            startDate: contract.startDate,
-                            endDate: contract.endDate,
-                            netPrice: contract.netPrice
-                        })
-                        console.log(contract)
-                        contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
-                        index++
-                    })
-                }
-            });
-        }
-        //Dato og tid via datetimepicker
-        const date = document.createElement("input")
-        date.type = "datetime-local"
-        date.id = "dateTime"
-        renderContent.append(date)
-
-        //div for kontrakter
-        const contracts = document.createElement("div")
-        contracts.id = "contractPicker"
-        renderContent.append(contracts)
-        const title = document.createElement('div')
-        title.innerHTML = "Kontrakter"
-        contracts.appendChild(title)
-
-        //div med valgte kontrakter
-        const chosenContracts = document.createElement('div')
-        chosenContracts.id = 'chosenContracts'
-        renderContent.append(chosenContracts)
-        const chosenTitle = document.createElement('div')
-        chosenTitle.innerHTML = 'Valgte kontrakter'
-        chosenContracts.appendChild(chosenTitle)
+//Render og returnér et textfelt
+function renderTextInput(title, id, onchange) {
+    const container = document.createElement("DIV")
+    container.className = "colDiv"
+    const lblTitle = document.createElement("P")
+    lblTitle.innerHTML = title
+    const textInput = document.createElement("Input")
+    textInput.type = "text"
+    textInput.id = id
+    container.append(lblTitle)
+    container.append(textInput)
+    renderContent.append(container)
+    return textInput;
 }
