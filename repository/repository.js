@@ -179,12 +179,20 @@ async function getSalesman(salesmanId) {
   }
 }
 
+//Metode til at hente alle salesmen fra firebase
+async function getAllSalesmen() {
+  const doc = await db.collection('salesmen').get();
+  const allSalesMen = doc.docs;
+  return allSalesMen;
+}
+
 
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
 async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
   if (("" + salesmanId).substring(0, 1) == "6") {
+    let year = new Date().getFullYear();
     let bookingsSalesman = []
-    const doc = db.collection('booking')
+    const doc = db.collection('bookings').doc(year).collection("bookings")
     const bookings = await doc.get()
     bookings.forEach(element => {
       if (element.data().salesmanId == "" + salesmanId) {
@@ -243,15 +251,20 @@ async function createBooking(salesman, customer, travelDocuments) {
     bookingNr: bookingNr,
     salesman: salesman,
     customer: customer,
-    travelDocuments: travelDocuments
   }
 
 
 
   const doc = await db.collection("bookings").doc(year)
-  await doc.set(booking)
-
-  return doc
+  const newDoc = await doc.set(booking)
+  try {
+    travelDocuments.forEach(async travelDoc => {
+      newDoc.collection("travelDocuments").set(travelDoc)
+    })
+  } catch (e) {
+    console.log(e.message)
+  }
+  return newDoc
 
 }
 /* 
@@ -262,7 +275,7 @@ year er hvilket år man vil finde booking med bookingNr
 
 async function getBooking(bookingNr) {
   try {
-    const year = bookingNr.substring(0, 4);
+    const year = bookingNr.toString().substring(0, 4);
 
     const booking = await db.collection("bookings").doc(year).collection("bookings")
       .doc(bookingNr).get()
@@ -300,4 +313,4 @@ async function getBookingForYear(year) {
 }
 
 
-module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking }
+module.exports = { getBooking, getCompanyDoc, getCompany, getHotels, getFlightCompanies, getGolfCourses, getTransferCompanies, getCarRentalCompanies, getAllCompanies, updateCompany, createCompany, createSalesman, getSalesman, getAllBookingSalesman, getBookings, createBooking, getBookingForYear, updateBooking, getAllSalesmen }

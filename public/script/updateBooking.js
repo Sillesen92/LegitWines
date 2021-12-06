@@ -1,3 +1,4 @@
+
 const searchField = () => document.querySelector("#updateBookingSearchInput").value;
 const table = document.querySelector("#kontraktInfoTable")
 const searchBtn = document.querySelector("#updateBookingSearchButton");
@@ -20,10 +21,9 @@ async function getBookingInfo() {
             const booking = await response.json();
             console.log(booking.salesman)
 
-            console.log(booking.travelDocuments[0])
+            // console.log(booking.collection("travelDocuments").get())
             salesmanDiv.innerHTML += booking.salesman
         }
-
 
     } catch (error) {
         console.log("Skete en fejl, her er med:  " + error.message)

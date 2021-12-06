@@ -1,13 +1,35 @@
 const express = require('express');
-const salesStatController = require('../controller/salesStat.js')
+const salesStatController = require('../controller/salesStat')
 const router = express.Router();
+const salesmanController = require('../controller/salesmen')
 router.get('/salesStat', async (req, resp) => {
-  resp.render('salesStat')
-})
+  try {
+    const salesmenDB = await salesmanController.getAllSalesmen();
+    salesmenDB.forEach(element => {
+      console.log("navn på salgsmand " + element.data().salesmanName)
+    })
+    resp.render('salesStats', { salesmen: salesmenDB })
+  } catch (error) {
+    console.log(error.message)
+  }
+
+}
+)
 
 router.post('/salesStat', async (req, resp) => {
-  const { companyName, companyAddress, companyEmail, companyPhone, companyType } = req.body;
-  await salesStatController.createCompany(companyName, companyAddress, companyEmail, companyPhone, companyType);
-  resp.sendStatus(200);
+  try {
+    const { salesmanId } = req.body
+    console.log(salesmanId)
+    const bookings = await salesmanController.getAllBookingSalesman(salesmanId);
+    if (bookings) {
+      console.log(bookings.data())
+    }
+    resp.status(200).send(bookings);
+
+  } catch (error) {
+    console.log(req.body)
+    console.log(error.message)
+  }
+
 })
 module.exports = router

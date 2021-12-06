@@ -1,13 +1,14 @@
 extends layout
 include salesman
 block append css
-    link(rel='stylesheet', href='/css/salesStats.css', type='text/css')
+    link(rel='stylesheet', href='/css/salesStats.css', type='text/css') 
+    script(src='/script/showStats.js' defer)
 block content
     h1 Vælg en sælger for at se personlig salgs statistik:
     div#salesmen
         table#salesmenTable
             each salesman in salesmen
-                +salesman(salesman.data().id,salesman.data().name)
+                +salesman(salesman.data().salesmanSalesId,salesman.data().salesmanName)
             tr.all(onclick=`location.href='/salesStats'`)
                 td
                     label Alle
