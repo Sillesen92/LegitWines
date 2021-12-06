@@ -33,8 +33,6 @@ app.use(loginRoute)
 const createSalesmanRoute = require('../routes/createSalesmanRoute.js')
 const { url } = require('inspector')
 app.use(createSalesmanRoute)
-const salesStatsRoute = require('../routes/salesStatRoute')
-app.use(salesStatsRoute)
 
 const salesStatsRoute = require('../routes/salesStatRoute.js')
 app.use(salesStatsRoute);
