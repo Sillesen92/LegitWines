@@ -22,22 +22,44 @@
 /*Alle ulige rækker*/
 #partnerTable tr:nth-child(odd){
     height: 40px;
-    background-color: #3e8e41;
-    color: #FFFFFF;
+    background-color: #DCDCDC;
+    color: black;
+    cursor: pointer;
+}
+#partnerTable tr:nth-child(odd):hover{
+    height: 40px;
+    background-color: #DCDCDC;
+    color: black;
+    border: 3px solid #F1DABF;
 }
 /*Alle lige rækker*/
 #partnerTable tr:nth-child(even){
     height: 40px;
     background-color: #FFFFFF;
-    color: #3e8e41;
+    color: black;
+}
+
+#partnerTable tr:nth-child(even):hover{
+    height: 40px;
+    background-color: #FFFFFF;
+    color: black;
+    border: 3px solid #F1DABF;
+    cursor: pointer;
 }
 
 /*Headline rækken*/
 #partnerTable tr:first-child {
-    background-color: #7C90A0;
+    background-color: #276954;
     color: #FFFFFF;
     height: 30px;
-    border: 1px solid #276954;
+    border: 2px solid #276954;
+}
+
+#partnerTable tr:first-child:hover {
+    background-color: #276954;
+    color: #FFFFFF;
+    height: 30px;
+    border: 2px solid #276954;
 }
 
 /*Alle celler*/
