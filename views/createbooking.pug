@@ -1,6 +1,9 @@
 extends layout
 block css
     link(rel='stylesheet', href='css/main.css', type='text/css' )
+    link(rel='stylesheet', href='css/header.css', type='text/css' )
+    link(rel='stylesheet', href='css/createBooking.css', type='text/css' )
+    link(rel='stylesheet', href='css/modalCreateBooking.css', type='text/css' )
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;1,300&family=Poppins:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
@@ -37,6 +40,6 @@ block content
                             <a href="#tools">Tools</a>
                 span(class = "closeResModal") &times;
             div(class = "renderContent")
-                img(src="images/greensoftlogo.png", alt="Greensoft Logo", id="greensoftlogo")
+                img(src="images/greensoftlogo.png", alt="Greensoft Logo", id="modalGreensoftLogo")
             div(class = "modalFooter")
                 button(class = "confirmResButton") Bekræft
