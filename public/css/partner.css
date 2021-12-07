@@ -139,3 +139,7 @@ div.contracts{
 .contracts button {
     height: 45px;
 }
+
+.contractItem {
+    cursor: pointer;
+}

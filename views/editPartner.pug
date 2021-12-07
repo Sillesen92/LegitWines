@@ -9,16 +9,16 @@ block content
         div.info
             div.inputRow
                 label.formLabel(for="companyName") Firmanavn: 
-                input.formField(id="companyName", type="text",placeholder="firma navn", value=`${companyPartner.data().companyName}`)
+                input.formField(id="companyName", type="text",placeholder="Firmanavn", value=`${companyPartner.data().companyName}`)
             div.inputRow
                 label.formLabel(for="companyAddress") Adresse:
-                input.formField(id="companyAddress", type="text",placeholder="adresse", value=`${companyPartner.data().companyAddress}`)
+                input.formField(id="companyAddress", type="text",placeholder="Adresse", value=`${companyPartner.data().companyAddress}`)
             div.inputRow
                 label.formLabel(for="companyEmail") Email: 
-                input.formField(id="companyEmail", type="text", placeholder="email", value=`${companyPartner.data().companyEmail}`)
+                input.formField(id="companyEmail", type="text", placeholder="Email", value=`${companyPartner.data().companyEmail}`)
             div.inputRow
                 label.formLabel(for="companyPhone") Telefon: 
-                input.formField(id="companyPhone", type="text", placeholder="tlf", value=`${companyPartner.data().companyPhone}`)
+                input.formField(id="companyPhone", type="text", placeholder="Telefon", value=`${companyPartner.data().companyPhone}`)
         div.message
             p#message
         div.contracts
@@ -32,7 +32,7 @@ block content
             div.contractsForm
                 div.inputRow
                     label.formLabel(for="contractDesc") Beskrivelse: 
-                    input.contractField(id="contractDesc", type="text",placeholder="beskrivelse")
+                    input.contractField(id="contractDesc", type="text",placeholder="Beskrivelse")
                 div.inputRow
                     label.formLabel(for="contractStart") Startdato: 
                     input.contractField(id="contractStart", type="date",placeholder="")
@@ -41,7 +41,7 @@ block content
                     input.contractField(id="contractEnd", type="date", placeholder="")
                 div.inputRow
                     label.formLabel(for="contractPrice") Pris: 
-                    input.contractField(id="contractPrice", type="number", placeholder="pris")
+                    input.contractField(id="contractPrice", type="number", placeholder="Pris")
             button#deleteContract(class="greenButton formButton") Slet kontrakt
             button#addContract(class="greenButton formButton") Tilføj kontrakt
             button.greenButton.formButton#savePartner Gem Ændringer
