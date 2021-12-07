@@ -4,6 +4,7 @@ const modalContent = document.querySelector(".resModalContent")
 const renderContent = document.querySelector(".renderContent")
 const span = document.querySelector(".closeResModal");
 const resDropdown = document.querySelector("#reservationType")
+const popup = document.querySelector("#messagePopup");
 let publicContracts = []
 let chosenContracts = []
 let selectedCompany;
@@ -25,6 +26,10 @@ window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+}
+
+document.querySelector("#popupButton").onclick = function () {
+    popup.style.display = "none";
 }
 
 // Åbner dropdown for at kunne søge på valgte company type
@@ -199,6 +204,7 @@ async function renderHotels() {
             contracts: chosenContracts
         }
         addDocument("Hotel", doc)
+        displayPopup("Hotelreservation tilføjet", `Reservation tilføjet fra den ${dateIn.valueAsDate.toLocaleDateString("da-DK")} til den ${dateOut.valueAsDate.toLocaleDateString("da-DK")}`)
     }
 
 }
@@ -422,4 +428,13 @@ function renderTextInput(title, id, onchange) {
     container.append(textInput)
     renderContent.append(container)
     return textInput;
+}
+
+function displayPopup(header, message) {
+    const popupHeader = document.querySelector("#popupHeader");
+    const popupMessage = document.querySelector("#popupMessage");
+    const popup = document.querySelector("#messagePopup");
+    popupHeader.innerHTML = header;
+    popupMessage.innerHTML = message;
+    popup.style.display = "flex";
 }
