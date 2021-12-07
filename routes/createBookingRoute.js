@@ -30,7 +30,7 @@ router.post('/getCompanies', async (req, resp) => {
                 resp.status(200).json(hotels);
         }
 
-        if (companyType == 'Boardinpass') {
+        if (companyType == 'Boardingpass') {
                 const flightCompanies = await companyController.getFlightCompanies();
                 const flights = [];
                 flightCompanies.forEach(doc => {
