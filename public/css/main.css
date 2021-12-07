@@ -17,6 +17,16 @@ p {
     font-family: Montserrat, Roboto, "Helvetica Neue";
 }
 
+.colDiv {
+    display:flex;
+    flex-direction: column;
+}
+
+.rowDiv {
+    display:flex;
+    flex-direction: row;
+}
+
 /* Simple background setup */
 #main {/*
     min-width: 1000px;
@@ -72,6 +82,11 @@ p {
     color: #FEFFFE;
 }
 
+#navigation {
+    display: flex;
+    flex-direction: row;
+}
+
 
 #navigationBar {
     float: right;
@@ -90,10 +105,9 @@ p {
 #navigationBar:hover {
     float: right;
     background-color: #F1DABF;
-    border: 2px solid #F1DABF;
+    border: 2px solid #FEFFFE;
     width: 200px;
     height: 50px;
-    box-shadow: 3px 4px 5px #cccc;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -147,9 +161,9 @@ p {
 /*Global button class?*/
 button.greenButton {
     background-color: #276954;
+    border: 2px solid #FEFFFE;
     color: #FEFFFE;
     font-size: 20px;
-    border: 3px solid #276954;
     border-radius: 15px;
     font-family: Poppins, Roboto, "Helvetica Neue";
     cursor: pointer;
@@ -157,8 +171,8 @@ button.greenButton {
 
 button:hover.greenButton {
     background-color: #FEFFFE;
+    border: 2px solid #276954;
     color: #276954;
-    border: 3px solid #276954;
     font-size: 20px;
     border-radius: 15px;
     font-family: Poppins, Roboto, "Helvetica Neue";
@@ -166,9 +180,9 @@ button:hover.greenButton {
 }
 
 button.redButton {
+    border: 2px solid #FEFFFE;
     background-color: darkred;
     color: #FEFFFE;
-    border: 3px solid black;
     font-size: 20px;
     border-radius: 15 px;
     font-family: Poppins, Roboto, "Helvetica Neue";
@@ -176,9 +190,21 @@ button.redButton {
 }
 
 button:hover.redButton{
+    border: 2px solid darkred;
     background-color: #FEFFFE;
+    font-size: 20px;
+    border-radius: 15 px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
     color: darkred;
     cursor: pointer;
+}
+
+.headerButton{
+
+    border-radius: 15px;
+    height:75px;
+    width: 150px;
+    margin: auto 20px auto
 }
 
 #frontpagebuttons button {
@@ -267,12 +293,11 @@ button:hover.redButton{
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 95%;
-    height: 525px;
+    width: 1200px;
+    min-height: 525px;
     margin: 30px auto;
     padding: 10px;
     position: relative;
-    justify-content: space-evenly;
     border: 2px solid #F1DABF;
     border-radius: 5px;
 }
@@ -287,22 +312,80 @@ button:hover.redButton{
     height: 70px;
     position: relative;
     border-radius: 50px;
-    display:      block;
-    margin-bottom:  auto;
     margin-top: 10px;
+}
+
+.resCardContent {
+    margin: auto;
+}
+
+.resCardContent p {
+    margin: 2px;
 }
 
 .resCard button {
     display:      block;
-    margin-left:  auto;
     margin-right: 15px;
     cursor: pointer;
 }
 
 .resCard button:hover {
     display:      block;
-    margin-left:  auto;
     margin-right: 15px;
+    cursor: pointer;
+}
+
+.removeReservationButton {
+    height: 50px;
+    width: 50px;
+    background-color: darkred;
+    margin:10px;
+    border-radius:25px;
+    font-size: 40px;
+    color: #FEFFFE;
+    border: 3px solid darkred;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 47px;
+}
+
+.removeReservationButton:hover {
+    height: 50px;
+    width: 50px;
+    background-color: #FEFFFE;
+    margin:10px;
+    border-radius:25px;
+    font-size: 40px;
+    color: darkred;
+    border: 3px solid darkred;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    line-height: 47px;
+}
+
+.confirmBookingButton {
+    background-color: #FEFFFE;
+    color: #276954;
+    font-size: 18px;
+    width: 100px;
+    height: 50px;
+    border: 3px solid #F1DABF;
+    border-radius: 25px;
+    margin: auto auto 20px auto;
+    padding: 0px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
+    cursor: pointer;
+}
+
+.confirmBookingButton:hover {
+    background-color: #F1DABF;
+    color: #276954;
+    font-size: 18px;
+    width: 100px;
+    height: 50px;
+    border: 3px solid #FEFFFE;
+    border-radius: 25px;
+    margin: 10px;
+    padding: 0px;
+    font-family: Poppins, Roboto, "Helvetica Neue";
     cursor: pointer;
 }
 
@@ -315,6 +398,7 @@ button:hover.redButton{
     border: 3px solid #276954;
     border-radius: 25px;
     margin: 10px;
+    margin-left:auto;
     padding: 0px;
     font-family: Poppins, Roboto, "Helvetica Neue";
     line-height: 47px;
@@ -331,6 +415,7 @@ button:hover.redButton{
     height: 50px;
     border-radius: 25px;
     margin: 10px;
+    margin-left: auto;
     font-family: Poppins, Roboto, "Helvetica Neue";
     line-height: 47px;
     box-sizing: border-box;
@@ -354,7 +439,7 @@ button:hover.redButton{
 
 .resModalContent {
     background-color: #FEFFFE;
-    margin: 15% auto; /* 15% from the top and centered */
+    margin: auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #F1DABF;
     width: 80%; /* Could be more or less, depending on screen size */
@@ -467,7 +552,7 @@ button:hover.redButton{
 }
 
 .companyPickerDropdownContent a:hover {
-    background-color: #f1f1f1
+    background-color: #f1f1f1;
     cursor: pointer;
 }
 

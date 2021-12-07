@@ -53,7 +53,7 @@ async function createCompany(companyName, companyAddress, companyEmail, companyP
   }
   else if (companyType == "3") {
     const col = ref.collection('airlinecompanies')
-    const count = await (await ref.get()).data().flightcompanycount
+    const count = await (await ref.get()).data().airlinecompaniescount
     const id = 30001 + count
     await (col.doc("" + id).set(company)).then(() => ref.update({ airlinecompaniescount: count + 1 })).then(() => created = true)
   }
@@ -179,6 +179,12 @@ async function getSalesman(salesmanId) {
   }
 }
 
+//Metode til at hente alle salesmen fra firebase
+async function getAllSalesmen() {
+  const doc = await db.collection('salesmen').get();
+  const allSalesMen = doc.docs;
+  return allSalesMen;
+}
 async function loginSalesman(username, password) {
   const ref = db.collection('salesmen');
   const query = ref.where('salesmanSalesId', "==", username).where('salesmanPassword', "==", password);
@@ -201,8 +207,9 @@ async function getAllSalesmen() {
 // returnerer alle bookings for en salesman, hvis datoerne / en dato er undefined tager den udgangspunkt fra det 
 async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
   if (("" + salesmanId).substring(0, 1) == "6") {
+    let year = new Date().getFullYear();
     let bookingsSalesman = []
-    const doc = db.collection('booking')
+    const doc = db.collection('bookings').doc(year).collection("bookings")
     const bookings = await doc.get()
     bookings.forEach(element => {
       if (element.data().salesmanId == "" + salesmanId) {
@@ -258,17 +265,26 @@ async function createBooking(salesman, customer, travelDocuments) {
   const booking = {
     bookingNr: bookingNr,
     salesman: salesman,
-    customer: customer
+    customer: customer,
   }
 
   const doc = await db.collection("bookings").doc(year)
-  await doc.set(booking)
-  const bookingToAddDoc = await getBooking(bookingNr)
-  for (i = 0; i < travelDocuments.length; i++) {
-    bookingToAddDoc.collection("travelDocuments").add(travelDocuments[i])
+  const newDoc = await doc.set(booking)
+  try {
+    travelDocuments.forEach(async travelDoc => {
+      newDoc.collection("travelDocuments").set(travelDoc)
+    })
+  } catch (e) {
+    console.log(e.message)
   }
+  return newDoc
+  // await doc.set(booking)
+  // const bookingToAddDoc = await getBooking(bookingNr)
+  // for (i = 0; i < travelDocuments.length; i++) {
+  //   bookingToAddDoc.collection("travelDocuments").add(travelDocuments[i])
+  // }
 
-  return doc
+  // return doc
 
 }
 /* 
@@ -279,7 +295,7 @@ finder booking med bookingNr
 
 async function getBooking(bookingNr) {
   try {
-    const year = bookingNr.substring(0, 4);
+    const year = bookingNr.toString().substring(0, 4);
 
     const booking = await db.collection("bookings").doc(year).collection("bookings")
       .doc(bookingNr).get()

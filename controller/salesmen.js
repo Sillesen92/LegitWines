@@ -6,6 +6,13 @@ async function createSalesman(salesmanName, salesmanEmail, salesmanPhoneNr, sale
 async function getSalesman(salesmanID) {
     return repository.getSalesman(salesmanID);
 }
+async function getAllSalesmen() {
+    return repository.getAllSalesmen();
+}
+
+async function getAllBookingSalesman(salesmanId, dateFrom, dateTo) {
+    return repository.getAllBookingSalesman(salesmanId, dateFrom, dateTo);
+}
 
 async function loginSalesman(username, password) {
     return repository.loginSalesman(username, password);
@@ -15,4 +22,4 @@ async function getAllSalesmen() {
     return repository.getAllSalesmen();
 }
 
-module.exports = { createSalesman, getSalesman, getAllSalesmen, loginSalesman }
+module.exports = { createSalesman, getSalesman, getAllSalesmen, loginSalesman, getAllBookingSalesman }

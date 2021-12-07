@@ -1,4 +1,5 @@
 mixin salesman(id,name)
-    tr.salesman(onclick=`location.href='/salesStats/${id}'`)
+    tr
         td
-            label Navn: #{name}
+            label#salesmanName Navn: #{name} 
+            label#salesmanId Id: #{id}
