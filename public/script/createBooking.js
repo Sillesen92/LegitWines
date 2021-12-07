@@ -300,12 +300,16 @@ function updateShownContracts() {
         let contractEnd = new Date(contract.endDate);
         //TODO: Logik?
         if (startDate != null) {
+<<<<<<< HEAD
             if (contractStart < startDate) {
+=======
+            if (contractStart > startDate || contractEnd < startDate) {
+>>>>>>> e6c2c9f15a34f2e0db88646e405c2688cce8a127
                 valid = false
             }
         }
         if (endDate != null) {
-            if (contractEnd < endDate) {
+            if (contractEnd < endDate || contractStart > endDate) {
                 valid = false;
             }
         }
@@ -320,7 +324,7 @@ function updateShownContracts() {
 function addContractToList(contract) {
     const contracts = document.querySelector("#contractPicker");
     let index = publicContracts.indexOf(contract)
-    contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr.</option>`;
+    contracts.innerHTML += `<div onclick = addContract('contract-${index}') id = 'contract-${index}'>${contract.description} + ${contract.netPrice}kr. - Indtil ${contract.endDate}</option>`;
 }
 
 

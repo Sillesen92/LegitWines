@@ -1,0 +1,157 @@
+/* Main CSS - Bookingside */
+
+#bookingpage {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+#bookingpage h1 {
+  margin: 15px 10px 0px 20px;
+}
+
+#bookingpage select {
+  margin: 15px 5px 0px 10px;
+  font-family: Montserrat, Roboto, "Helvetica Neue";
+  font-size: 20px;
+  text-align-last: center;
+  cursor: pointer;
+}
+
+#bookingtype {
+  border: 2px solid #276954;
+  width: 200px;
+  height: 50px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#bookingtype:hover {
+  border: 2px solid #276954;
+  width: 200px;
+  height: 50px;
+  box-shadow: 3px 4px 5px #cccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#bookingpagelogo {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  width: 95%;
+  height: auto;
+  margin: 50px auto;
+  padding: 10px;
+  position: relative;
+  justify-content: space-evenly;
+}
+
+/* Create Booking */
+
+#createbooking {
+  background-color: #276954;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 1200px;
+  height: 525px;
+  margin: 30px auto;
+  padding: 10px;
+  position: relative;
+  justify-content: space-evenly;
+  border: 2px solid #F1DABF;
+  border-radius: 5px;
+}
+
+.resCard {
+  background-color: #FEFFFE;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  border: 2px solid #F1DABF;
+  width: 98%;
+  height: 70px;
+  position: relative;
+  border-radius: 50px;
+  display:      block;
+  margin-bottom:  auto;
+  margin-top: 10px;
+}
+
+.resCard button {
+  display:      block;
+  margin-left:  auto;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.resCard button:hover {
+  display:      block;
+  margin-left:  auto;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.confirmBookingButton {
+  background-color: #FEFFFE;
+  color: #276954;
+  font-size: 18px;
+  width: 100px;
+  height: 50px;
+  border: 3px solid #F1DABF;
+  border-radius: 25px;
+  margin: 10px;
+  padding: 0px;
+  font-family: Poppins, Roboto, "Helvetica Neue";
+  cursor: pointer;
+}
+
+.confirmBookingButton:hover {
+  background-color: #F1DABF;
+  color: #276954;
+  font-size: 18px;
+  width: 100px;
+  height: 50px;
+  border: 3px solid #FEFFFE;
+  border-radius: 25px;
+  margin: 10px;
+  padding: 0px;
+  font-family: Poppins, Roboto, "Helvetica Neue";
+  cursor: pointer;
+}
+
+.addReservationButton {
+  background-color: #276954;
+  color: #FEFFFE;
+  font-size: 40px;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #276954;
+  border-radius: 25px;
+  margin: 10px;
+  padding: 0px;
+  font-family: Poppins, Roboto, "Helvetica Neue";
+  line-height: 47px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.addReservationButton:hover {
+  background-color: #FEFFFE;
+  color: #276954;
+  border: 3px solid #276954;
+  font-size: 40px;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin: 10px;
+  font-family: Poppins, Roboto, "Helvetica Neue";
+  line-height: 47px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
