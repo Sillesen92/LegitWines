@@ -98,8 +98,8 @@ function addDocument(documentType, data) {
         content.className = "resCardContent";
         div.append(content);
     }
-    else if (documentType == "Transfer") {}
-    else if (documentType == "Billeje") {}
+    else if (documentType == "Transfer") { }
+    else if (documentType == "Billeje") { }
     else if (documentType == "Greenfee") {
         doc = {
             type: "Greenfee",
@@ -116,8 +116,8 @@ function addDocument(documentType, data) {
         div.append(content);
 
     }
-    else if (documentType == "Passager") {}
-    else if (documentType == "Flyafgang") {}
+    else if (documentType == "Passager") { }
+    else if (documentType == "Flyafgang") { }
 
     const button = document.createElement("BUTTON")
     button.className = "removeReservationButton";
@@ -125,7 +125,7 @@ function addDocument(documentType, data) {
     div.append(button)
 
     documents.push(doc);
-    documentList.insertBefore(div, documentList.childNodes[documentList.childNodes.length-2]);
+    documentList.insertBefore(div, documentList.childNodes[documentList.childNodes.length - 2]);
     button.onclick = () => removeReservation(div, doc);
 }
 
@@ -133,7 +133,7 @@ function removeReservation(div, doc) {
     console.log(div)
     console.log(doc)
     const documentList = document.querySelector("#createbooking")
-    documents.splice(documents.indexOf(doc,0),1)
+    documents.splice(documents.indexOf(doc, 0), 1)
     documentList.removeChild(div);
 
 }
@@ -181,25 +181,25 @@ async function renderModal() {
 }
 
 async function renderHotels() {
-        //Render hotel partner side
-        renderCompanyDropDown("hotel")
-        const dateIn = renderDatePicker("Check-in dato", "dateIn", updateShownContracts)
-        const dateOut = renderDatePicker("Check-ud dato", "dateOut", updateShownContracts)
-        const commentInput = renderTextInput("Kommentar", "commentInput", null)
-        renderContractPicker();
+    //Render hotel partner side
+    renderCompanyDropDown("hotel")
+    const dateIn = renderDatePicker("Check-in dato", "dateIn", updateShownContracts)
+    const dateOut = renderDatePicker("Check-ud dato", "dateOut", updateShownContracts)
+    const commentInput = renderTextInput("Kommentar", "commentInput", null)
+    renderContractPicker();
 
-        //Bekræft-knap funktionalitet
-        const button = document.querySelector("#confirmResButton")
-        button.onclick = () => {
-            const doc = {
-                companyName: selectedCompany.companyName,
-                checkinDate: dateIn.valueAsDate,
-                checkoutDate: dateOut.valueAsDate,
-                comment: commentInput.value,
-                contracts: chosenContracts
-            }
-            addDocument("Hotel", doc)
+    //Bekræft-knap funktionalitet
+    const button = document.querySelector("#confirmResButton")
+    button.onclick = () => {
+        const doc = {
+            companyName: selectedCompany.companyName,
+            checkinDate: dateIn.valueAsDate,
+            checkoutDate: dateOut.valueAsDate,
+            comment: commentInput.value,
+            contracts: chosenContracts
         }
+        addDocument("Hotel", doc)
+    }
 
 }
 
@@ -235,53 +235,53 @@ async function renderFlights() {
 
 }
 async function renderTransfers() {
-        renderCompanyDropDown("Transfer")
-        const date = renderDatePicker("Dato", "date", updateShownContracts)
-        const destination = renderTextInput("Destination", "destination", null)
-        renderContractPicker();
+    renderCompanyDropDown("Transfer")
+    const date = renderDatePicker("Dato", "date", updateShownContracts)
+    const destination = renderTextInput("Destination", "destination", null)
+    renderContractPicker();
 
-        //TODO: Bekræft-knap funktionalitet
-        const button = document.querySelector("#confirmResButton")
-        button.onclick = () => {
-            const doc = {
+    //TODO: Bekræft-knap funktionalitet
+    const button = document.querySelector("#confirmResButton")
+    button.onclick = () => {
+        const doc = {
 
-            }
-            addDocument("Transfer", doc)
         }
+        addDocument("Transfer", doc)
+    }
 }
 //TODO: fix
 async function renderCarRentals() {
-        renderCompanyDropDown("Billeje")
-        const dateIn = renderDatePicker("Fra-dato", "dateIn", updateShownContracts)
-        const dateOut = renderDatePicker("Til-dato", "dateOut", updateShownContracts)
-        renderContractPicker();
+    renderCompanyDropDown("Billeje")
+    const dateIn = renderDatePicker("Fra-dato", "dateIn", updateShownContracts)
+    const dateOut = renderDatePicker("Til-dato", "dateOut", updateShownContracts)
+    renderContractPicker();
 
-        //TODO: Bekræft-knap funktionalitet
-        const button = document.querySelector("#confirmResButton")
-        button.onclick = () => {
-            const doc = {
-                
-            }
-            addDocument("Billeje", doc)
+    //TODO: Bekræft-knap funktionalitet
+    const button = document.querySelector("#confirmResButton")
+    button.onclick = () => {
+        const doc = {
+
         }
+        addDocument("Billeje", doc)
+    }
 }
 
 async function renderCourses() {
-        //Render greenfee partner side
-        renderCompanyDropDown("Greenfee")
-        const date = renderDatePicker("Dato", "dateIn", updateShownContracts)
-        renderContractPicker()
+    //Render greenfee partner side
+    renderCompanyDropDown("Greenfee")
+    const date = renderDatePicker("Dato", "dateIn", updateShownContracts)
+    renderContractPicker()
 
-        //Bekræft-knap funktionalitet
-        const button = document.querySelector("#confirmResButton")
-        button.onclick = () => {
-            const doc = {
-                companyName: selectedCompany.companyName,
-                date: date.valueAsDate,
-                contracts: chosenContracts
-            }
-            addDocument("Greenfee", doc)
+    //Bekræft-knap funktionalitet
+    const button = document.querySelector("#confirmResButton")
+    button.onclick = () => {
+        const doc = {
+            companyName: selectedCompany.companyName,
+            date: date.valueAsDate,
+            contracts: chosenContracts
         }
+        addDocument("Greenfee", doc)
+    }
 }
 
 
@@ -291,7 +291,7 @@ function updateShownContracts() {
     let startDate = null;
     let endDate = null;
     if (document.querySelector("#dateIn")) startDate = document.querySelector("#dateIn").valueAsDate
-    if(document.querySelector("#dateOut")) endDate = document.querySelector("#dateOut").valueAsDate
+    if (document.querySelector("#dateOut")) endDate = document.querySelector("#dateOut").valueAsDate
     document.querySelector("#contractPicker").innerHTML = ""
 
     publicContracts.forEach(contract => {
@@ -300,7 +300,7 @@ function updateShownContracts() {
         let contractEnd = new Date(contract.endDate);
         //TODO: Logik?
         if (startDate != null) {
-            if (contractStart < startDate){
+            if (contractStart < startDate) {
                 valid = false
             }
         }
@@ -326,27 +326,27 @@ function addContractToList(contract) {
 
 //Render liste til at vælge og vise valgte kontrakter
 function renderContractPicker() {
-        //div for kontrakter
-        const contracts = document.createElement("div")
-        const contractPicker = document.createElement("div")
-        contractPicker.id = "contractPicker"
-        const titleDiv = document.createElement('div')
-        const title = document.createElement('p')
-        title.innerHTML = "Kontrakter"
-        titleDiv.append(title)
-        contracts.appendChild(titleDiv)
-        contracts.appendChild(contractPicker)
-        renderContent.append(contracts)
+    //div for kontrakter
+    const contracts = document.createElement("div")
+    const contractPicker = document.createElement("div")
+    contractPicker.id = "contractPicker"
+    const titleDiv = document.createElement('div')
+    const title = document.createElement('p')
+    title.innerHTML = "Kontrakter"
+    titleDiv.append(title)
+    contracts.appendChild(titleDiv)
+    contracts.appendChild(contractPicker)
+    renderContent.append(contracts)
 
-        //div med valgte kontrakter
-        const divChosenContracts = document.createElement('div')
-        divChosenContracts.id = 'chosenContracts'
-        const chosenTitleDiv = document.createElement('div')
-        const chosenTitle = document.createElement('p')
-        chosenTitle.innerHTML = 'Valgte kontrakter'
-        chosenTitleDiv.append(chosenTitle)
-        divChosenContracts.appendChild(chosenTitleDiv)
-        renderContent.append(divChosenContracts)
+    //div med valgte kontrakter
+    const divChosenContracts = document.createElement('div')
+    divChosenContracts.id = 'chosenContracts'
+    const chosenTitleDiv = document.createElement('div')
+    const chosenTitle = document.createElement('p')
+    chosenTitle.innerHTML = 'Valgte kontrakter'
+    chosenTitleDiv.append(chosenTitle)
+    divChosenContracts.appendChild(chosenTitleDiv)
+    renderContent.append(divChosenContracts)
 }
 
 //Render listen af firmaer i dropdown
@@ -368,7 +368,7 @@ async function renderCompanyDropDown(type) {
         const search = document.createElement("INPUT");
         search.type = "text";
         search.placeholder = "Søg...";
-        search.id ="companyInput";
+        search.id = "companyInput";
         search.onkeyup = filterFunction;
         dropdown.appendChild(search);
 
@@ -394,18 +394,18 @@ async function renderCompanyDropDown(type) {
 //Render og returnér en datepicker
 function renderDatePicker(title, id, onchange) {
 
-        const container = document.createElement("DIV")
-        container.className = "colDiv"
-        const lblTitle = document.createElement("P")
-        lblTitle.innerHTML = title
-        const datepicker = document.createElement("input")
-        datepicker.type = "date"
-        datepicker.id = id
-        datepicker.addEventListener("change", onchange)
-        container.append(lblTitle)
-        container.append(datepicker)
-        renderContent.append(container)
-        return datepicker;
+    const container = document.createElement("DIV")
+    container.className = "colDiv"
+    const lblTitle = document.createElement("P")
+    lblTitle.innerHTML = title
+    const datepicker = document.createElement("input")
+    datepicker.type = "date"
+    datepicker.id = id
+    datepicker.addEventListener("change", onchange)
+    container.append(lblTitle)
+    container.append(datepicker)
+    renderContent.append(container)
+    return datepicker;
 }
 
 
@@ -422,4 +422,12 @@ function renderTextInput(title, id, onchange) {
     container.append(textInput)
     renderContent.append(container)
     return textInput;
+}
+
+//reset modalContent
+function resetModal() {
+    resDropdown.options[0].selected = true
+    const dropdown = document.querySelector(".companyPickerDropdownContent")
+    dropdown.innerHTML = ""
+    renderContent.innerHTML = "<img src='images/greensoftlogo.png' alt='Greensoft Logo' id='greensoftlogo'>"
 }
