@@ -15,6 +15,7 @@ let todate;
 
 // Åbner modal vindue for at kunne tilføje nye reservationer/contracts til en booking
 button.onclick = function () {
+    resetModal();
     modal.style.display = 'block';
 }
 
@@ -204,6 +205,7 @@ async function renderHotels() {
             contracts: chosenContracts
         }
         addDocument("Hotel", doc)
+        resetChosenContracts();
         displayPopup("Hotelreservation tilføjet", `Reservation tilføjet fra den ${dateIn.valueAsDate.toLocaleDateString("da-DK")} til den ${dateOut.valueAsDate.toLocaleDateString("da-DK")}`)
     }
 
@@ -437,4 +439,17 @@ function displayPopup(header, message) {
     popupHeader.innerHTML = header;
     popupMessage.innerHTML = message;
     popup.style.display = "flex";
+}
+//reset modalContent
+function resetModal() {
+    resDropdown.options[0].selected = true
+    const dropdown = document.querySelector(".companyPickerDropdownContent")
+    dropdown.innerHTML = ""
+    renderContent.innerHTML = "<img src='images/greensoftlogo.png' alt='Greensoft Logo' id='greensoftlogo'>"
+}
+
+function resetChosenContracts() {
+    chosenContracts = []
+    const contracts = document.querySelector("#chosenContracts");
+    contracts.innerHTML = "<div><p>Valgte Kontrakter</p></div>";
 }
