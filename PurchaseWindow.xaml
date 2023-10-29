@@ -1,0 +1,29 @@
+﻿<Window x:Class="LegitWines.PurchaseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LegitWines"
+        mc:Ignorable="d"
+        Title="PurchaseWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel>
+            <Label Content="Purchases" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Margin="0,10,0,0" FontFamily="Lucida Calligraphy" FontSize="20"/>
+            <ListBox x:Name="PurchaseBox" Height="100" MinWidth="200" MinHeight="250" Margin="0,10,0,0" FontFamily="Lucida Calligraphy" HorizontalContentAlignment="Left" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Wine: "/>
+                            <TextBlock Text="{Binding Wine}"/>
+                            <TextBlock Text=", date: "/>
+                            <TextBlock Text="{Binding DateOfPurchase}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Label Content="Total purchase in DKK" FontFamily="Lucida Calligraphy" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+            <TextBox x:Name="TotalPurchaseBox" FontFamily="Lucida Calligraphy" IsReadOnly="True" MaxWidth="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0,0,0,0"/>
+            <Button x:Name="CloseWindowButton" Margin="0,10,0,10" MinHeight="30" HorizontalAlignment="Center" Padding="10,1,10,1" Content="Close window" Click="CloseWindowButton_Click" FontFamily="Lucida Calligraphy"/>
+        </StackPanel>
+    </Grid>
+</Window>

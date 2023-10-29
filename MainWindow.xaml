@@ -1,0 +1,88 @@
+﻿<Window x:Class="LegitWines.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LegitWines"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid x:Name="MainGrid" Background="White">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox TextWrapping="Wrap" Text="Legit Wines Inc" VerticalAlignment="Top" FontSize="36" IsEnabled="False" Margin="0,0,0,0" HorizontalContentAlignment="Left" BorderThickness="0,0,0,0" BorderBrush="#FF000103" MinWidth="600" HorizontalAlignment="Stretch" Background="{x:Null}" Padding="10,10,0,0" FontFamily="Lucida Calligraphy"/>
+                <Menu x:Name="MenuOptions" Width="100" MinWidth="200" Background="{x:Null}">
+                    <MenuItem x:Name="Username" FontFamily="Lucida Calligraphy" FontSize="20" MaxWidth="200" MinWidth="200" MinHeight="55" Header="{Binding Name}">
+                        <MenuItem x:Name="Profile" Header="Profile" FontFamily="Lucida Calligraphy" FontSize="14" Click="Profile_Click"/>
+                        <MenuItem x:Name="Purchases" Header="Purchases" FontFamily="Lucida Calligraphy" FontSize="14" Click="Purchases_Click"/>
+                        <MenuItem x:Name="Logout" Header="Logout" FontFamily="Lucida Calligraphy" FontSize="14" Click="Logout_Click"/>
+                        <MenuItem x:Name="Admin" Header="Admin page" FontFamily="Lucida Calligraphy" FontSize="14" Visibility="Collapsed" Click="Admin_Click"/>
+                    </MenuItem>
+                </Menu>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinHeight="350">
+                <StackPanel.Background>
+                    <ImageBrush/>
+                </StackPanel.Background>
+                <ListBox x:Name="WineListBox" Height="106" Padding="0,0,0,0" Margin="10,10,20,10" MinWidth="200" HorizontalAlignment="Stretch" MinHeight="300" BorderBrush="#FF000208" SelectionChanged="WineListBox_SelectionChanged" Background="{x:Null}" FontFamily="Lucida Calligraphy">
+                    <ListBox.GroupStyle>
+                        <GroupStyle/>
+                    </ListBox.GroupStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}"/>
+                                <TextBlock Text=", "/>
+                                <TextBlock Text="{Binding Vintage}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Border BorderBrush="Black" BorderThickness="1" Margin="0,10,10,10" Height="296" MinWidth="540" MinHeight="300">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label x:Name="WineNameLabel" Content="" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="0,0,0,0" MinWidth="200" FontFamily="Lucida Calligraphy"/>
+                                <Label x:Name="FlagLabel" Content="" Margin="0,10,10,10" BorderBrush="Black" BorderThickness="0,0,0,0" MinWidth="40">
+                                    <Label.Background>
+                                        <ImageBrush/>
+                                    </Label.Background>
+                                </Label>
+                            </StackPanel>
+                            <ListBox x:Name="WineDetailBox" Margin="10,0,10,0" BorderBrush="#FF000206" MinHeight="240" MinWidth="250" MaxWidth="250" MaxHeight="240" Background="{x:Null}" FontFamily="Lucida Calligraphy">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="Country:"/>
+                                            <TextBlock Text="{Binding Country}"/>
+                                            <TextBlock/>
+                                            <TextBlock Text="Area:"/>
+                                            <TextBlock Text="{Binding Area}"/>
+                                            <TextBlock/>
+                                            <TextBlock Text="Alcohol %:"/>
+                                            <TextBlock Text="{Binding AlcoholPercentage}"/>
+                                            <TextBlock/>
+                                            <TextBlock Text="{Binding Description}"/>
+                                            <TextBlock/>
+                                            <TextBlock Text="Price:"/>
+                                            <TextBlock Text="{Binding Price}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <Label Content="Grapes" Margin="10,10,10,10" BorderBrush="Black" BorderThickness="0,0,0,0" VerticalContentAlignment="Top" HorizontalContentAlignment="Left" FontFamily="Lucida Calligraphy"/>
+                            <ListBox x:Name="GrapesBox" Margin="10,0,10,0" BorderBrush="#FF000206" MinHeight="150" MinWidth="250" MaxWidth="250" MaxHeight="240" Background="White" FontFamily="Lucida Calligraphy"/>
+                            <Button x:Name="BuyThisWinebutton" Margin="10,35,10,0" HorizontalAlignment="Center" Padding="20,1,20,1" FontFamily="Lucida Calligraphy" FontSize="20" Click="BuyThisWinebutton_Click">Buy this wine</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+                <StackPanel/>
+
+
+
+
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
